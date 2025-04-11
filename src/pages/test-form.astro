@@ -1,0 +1,126 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Formulario de Prueba - FaziI AI">
+  <main class="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 py-12 px-4">
+    <div class="container mx-auto max-w-md">
+      <div class="bg-white rounded-xl shadow-lg p-8">
+        <h1 class="text-2xl font-bold text-center mb-6">Formulario de Prueba</h1>
+        
+        <form id="testForm" enctype="multipart/form-data" class="space-y-6">
+          <!-- Campo de nombre -->
+          <div>
+            <label for="companyName" class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
+            <input 
+              type="text" 
+              id="companyName" 
+              name="companyName" 
+              required 
+              class="w-full p-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500"
+            >
+          </div>
+          
+          <!-- Campo de logo -->
+          <div>
+            <label for="logo" class="block text-sm font-medium text-gray-700 mb-1">Logo</label>
+            <input 
+              type="file" 
+              id="logo" 
+              name="logo" 
+              accept="image/*" 
+              class="w-full p-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500"
+            >
+          </div>
+          
+          <!-- Botón de envío -->
+          <button 
+            type="submit" 
+            class="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-colors"
+          >
+            Enviar
+          </button>
+        </form>
+        
+        <!-- Estado del envío -->
+        <div id="formStatus" class="hidden mt-4 p-3 rounded-lg text-center"></div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('testForm') as HTMLFormElement;
+    const formStatus = document.getElementById('formStatus');
+    
+    if (form && formStatus) {
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        // Mostrar estado de carga
+        formStatus.textContent = 'Enviando formulario...';
+        formStatus.className = 'mt-4 p-3 rounded-lg text-center bg-yellow-100 text-yellow-800';
+        formStatus.style.display = 'block';
+        
+        try {
+          // Crear FormData con los datos del formulario
+          const formData = new FormData(form);
+          
+          // Enviar datos al endpoint
+          const response = await fetch('/api/test-upload', {
+            method: 'POST',
+            body: formData
+          });
+          
+          const result = await response.json();
+
+// Añade esta línea para ver el objeto completo en la consola
+console.log("Respuesta completa:", JSON.stringify(result));
+
+if (response.ok) {
+            // Mostrar éxito
+            formStatus.textContent = '¡Datos enviados con éxito!';
+            formStatus.className = 'mt-4 p-3 rounded-lg text-center bg-green-100 text-green-800';
+            
+            // Mostrar información adicional
+            const infoDiv = document.createElement('div');
+            infoDiv.className = 'mt-2 text-sm';
+            
+            // Mostrar ID del registro creado
+            if (result.recordId) {
+              infoDiv.innerHTML += `<p>ID del registro: ${result.recordId}</p>`;
+            }
+            
+            // Mostrar URL del logo y la imagen si se subió
+            if (result.uploads && result.uploads.logo) {
+              // Mensaje de "Imagen subida:"
+              infoDiv.appendChild(document.createElement('p')).textContent = 'Imagen subida:';
+              // Previsualización de la imagen
+              const imgPreview = document.createElement('img');
+              imgPreview.src = result.uploads.logo;
+              imgPreview.className = 'mt-3 mx-auto w-32 h-32 object-contain border rounded';
+              infoDiv.appendChild(imgPreview);
+
+              // Mostrar la URL de la imagen (LOG adicional)
+              const urlInfo = document.createElement('p');
+              urlInfo.textContent = `URL de la imagen: ${result.uploads.logo}`;
+              urlInfo.className = 'mt-2 text-xs text-gray-500 break-all';
+              infoDiv.appendChild(urlInfo);
+            }
+            
+            formStatus.appendChild(infoDiv);
+            form.reset();
+          } else {
+            // Mostrar error
+            throw new Error(result.message || 'Error al enviar el formulario');
+          }
+        } catch (error: any) {
+          // Mostrar mensaje de error
+          formStatus.textContent = `Error: ${error.message || 'Error desconocido'}`;
+          formStatus.className = 'mt-4 p-3 rounded-lg text-center bg-red-100 text-red-800';
+        }
+      });
+    }
+  });
+</script>

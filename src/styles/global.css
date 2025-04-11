@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Variables personalizadas */
+:root {
+  --color-primary: #2D3BF5;
+  --color-secondary: #8C52FF;
+  --color-accent: #10DAE7;
+  --color-accent-2: #FF3D8A;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+}

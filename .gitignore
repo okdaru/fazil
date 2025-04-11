@@ -1,0 +1,29 @@
+# Ignorar las dependencias de Node.js
+node_modules/
+
+# Archivos de logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ignorar archivos de entorno que pueden contener credenciales sensibles
+.env
+.env.local
+.env.*.local
+
+# Ignorar salidas de compilación o build
+dist/
+build/
+.cache/
+
+# Ignorar archivos de configuración del editor (opcional)
+.vscode/
+.idea/
+
+# Ignorar carpetas o archivos generados por Vercel (u otros proveedores de deploy)
+.vercel/
+output/
+
+# Otros archivos temporales del sistema
+.DS_Store
+Thumbs.db

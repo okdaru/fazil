@@ -1,0 +1,463 @@
+---
+// ClientForm.astro
+---
+
+<form id="clientForm" class="space-y-8 max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg">
+    <h1 class="text-3xl font-bold text-center text-primary mb-8">Formulario de Información para Desarrollo Web</h1>
+    <p class="text-gray-600 mb-8">Este formulario nos ayudará a recopilar toda la información necesaria para crear su landing page profesional. Por favor, complete todos los campos posibles para garantizar un resultado óptimo y personalizado.</p>
+  
+    <!-- Sección 1: Información Básica del Negocio -->
+    <div class="bg-gray-50 p-6 rounded-lg">
+      <h2 class="text-xl font-semibold mb-4 text-primary">1. Información Básica del Negocio</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label for="companyName" class="block text-sm font-medium text-gray-700 mb-1">Nombre de la empresa/marca *</label>
+          <input type="text" id="companyName" name="companyName" required class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
+        </div>
+        <div>
+          <label for="slogan" class="block text-sm font-medium text-gray-700 mb-1">Eslogan o tagline (si existe)</label>
+          <input type="text" id="slogan" name="slogan" class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
+        </div>
+        <div>
+          <label for="industry" class="block text-sm font-medium text-gray-700 mb-1">Sector o industria *</label>
+          <input type="text" id="industry" name="industry" required class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
+        </div>
+        <div>
+          <label for="foundedYear" class="block text-sm font-medium text-gray-700 mb-1">Año de fundación</label>
+          <input type="number" id="foundedYear" name="foundedYear" class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
+        </div>
+        <div class="md:col-span-2">
+          <label for="businessDescription" class="block text-sm font-medium text-gray-700 mb-1">Breve descripción del negocio *</label>
+          <textarea id="businessDescription" name="businessDescription" rows="3" required class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary"></textarea>
+        </div>
+        <div class="md:col-span-2">
+          <label for="location" class="block text-sm font-medium text-gray-700 mb-1">Ubicación/dirección (si desea mostrarla)</label>
+          <input type="text" id="location" name="location" class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
+        </div>
+      </div>
+    </div>
+  
+    <!-- Sección 2: Información de Contacto -->
+    <div class="bg-gray-50 p-6 rounded-lg">
+      <h2 class="text-xl font-semibold mb-4 text-primary">2. Información de Contacto para el Proyecto</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label for="contactName" class="block text-sm font-medium text-gray-700 mb-1">Nombre de la persona de contacto *</label>
+          <input type="text" id="contactName" name="contactName" required class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
+        </div>
+        <div>
+          <label for="contactPhone" class="block text-sm font-medium text-gray-700 mb-1">Teléfono *</label>
+          <input type="tel" id="contactPhone" name="contactPhone" required class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
+        </div>
+        <div>
+          <label for="contactEmail" class="block text-sm font-medium text-gray-700 mb-1">Correo electrónico *</label>
+          <input type="email" id="contactEmail" name="contactEmail" required class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
+        </div>
+        <div>
+          <label for="whatsappNumber" class="block text-sm font-medium text-gray-700 mb-1">Número de WhatsApp para el botón de contacto *</label>
+          <input type="tel" id="whatsappNumber" name="whatsappNumber" required class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
+        </div>
+        <div class="md:col-span-2">
+          <label for="whatsappText" class="block text-sm font-medium text-gray-700 mb-1">Texto predeterminado para el mensaje de WhatsApp</label>
+          <input type="text" id="whatsappText" name="whatsappText" placeholder="Ej: Hola, me interesa conocer más sobre..." class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
+        </div>
+      </div>
+    </div>
+  
+    <!-- Sección 3: Credenciales de GitHub -->
+    <div class="bg-gray-50 p-6 rounded-lg">
+      <h2 class="text-xl font-semibold mb-4 text-primary">3. Credenciales de GitHub</h2>
+      <p class="text-sm text-gray-600 mb-4">Necesitamos que cree una cuenta en GitHub para el despliegue automático.</p>
+      <div class="grid grid-cols-1 gap-6">
+        <div>
+          <label for="githubUsername" class="block text-sm font-medium text-gray-700 mb-1">Nombre de usuario de GitHub *</label>
+          <input type="text" id="githubUsername" name="githubUsername" required class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
+        </div>
+        <div>
+          <p class="text-sm text-gray-600">La contraseña de GitHub debe ser enviada por un canal seguro. Nos pondremos en contacto para coordinar esto.</p>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Sección 4: Productos o Servicios -->
+    <div class="bg-gray-50 p-6 rounded-lg">
+      <h2 class="text-xl font-semibold mb-4 text-primary">4. Productos o Servicios</h2>
+      <div class="grid grid-cols-1 gap-6">
+        <div>
+          <label for="services" class="block text-sm font-medium text-gray-700 mb-1">Liste sus principales productos/servicios (máximo 5) *</label>
+          <textarea id="services" name="services" rows="5" required class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary" placeholder="1. Servicio uno&#10;2. Servicio dos&#10;3. Servicio tres"></textarea>
+        </div>
+        <div>
+          <label for="serviceDescriptions" class="block text-sm font-medium text-gray-700 mb-1">Descripción breve de cada producto/servicio *</label>
+          <textarea id="serviceDescriptions" name="serviceDescriptions" rows="5" required class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary"></textarea>
+        </div>
+        <div>
+          <label for="servicePrices" class="block text-sm font-medium text-gray-700 mb-1">Precios de los productos/servicios (si desea mostrarlos)</label>
+          <textarea id="servicePrices" name="servicePrices" rows="5" class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary"></textarea>
+        </div>
+        <div>
+          <label for="serviceBenefits" class="block text-sm font-medium text-gray-700 mb-1">Beneficios o características destacadas de sus productos/servicios *</label>
+          <textarea id="serviceBenefits" name="serviceBenefits" rows="5" required class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary"></textarea>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Sección 5: Información sobre el Público Objetivo -->
+    <div class="bg-gray-50 p-6 rounded-lg">
+      <h2 class="text-xl font-semibold mb-4 text-primary">5. Información sobre el Público Objetivo</h2>
+      <div class="grid grid-cols-1 gap-6">
+        <div>
+          <label for="targetAudience" class="block text-sm font-medium text-gray-700 mb-1">¿Quién es su cliente ideal? (Edad, ubicación, intereses, etc.) *</label>
+          <textarea id="targetAudience" name="targetAudience" rows="3" required class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary"></textarea>
+        </div>
+        <div>
+          <label for="problemSolution" class="block text-sm font-medium text-gray-700 mb-1">¿Qué problema resuelve su producto/servicio para sus clientes? *</label>
+          <textarea id="problemSolution" name="problemSolution" rows="3" required class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary"></textarea>
+        </div>
+        <div>
+          <label for="uniqueValue" class="block text-sm font-medium text-gray-700 mb-1">¿Por qué deberían elegirlo a usted en lugar de a la competencia? *</label>
+          <textarea id="uniqueValue" name="uniqueValue" rows="3" required class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary"></textarea>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Sección 6: Objetivos de la Landing Page -->
+    <div class="bg-gray-50 p-6 rounded-lg">
+      <h2 class="text-xl font-semibold mb-4 text-primary">6. Objetivos de la Landing Page</h2>
+      <div class="grid grid-cols-1 gap-6">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">¿Cuál es el objetivo principal de su página web? *</label>
+          <div class="space-y-2">
+            <div class="flex items-start">
+              <!-- Ajusta el value para que coincida con la opción permitida en Airtable -->
+              <input id="objective1" name="pageObjective" type="radio" value="Generar contactos" class="mt-1 h-4 w-4 text-primary border-gray-300 focus:ring-primary" required>
+              <label for="objective1" class="ml-2 block text-sm text-gray-700">Generar contactos (leads)</label>
+            </div>
+            <div class="flex items-start">
+              <input id="objective2" name="pageObjective" type="radio" value="Vender productos/servicios" class="mt-1 h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+              <label for="objective2" class="ml-2 block text-sm text-gray-700">Vender productos/servicios</label>
+            </div>
+            <div class="flex items-start">
+              <input id="objective3" name="pageObjective" type="radio" value="Informar sobre la empresa/marca" class="mt-1 h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+              <label for="objective3" class="ml-2 block text-sm text-gray-700">Informar sobre la empresa/marca</label>
+            </div>
+            <div class="flex items-start">
+              <input id="objective4" name="pageObjective" type="radio" value="Promocionar evento" class="mt-1 h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+              <label for="objective4" class="ml-2 block text-sm text-gray-700">Promocionar un evento o lanzamiento</label>
+            </div>
+            <div class="flex items-start">
+              <input id="objective5" name="pageObjective" type="radio" value="Otro" class="mt-1 h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+              <label for="objective5" class="ml-2 block text-sm text-gray-700">Otro (especificar):</label>
+              <input type="text" id="objectiveOther" name="objectiveOther" class="ml-2 p-1 border border-gray-300 rounded focus:ring-primary focus:border-primary">
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">¿Qué acción específica quiere que realicen los visitantes? *</label>
+          <div class="space-y-2">
+            <div class="flex items-start">
+              <!-- Cambia el value a "Contactar por WhatsApp" si es lo permitido en Airtable -->
+              <input id="action1" name="desiredAction" type="radio" value="Contactar por WhatsApp" class="mt-1 h-4 w-4 text-primary border-gray-300 focus:ring-primary" required>
+              <label for="action1" class="ml-2 block text-sm text-gray-700">Contactar por WhatsApp</label>
+            </div>
+            <div class="flex items-start">
+              <input id="action2" name="desiredAction" type="radio" value="Llenar un formulario" class="mt-1 h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+              <label for="action2" class="ml-2 block text-sm text-gray-700">Llenar un formulario</label>
+            </div>
+            <div class="flex items-start">
+              <input id="action3" name="desiredAction" type="radio" value="Llamar por teléfono" class="mt-1 h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+              <label for="action3" class="ml-2 block text-sm text-gray-700">Llamar por teléfono</label>
+            </div>
+            <div class="flex items-start">
+              <input id="action4" name="desiredAction" type="radio" value="Visitar un local físico" class="mt-1 h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+              <label for="action4" class="ml-2 block text-sm text-gray-700">Visitar un local físico</label>
+            </div>
+            <div class="flex items-start">
+              <input id="action5" name="desiredAction" type="radio" value="Comprar directamente" class="mt-1 h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+              <label for="action5" class="ml-2 block text-sm text-gray-700">Comprar directamente</label>
+            </div>
+            <div class="flex items-start">
+              <input id="action6" name="desiredAction" type="radio" value="Otro" class="mt-1 h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+              <label for="action6" class="ml-2 block text-sm text-gray-700">Otro (especificar):</label>
+              <input type="text" id="actionOther" name="actionOther" class="ml-2 p-1 border border-gray-300 rounded focus:ring-primary focus:border-primary">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  
+    <!-- Sección 7: Elementos Visuales -->
+    <div class="bg-gray-50 p-6 rounded-lg">
+      <h2 class="text-xl font-semibold mb-4 text-primary">7. Elementos Visuales</h2>
+      <p class="text-sm text-gray-600 mb-4">Por favor, proporcione todos los elementos visuales en alta resolución.</p>
+      
+      <div class="grid grid-cols-1 gap-6">
+        <div>
+          <label for="logo" class="block text-sm font-medium text-gray-700 mb-1">Logotipo (PNG o SVG con fondo transparente) *</label>
+          <input type="file" id="logo" name="logo" accept=".png,.svg" required class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div>
+            <label for="mainColor" class="block text-sm font-medium text-gray-700 mb-1">Color principal</label>
+            <input type="color" id="mainColor" name="mainColor" class="w-full h-10 p-1 border border-gray-300 rounded">
+          </div>
+          <div>
+            <label for="secondaryColor" class="block text-sm font-medium text-gray-700 mb-1">Color secundario</label>
+            <input type="color" id="secondaryColor" name="secondaryColor" class="w-full h-10 p-1 border border-gray-300 rounded">
+          </div>
+          <div>
+            <label for="accentColor" class="block text-sm font-medium text-gray-700 mb-1">Color acento</label>
+            <input type="color" id="accentColor" name="accentColor" class="w-full h-10 p-1 border border-gray-300 rounded">
+          </div>
+        </div>
+        
+        <div>
+          <label for="productImages" class="block text-sm font-medium text-gray-700 mb-1">Imágenes de productos/servicios *</label>
+          <input type="file" id="productImages" name="productImages" accept="image/*" multiple required class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
+        </div>
+        
+        <div>
+          <div class="bg-gray-50 p-6 rounded-lg">
+            <label class="block text-sm font-medium text-gray-700 mb-2">¿Tiene preferencia por algún estilo visual? *</label>
+            <div class="space-y-2">
+              <div class="flex items-start">
+                <!-- Cambia el value a "Minimalista" -->
+                <input id="style1" name="visualStyle" type="radio" value="Minimalista" class="mt-1 h-4 w-4 text-primary border-gray-300 focus:ring-primary" required>
+                <label for="style1" class="ml-2 block text-sm text-gray-700">Minimalista</label>
+              </div>
+              <div class="flex items-start">
+                <!-- Cambia el value a "Corporativo" -->
+                <input id="style2" name="visualStyle" type="radio" value="Corporativo" class="mt-1 h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                <label for="style2" class="ml-2 block text-sm text-gray-700">Corporativo</label>
+              </div>
+              <div class="flex items-start">
+                <!-- Cambia el value a "Moderno/Tecnológico" -->
+                <input id="style3" name="visualStyle" type="radio" value="Moderno/Tecnológico" class="mt-1 h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                <label for="style3" class="ml-2 block text-sm text-gray-700">Moderno/Tecnológico</label>
+              </div>
+              <div class="flex items-start">
+                <!-- Cambia el value a "Artístico/Creativo" -->
+                <input id="style4" name="visualStyle" type="radio" value="Artístico/Creativo" class="mt-1 h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                <label for="style4" class="ml-2 block text-sm text-gray-700">Artístico/Creativo</label>
+              </div>
+              <div class="flex items-start">
+                <input id="style5" name="visualStyle" type="radio" value="Otro" class="mt-1 h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                <label for="style5" class="ml-2 block text-sm text-gray-700">Otro (especificar):</label>
+                <input type="text" id="styleOther" name="styleOther" class="ml-2 p-1 border border-gray-300 rounded focus:ring-primary focus:border-primary">
+              </div>
+            </div>
+          </div>          
+      </div>
+    </div>
+  
+    <!-- Sección 8: Estructura de la Página -->
+    <div class="bg-gray-50 p-6 rounded-lg">
+      <h2 class="text-xl font-semibold mb-4 text-primary">8. Estructura de la Página</h2>
+      <p class="text-sm text-gray-600 mb-4">Su landing page incluirá una página principal con varias secciones. Seleccione las que desea incluir:</p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+        <div class="flex items-start">
+          <input id="section1" name="pageSections" type="checkbox" value="hero" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary" checked disabled>
+          <label for="section1" class="ml-2 block text-sm text-gray-700">Hero (sección principal con mensaje clave) - Siempre incluida</label>
+        </div>
+        <div class="flex items-start">
+          <input id="section2" name="pageSections" type="checkbox" value="about" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
+          <label for="section2" class="ml-2 block text-sm text-gray-700">Sobre Nosotros/Historia</label>
+        </div>
+        <div class="flex items-start">
+          <input id="section3" name="pageSections" type="checkbox" value="services" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
+          <label for="section3" class="ml-2 block text-sm text-gray-700">Servicios/Productos</label>
+        </div>
+        <div class="flex items-start">
+          <input id="section4" name="pageSections" type="checkbox" value="benefits" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
+          <label for="section4" class="ml-2 block text-sm text-gray-700">Beneficios/Características</label>
+        </div>
+        <div class="flex items-start">
+          <input id="section5" name="pageSections" type="checkbox" value="testimonials" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
+          <label for="section5" class="ml-2 block text-sm text-gray-700">Testimonios de clientes</label>
+        </div>
+        <div class="flex items-start">
+          <input id="section6" name="pageSections" type="checkbox" value="portfolio" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
+          <label for="section6" class="ml-2 block text-sm text-gray-700">Portafolio/Trabajos realizados</label>
+        </div>
+        <div class="flex items-start">
+          <input id="section7" name="pageSections" type="checkbox" value="team" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
+          <label for="section7" class="ml-2 block text-sm text-gray-700">Equipo</label>
+        </div>
+        <div class="flex items-start">
+          <input id="section8" name="pageSections" type="checkbox" value="pricing" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
+          <label for="section8" class="ml-2 block text-sm text-gray-700">Precios</label>
+        </div>
+        <div class="flex items-start">
+          <input id="section9" name="pageSections" type="checkbox" value="faq" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
+          <label for="section9" class="ml-2 block text-sm text-gray-700">FAQ (Preguntas frecuentes)</label>
+        </div>
+        <div class="flex items-start">
+          <input id="section10" name="pageSections" type="checkbox" value="contact" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary" checked disabled>
+          <label for="section10" class="ml-2 block text-sm text-gray-700">Contacto - Siempre incluida</label>
+        </div>
+        <div class="flex items-start md:col-span-2">
+          <input id="section11" name="pageSections" type="checkbox" value="other" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
+          <label for="section11" class="ml-2 block text-sm text-gray-700">Otras (especificar):</label>
+          <input type="text" id="sectionsOther" name="sectionsOther" class="ml-2 p-1 border border-gray-300 rounded focus:ring-primary focus:border-primary">
+        </div>
+      </div>
+    </div>
+  
+    <!-- Sección 9: Contenido Adicional -->
+    <div class="bg-gray-50 p-6 rounded-lg">
+      <h2 class="text-xl font-semibold mb-4 text-primary">9. Contenido Adicional</h2>
+      
+      <div class="grid grid-cols-1 gap-6">
+        <div>
+          <label for="testimonials" class="block text-sm font-medium text-gray-700 mb-1">Testimonios de clientes (si tiene)</label>
+          <textarea id="testimonials" name="testimonials" rows="4" class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary" placeholder="Nombre del cliente: Juan Pérez&#10;Texto del testimonio: Esta empresa ha transformado nuestro negocio..."></textarea>
+        </div>
+        
+        <div>
+          <label for="faq" class="block text-sm font-medium text-gray-700 mb-1">Preguntas frecuentes (FAQ)</label>
+          <textarea id="faq" name="faq" rows="4" class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary" placeholder="Pregunta: ¿Cuánto tiempo toma implementar el servicio?&#10;Respuesta: Nuestro servicio se implementa en..."></textarea>
+        </div>
+        
+        <div>
+          <label for="socialLinks" class="block text-sm font-medium text-gray-700 mb-1">Enlaces a redes sociales</label>
+          <textarea id="socialLinks" name="socialLinks" rows="4" class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary" placeholder="Facebook: https://facebook.com/miempresa&#10;Instagram: https://instagram.com/miempresa"></textarea>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Sección 10: Requisitos Técnicos Adicionales -->
+    <div class="bg-gray-50 p-6 rounded-lg">
+        <h2 class="text-xl font-semibold mb-4 text-primary">10. Requisitos Técnicos Adicionales</h2>
+        
+        <div class="grid grid-cols-1 gap-6">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">¿Necesita alguno de estos servicios adicionales?</label>
+            <div class="space-y-2">
+              <div class="flex items-start">
+                <input id="addon1" name="additionalServices" type="checkbox" value="domain" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
+                <label for="addon1" class="ml-2 block text-sm text-gray-700">Dominio personalizado (Costo adicional: precio del dominio + 10%)</label>
+              </div>
+              <div class="flex items-start">
+                <input id="addon2" name="additionalServices" type="checkbox" value="form" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
+                <label for="addon2" class="ml-2 block text-sm text-gray-700">Formulario de contacto (Costo adicional: $30,000)</label>
+              </div>
+              <div class="flex items-start">
+                <input id="addon3" name="additionalServices" type="checkbox" value="analytics" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
+                <label for="addon3" class="ml-2 block text-sm text-gray-700">Google Tag Manager y Analytics (Costo adicional: $50,000, GRATIS si proporciona los tags antes)</label>
+              </div>
+              <div class="flex items-start">
+                <input id="addon4" name="additionalServices" type="checkbox" value="other" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
+                <label for="addon4" class="ml-2 block text-sm text-gray-700">Otro (especificar):</label>
+                <input type="text" id="addonsOther" name="addonsOther" class="ml-2 p-1 border border-gray-300 rounded focus:ring-primary focus:border-primary">
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <label for="analyticsId" class="block text-sm font-medium text-gray-700 mb-1">Si seleccionó Google Analytics, proporcione su ID de seguimiento</label>
+            <input type="text" id="analyticsId" name="analyticsId" class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
+          </div>
+        </div>
+      </div>
+      
+      <!-- Sección 11: Referencias y Competencia -->
+      <div class="bg-gray-50 p-6 rounded-lg">
+        <h2 class="text-xl font-semibold mb-4 text-primary">11. Referencias y Competencia</h2>
+        
+        <div class="grid grid-cols-1 gap-6">
+          <div>
+            <label for="references" class="block text-sm font-medium text-gray-700 mb-1">¿Hay algún sitio web que le guste y quiera tomar como referencia? (Proporcione enlaces)</label>
+            <textarea id="references" name="references" rows="3" class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary"></textarea>
+          </div>
+          
+          <div>
+            <label for="competitors" class="block text-sm font-medium text-gray-700 mb-1">¿Quiénes son sus principales competidores? (Proporcione enlaces a sus sitios web si es posible)</label>
+            <textarea id="competitors" name="competitors" rows="3" class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary"></textarea>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Sección 12: Información Adicional -->
+      <div class="bg-gray-50 p-6 rounded-lg">
+        <h2 class="text-xl font-semibold mb-4 text-primary">12. Información Adicional</h2>
+        
+        <div>
+          <label for="additionalInfo" class="block text-sm font-medium text-gray-700 mb-1">¿Hay algo más que debamos saber para desarrollar su landing page de manera efectiva?</label>
+          <textarea id="additionalInfo" name="additionalInfo" rows="4" class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary"></textarea>
+        </div>
+      </div>
+      
+      <!-- Términos y Condiciones -->
+      <div class="bg-gray-50 p-6 rounded-lg">
+        <h2 class="text-xl font-semibold mb-4 text-primary">Términos y Condiciones</h2>
+        
+        <div class="space-y-4">
+          <p class="text-sm text-gray-700"><strong>Tiempo de entrega:</strong> Se presentará un wireframe inmediatamente después de recibir el formulario completo y el pago. La página web estará lista en hora y media después de la aprobación del wireframe.</p>
+          
+          <p class="text-sm text-gray-700"><strong>Correcciones:</strong> El servicio incluye una (1) corrección sin costo adicional. Cada corrección adicional tendrá un costo de $20,000 CLP. Un cambio total de diseño costará $100,000 CLP.</p>
+          
+          <p class="text-sm text-gray-700"><strong>Pago:</strong> El pago completo de $190,000 CLP debe realizarse antes de comenzar el proyecto.</p>
+          
+          <div class="flex items-start mt-4">
+            <input id="termsAccepted" name="termsAccepted" type="checkbox" required class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
+            <label for="termsAccepted" class="ml-2 block text-sm text-gray-700">
+              Al enviar este formulario, confirmo que he leído y acepto los términos y condiciones del servicio.
+            </label>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Botón de envío -->
+      <div class="text-center">
+        <button type="submit" class="bg-primary hover:bg-primary-dark text-white font-bold py-3 px-8 rounded-lg transition-colors">
+          Enviar Solicitud
+        </button>
+      </div>
+      
+      <!-- Estado de envío - Oculto inicialmente -->
+      <div id="formStatus" class="hidden mt-6 p-4 rounded-lg text-center"></div>
+      </form>
+      
+      <!-- Corrección en el script para manejar posibles valores nulos -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('clientForm') as HTMLFormElement;
+      const formStatus = document.getElementById('formStatus');
+      
+      if (form && formStatus) {
+        form.addEventListener('submit', async function(e) {
+          e.preventDefault();
+          
+          formStatus.textContent = 'Enviando formulario...';
+          formStatus.className = 'mt-6 p-4 rounded-lg text-center bg-yellow-100 text-yellow-800';
+          formStatus.style.display = 'block';
+          
+          const formData = new FormData(form);
+          
+          try {
+            const response = await fetch('/api/submit-form', {
+              method: 'POST',
+              body: formData
+            });
+            
+            const result = await response.json();
+            
+            if (response.ok) {
+              formStatus.textContent = '¡Formulario enviado con éxito! Nos pondremos en contacto con usted pronto.';
+              formStatus.className = 'mt-6 p-4 rounded-lg text-center bg-green-100 text-green-800';
+              form.reset();
+            } else {
+              throw new Error(result.message || 'Hubo un error al enviar el formulario');
+            }
+          } catch (error: any) {
+            formStatus.textContent = `Error: ${error.message || 'Desconocido'}. Por favor, intente nuevamente o contáctenos directamente.`;
+            formStatus.className = 'mt-6 p-4 rounded-lg text-center bg-red-100 text-red-800';
+          }
+        });
+      }
+    });
+  </script>
