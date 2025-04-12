@@ -1,5 +1,5 @@
 <!-- Landing Page con proporcionalidad en dispositivos móviles - Imagen primero en móvil -->
-<section class="relative min-h-screen  md:pb-0 pb-20 bg-gradient-to-br from-blue-700 to-purple-700 text-white overflow-hidden">
+<section class="relative min-h-screen md:pb-10 pb-20 bg-gradient-to-br from-blue-700 to-purple-700 text-white overflow-hidden">
   <!-- Elementos decorativos de fondo -->
   <div class="absolute inset-0 overflow-hidden">
     <div class="absolute top-1/5 left-1/10 w-1/4 h-1/4 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
@@ -8,12 +8,19 @@
   </div>
   
   <!-- Hero Content -->
-  <div class="relative z-10   container mx-auto px-4 md:px-6 py-8 md:py-12 lg:py-16 flex flex-col min-h-screen">
+  <div class="relative z-10 container mx-auto px-4 md:px-6 py-8 md:py-12 lg:py-16 flex flex-col min-h-screen">
+    <!-- Banner de oferta por tiempo limitado -->
+    <div class="text-center mb-6 mt-16 md:mt-8">
+      <div class="inline-block py-2 px-4 bg-rose-600 text-white rounded-full font-medium animate-pulse">
+        ¡OFERTA ESPECIAL! Solo del 15 al 30 de abril
+      </div>
+    </div>
+
     <!-- Estructura flexible reordenable con flexbox -->
     <div class="flex-grow flex flex-col md:flex-row items-center justify-center">
       
       <!-- Representación de landing page proporcional - Primero en móvil -->
-<div class="w-full md:w-1/2 order-1 md:order-2 flex justify-center md:justify-end mb-8 md:mb-0 pt-10  md:pt-0 md:pb-0">
+<div class="w-full md:w-1/2 order-1 md:order-2 flex justify-center md:justify-end mb-8 md:mb-0 pt-10 md:pt-0 md:pb-0">
   <!-- Contenedor con proporción fija -->
   <div class="w-full max-w-sm aspect-square">
     <!-- Borde exterior y fondo -->
@@ -106,15 +113,31 @@
         <p class="text-lg md:text-xl lg:text-2xl mb-6 md:mb-8 text-blue-100">
           Diseño rápido, moderno y optimizado para SEO con tecnología Astro
         </p>
+        
+        <!-- Mensaje de oferta especial -->
+        <div class="bg-white/10 p-4 rounded-lg mb-6 border border-white/20">
+          <div class="flex items-center">
+            <div class="text-rose-300 mr-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div>
+              <p class="font-bold text-rose-200">OFERTA ESPECIAL: $190,000</p>
+              <p class="text-sm text-blue-100">Precio normal: <span class="line-through">$250,000</span> • Ahorra $60,000</p>
+            </div>
+          </div>
+        </div>
+        
         <div class="flex flex-col sm:flex-row gap-4">
           <a 
             href="#pricing" 
             class="px-6 py-3 md:px-8 md:py-4 bg-pink-600 hover:bg-pink-700 rounded-lg font-bold transition transform hover:scale-105 text-center"
           >
-            Obtén tu web por solo $250,000
+            Obtén tu web por solo $190,000
           </a>
           <a 
-            href="https://wa.me/+XXXXXXXXXXX?text=Hola%20FaziI%20AI,%20me%20interesa%20una%20landing%20page" 
+            href="https://wa.me/+XXXXXXXXXXX?text=Hola%20FaziI%20AI,%20me%20interesa%20una%20landing%20page%20por%20$190,000" 
             target="_blank"
             rel="noopener noreferrer"
             class="px-6 py-3 md:px-8 md:py-4 bg-green-600 hover:bg-green-700 rounded-lg font-bold flex items-center justify-center transition transform hover:scale-105"
