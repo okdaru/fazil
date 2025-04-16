@@ -48,7 +48,7 @@
     </div>
     
     <!-- Menú móvil (oculto por defecto) -->
-    <div id="mobileMenu" class="hidden md:hidden bg-white rounded-lg mt-4 shadow-lg p-4 absolute left-6 right-6">
+    <div id="mobileMenu" class="hidden md:hidden bg-white rounded-lg mt-4 shadow-lg p-4 absolute left-6 right-6 z-50">
       <nav class="flex flex-col space-y-3">
         <a href="/process" class="text-gray-800 hover:text-primary font-medium">Proceso</a>
         <a href="/astro-benefits" class="text-gray-800 hover:text-primary font-medium">Astro</a>
@@ -56,7 +56,7 @@
         <a href="#benefits" class="text-gray-800 hover:text-primary font-medium">Beneficios</a>
         <a href="#pricing" class="text-gray-800 hover:text-primary font-medium">Precios</a>
         <a 
-          href="https://wa.me/+XXXXXXXXXXX?text=Hola%20FaziI%20AI,%20me%20interesa%20una%20landing%20page%20por%20$190,000" 
+          href="https://wa.me/+573181123660?text=Hola%20FaziI%20AI,%20me%20interesa%20una%20landing%20page%20por%20$190,000" 
           target="_blank"
           rel="noopener noreferrer"
           class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-medium transition-colors flex items-center justify-center"
@@ -89,6 +89,20 @@
         link.addEventListener('click', function() {
           mobileMenu.classList.add('hidden');
         });
+      });
+      
+      // Cerrar el menú al hacer clic fuera de él
+      document.addEventListener('click', function(event) {
+        // Corregido: Cast apropiado de EventTarget a Element o Node
+        const target = event.target as Element;
+        
+        // Verificar si el clic fue dentro del menú o en el botón del menú
+        const isClickInsideMenu = mobileMenu.contains(target);
+        const isClickMenuButton = menuButton.contains(target);
+        
+        if (!isClickInsideMenu && !isClickMenuButton && !mobileMenu.classList.contains('hidden')) {
+          mobileMenu.classList.add('hidden');
+        }
       });
     }
   });
