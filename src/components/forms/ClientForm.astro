@@ -3,39 +3,40 @@
 ---
 
 <form id="clientForm" class="space-y-8 max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg">
-    <h1 class="text-3xl font-bold text-center text-primary mb-8">Formulario de Información para Desarrollo Web</h1>
-    <p class="text-gray-600 mb-8">Este formulario nos ayudará a recopilar toda la información necesaria para crear su página web profesional. Por favor, complete todos los campos posibles para garantizar un resultado óptimo y personalizado.</p>
-  
-    <!-- Sección 1: Información Básica del Negocio -->
-    <div class="bg-gray-50 p-6 rounded-lg">
-      <h2 class="text-xl font-semibold mb-4 text-primary">1. Información Básica del Negocio</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <label for="companyName" class="block text-sm font-medium text-gray-700 mb-1">Nombre de la empresa/marca *</label>
-          <input type="text" id="companyName" name="companyName" required class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
-        </div>
-        <div>
-          <label for="slogan" class="block text-sm font-medium text-gray-700 mb-1">Eslogan o tagline (si existe)</label>
-          <input type="text" id="slogan" name="slogan" class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
-        </div>
-        <div>
-          <label for="industry" class="block text-sm font-medium text-gray-700 mb-1">Sector o industria *</label>
-          <input type="text" id="industry" name="industry" required class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
-        </div>
-        <div>
-          <label for="foundedYear" class="block text-sm font-medium text-gray-700 mb-1">Año de fundación</label>
-          <input type="number" id="foundedYear" name="foundedYear" class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
-        </div>
-        <div class="md:col-span-2">
-          <label for="businessDescription" class="block text-sm font-medium text-gray-700 mb-1">Breve descripción del negocio *</label>
-          <textarea id="businessDescription" name="businessDescription" rows="3" required class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary"></textarea>
-        </div>
-        <div class="md:col-span-2">
-          <label for="location" class="block text-sm font-medium text-gray-700 mb-1">Ubicación/dirección (si desea mostrarla)</label>
-          <input type="text" id="location" name="location" class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
-        </div>
+  <h1 class="text-3xl font-bold text-center text-primary mb-8">Formulario de Información para Desarrollo Web</h1>
+  <p class="text-gray-600 mb-8">Este formulario nos ayudará a recopilar toda la información necesaria para crear su página web profesional. Por favor, complete todos los campos posibles para garantizar un resultado óptimo y personalizado.</p>
+
+  <!-- Sección 1: Información Básica del Negocio -->
+  <div class="bg-gray-50 p-6 rounded-lg">
+    <h2 class="text-xl font-semibold mb-4 text-primary">1. Información Básica del Negocio</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <label for="companyName" class="block text-sm font-medium text-gray-700 mb-1">Nombre de la empresa/marca *</label>
+        <input type="text" id="companyName" name="companyName" required class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
+      </div>
+      <div>
+        <label for="slogan" class="block text-sm font-medium text-gray-700 mb-1">Eslogan o tagline (si existe)</label>
+        <input type="text" id="slogan" name="slogan" class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
+      </div>
+      <div>
+        <label for="industry" class="block text-sm font-medium text-gray-700 mb-1">Sector o industria *</label>
+        <input type="text" id="industry" name="industry" required class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
+      </div>
+      <div>
+        <label for="foundedYear" class="block text-sm font-medium text-gray-700 mb-1">Año de fundación</label>
+        <input type="number" id="foundedYear" name="foundedYear" class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
+      </div>
+      <div class="md:col-span-2">
+        <label for="businessDescription" class="block text-sm font-medium text-gray-700 mb-1">Breve descripción del negocio *</label>
+        <textarea id="businessDescription" name="businessDescription" rows="3" required class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary"></textarea>
+      </div>
+      <div class="md:col-span-2">
+        <label for="location" class="block text-sm font-medium text-gray-700 mb-1">Ubicación/dirección (si desea mostrarla)</label>
+        <input type="text" id="location" name="location" class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
       </div>
     </div>
+  </div>
+
   
     <!-- Sección 2: Información de Contacto -->
     <div class="bg-gray-50 p-6 rounded-lg">
@@ -188,7 +189,7 @@
     </div>
     
   
-    <!-- Sección 7: Elementos Visuales -->
+    <!-- Sección 7: Elementos Visuales - Modificado para limitar imágenes -->
     <div class="bg-gray-50 p-6 rounded-lg">
       <h2 class="text-xl font-semibold mb-4 text-primary">7. Elementos Visuales</h2>
       <p class="text-sm text-gray-600 mb-4">Por favor, proporcione todos los elementos visuales en alta resolución.</p>
@@ -214,10 +215,31 @@
           </div>
         </div>
         
+        <!-- Campo de imágenes de productos modificado con límite de 15 -->
         <div>
-          <label for="productImages" class="block text-sm font-medium text-gray-700 mb-1">Imágenes de productos/servicios *</label>
-          <input type="file" id="productImages" name="productImages" accept="image/*" multiple required class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
+          <label for="productImages" class="block text-sm font-medium text-gray-700 mb-1">
+            Imágenes de productos/servicios * <span class="text-xs text-gray-500">(Máximo 15 imágenes)</span>
+          </label>
+          <input 
+            type="file" 
+            id="productImages" 
+            name="productImages" 
+            accept="image/*" 
+            multiple 
+            required 
+            class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary"
+          >
+          <!-- Mensaje de error (oculto por defecto) -->
+          <div id="imageErrorMessage" class="hidden mt-2 text-sm text-red-600 font-medium">
+            Solo se permiten hasta 15 imágenes. Si necesita subir más, por favor contacte al administrador.
+          </div>
+          <!-- Contador de imágenes seleccionadas -->
+          <div id="imageCounter" class="mt-2 text-sm text-gray-600">
+            0 imágenes seleccionadas
+          </div>
         </div>
+        
+        
         
         <div>
           <div class="bg-gray-50 p-6 rounded-lg">
@@ -411,53 +433,111 @@
         </div>
       </div>
       
-      <!-- Botón de envío -->
-      <div class="text-center">
-        <button type="submit" class="bg-primary hover:bg-primary-dark text-white font-bold py-3 px-8 rounded-lg transition-colors">
-          Enviar Solicitud
-        </button>
-      </div>
+  <!-- Botón de envío -->
+  <div class="text-center">
+    <button type="submit" class="bg-primary hover:bg-primary-dark text-white font-bold py-3 px-8 rounded-lg transition-colors">
+      Enviar Solicitud
+    </button>
+  </div>
+  
+  <!-- Estado de envío - Oculto inicialmente -->
+  <div id="formStatus" class="hidden mt-6 p-4 rounded-lg text-center"></div>
+</form>
       
-      <!-- Estado de envío - Oculto inicialmente -->
-      <div id="formStatus" class="hidden mt-6 p-4 rounded-lg text-center"></div>
-      </form>
-      
-      <!-- Corrección en el script para manejar posibles valores nulos -->
+
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const form = document.getElementById('clientForm') as HTMLFormElement;
-      const formStatus = document.getElementById('formStatus');
-      
-      if (form && formStatus) {
-        form.addEventListener('submit', async function(e) {
-          e.preventDefault();
-          
-          formStatus.textContent = 'Enviando formulario...';
-          formStatus.className = 'mt-6 p-4 rounded-lg text-center bg-yellow-100 text-yellow-800';
-          formStatus.style.display = 'block';
-          
-          const formData = new FormData(form);
-          
-          try {
-            const response = await fetch('/api/submit-form', {
-              method: 'POST',
-              body: formData
-            });
-            
-            const result = await response.json();
-            
-            if (response.ok) {
-              formStatus.textContent = '¡Formulario enviado con éxito! Nos pondremos en contacto con usted pronto.';
-              formStatus.className = 'mt-6 p-4 rounded-lg text-center bg-green-100 text-green-800';
-              form.reset();
-            } else {
-              throw new Error(result.message || 'Hubo un error al enviar el formulario');
-            }
-          } catch (error: any) {
-            formStatus.textContent = `Error: ${error.message || 'Desconocido'}. Por favor, intente nuevamente o contáctenos directamente.`;
-            formStatus.className = 'mt-6 p-4 rounded-lg text-center bg-red-100 text-red-800';
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('clientForm') as HTMLFormElement;
+    const formStatus = document.getElementById('formStatus');
+    const productImagesInput = document.getElementById('productImages') as HTMLInputElement;
+    const imageErrorMessage = document.getElementById('imageErrorMessage');
+    const imageCounter = document.getElementById('imageCounter');
+    
+    // Constante para el límite de imágenes
+    const MAX_IMAGES = 15;
+    
+    // Validar número de imágenes seleccionadas
+    if (productImagesInput) {
+      productImagesInput.addEventListener('change', function() {
+        const filesCount = this.files ? this.files.length : 0;
+        
+        // Actualizar contador
+        if (imageCounter) {
+          imageCounter.textContent = `${filesCount} ${filesCount === 1 ? 'imagen seleccionada' : 'imágenes seleccionadas'}`;
+        }
+        
+        // Verificar límite de imágenes
+        if (filesCount > MAX_IMAGES) {
+          // Mostrar mensaje de error
+          if (imageErrorMessage) {
+            imageErrorMessage.classList.remove('hidden');
           }
-        });
-      }
-    });
-  </script>
+          
+          // Deshabilitar el botón de envío
+          const submitButton = form?.querySelector('button[type="submit"]') as HTMLButtonElement;
+          if (submitButton) {
+            submitButton.disabled = true;
+            submitButton.classList.add('opacity-50', 'cursor-not-allowed');
+          }
+        } else {
+          // Ocultar mensaje de error
+          if (imageErrorMessage) {
+            imageErrorMessage.classList.add('hidden');
+          }
+          
+          // Habilitar el botón de envío
+          const submitButton = form?.querySelector('button[type="submit"]') as HTMLButtonElement;
+          if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.classList.remove('opacity-50', 'cursor-not-allowed');
+          }
+        }
+      });
+    }
+    
+    if (form && formStatus) {
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        // Verificar de nuevo el límite de imágenes antes de enviar
+        if (productImagesInput && productImagesInput.files && productImagesInput.files.length > MAX_IMAGES) {
+          if (imageErrorMessage) {
+            imageErrorMessage.classList.remove('hidden');
+          }
+          return; // Evitar envío del formulario
+        }
+        
+        formStatus.textContent = 'Enviando formulario...';
+        formStatus.className = 'mt-6 p-4 rounded-lg text-center bg-yellow-100 text-yellow-800';
+        formStatus.style.display = 'block';
+        
+        const formData = new FormData(form);
+        
+        try {
+          const response = await fetch('/api/submit-form', {
+            method: 'POST',
+            body: formData
+          });
+          
+          const result = await response.json();
+          
+          if (response.ok) {
+            formStatus.textContent = '¡Formulario enviado con éxito! Nos pondremos en contacto con usted pronto.';
+            formStatus.className = 'mt-6 p-4 rounded-lg text-center bg-green-100 text-green-800';
+            form.reset();
+            
+            // Resetear contador de imágenes
+            if (imageCounter) {
+              imageCounter.textContent = '0 imágenes seleccionadas';
+            }
+          } else {
+            throw new Error(result.message || 'Hubo un error al enviar el formulario');
+          }
+        } catch (error: any) {
+          formStatus.textContent = `Error: ${error.message || 'Desconocido'}. Por favor, intente nuevamente o contáctenos directamente.`;
+          formStatus.className = 'mt-6 p-4 rounded-lg text-center bg-red-100 text-red-800';
+        }
+      });
+    }
+  });
+</script>
