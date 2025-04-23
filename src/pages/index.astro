@@ -1,28 +1,27 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import HeroSection from '../components/sections/HeroSection.astro';
-import BenefitsSection from '../components/sections/BenefitsSection.astro';
-import ProcessSection from '../components/sections/ProcessSection.astro';
-import FeaturesSection from '../components/sections/FeaturesSection.astro';
-import PricingSection from '../components/sections/PricingSection.astro';
-import CTASection from '../components/sections/CTASection.astro';
-import Footer from '../components/Footer.astro';
-import OurPagesSection from '../components/sections/OurPagesSection.astro';
-
+import ClientForm from '../components/forms/ClientForm.astro';
 ---
 
-<Layout title="Fazil  - Páginas Web Profesionales en 50 Minutos">
-  <!-- Header transparente para la página de inicio -->
-  <Header isTransparent={true} />
-  <main>
-    <HeroSection />
-    <BenefitsSection />
-    <ProcessSection />
-    <FeaturesSection />
-    <PricingSection />
-    <OurPagesSection />
-    <CTASection />
+<Layout title="Formulario de Información para Desarrollo Web - FaziI AI">
+  <main class="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 py-12 px-4">
+    <div class="container mx-auto">
+      <div class="max-w-4xl mx-auto mb-10 text-center">
+        <h1 class="text-4xl font-bold text-primary mb-4">Cuestionario para su pagina web</h1>
+        <p class="text-lg text-gray-600">Complete el siguiente formulario para ayudarnos a crear su pagina web perfecta. Cuanta más información nos proporcione, mejor podremos adaptar el diseño a sus necesidades.</p>
+      </div>
+      
+      <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-1">
+        <ClientForm />
+      </div>
+      
+      <div class="max-w-4xl mx-auto mt-8 text-center">
+        <p class="text-sm text-gray-500">
+          ¿Tiene alguna pregunta? Contáctenos directamente a través de 
+          <a href="https://wa.me/+XXXXXXXXXXX" class="text-primary hover:underline">WhatsApp</a> o 
+          <a href="mailto:info@fazii-ai.com" class="text-primary hover:underline">info@fazii-ai.com</a>
+        </p>
+      </div>
+    </div>
   </main>
-  <Footer />
 </Layout>

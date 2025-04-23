@@ -1,5 +1,5 @@
 ---
-// ClientForm.astro
+// ClientForm.astro - Mejorado con campos específicos por industria
 ---
 
 <form id="clientForm" class="space-y-8 max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg">
@@ -18,10 +18,27 @@
         <label for="slogan" class="block text-sm font-medium text-gray-700 mb-1">Eslogan o tagline (si existe)</label>
         <input type="text" id="slogan" name="slogan" class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
       </div>
+      
+      <!-- Campo de industria mejorado con opciones predefinidas -->
       <div>
         <label for="industry" class="block text-sm font-medium text-gray-700 mb-1">Sector o industria *</label>
-        <input type="text" id="industry" name="industry" required class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
+        <select id="industry" name="industry" required class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
+          <option value="">Seleccione un sector</option>
+          <option value="restaurante">Restaurante o servicio de alimentación</option>
+          <option value="medico">Consultorio médico/Clínica</option>
+          <option value="psicologia">Servicios psicológicos/Terapias</option>
+          <option value="profesional">Servicios profesionales (abogados, contadores, etc.)</option>
+          <option value="educacion">Educación y formación</option>
+          <option value="otro">Otro</option>
+        </select>
       </div>
+      
+      <!-- Campo adicional que aparece si selecciona "Otro" -->
+      <div id="otherIndustryField" class="hidden">
+        <label for="otherIndustry" class="block text-sm font-medium text-gray-700 mb-1">Especifique su sector *</label>
+        <input type="text" id="otherIndustry" name="otherIndustry" class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
+      </div>
+      
       <div>
         <label for="foundedYear" class="block text-sm font-medium text-gray-700 mb-1">Año de fundación</label>
         <input type="number" id="foundedYear" name="foundedYear" class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
@@ -37,52 +54,340 @@
     </div>
   </div>
 
-  
-    <!-- Sección 2: Información de Contacto -->
-    <div class="bg-gray-50 p-6 rounded-lg">
-      <h2 class="text-xl font-semibold mb-4 text-primary">2. Información de Contacto para el Proyecto</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <label for="contactName" class="block text-sm font-medium text-gray-700 mb-1">Nombre de la persona de contacto *</label>
-          <input type="text" id="contactName" name="contactName" required class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
+  <!-- Sección 2: Información de Contacto -->
+  <div class="bg-gray-50 p-6 rounded-lg">
+    <h2 class="text-xl font-semibold mb-4 text-primary">2. Información de Contacto para el Proyecto</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <label for="contactName" class="block text-sm font-medium text-gray-700 mb-1">Nombre de la persona de contacto *</label>
+        <input type="text" id="contactName" name="contactName" required class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
+      </div>
+      <div>
+        <label for="contactPhone" class="block text-sm font-medium text-gray-700 mb-1">Teléfono *</label>
+        <input type="tel" id="contactPhone" name="contactPhone" required class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
+      </div>
+      <div>
+        <label for="contactEmail" class="block text-sm font-medium text-gray-700 mb-1">Correo electrónico *</label>
+        <input type="email" id="contactEmail" name="contactEmail" required class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
+      </div>
+      <div>
+        <label for="whatsappNumber" class="block text-sm font-medium text-gray-700 mb-1">Número de WhatsApp para el botón de contacto *</label>
+        <input type="tel" id="whatsappNumber" name="whatsappNumber" required class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
+      </div>
+      <div class="md:col-span-2">
+        <label for="whatsappText" class="block text-sm font-medium text-gray-700 mb-1">Texto predeterminado para el mensaje de WhatsApp</label>
+        <input type="text" id="whatsappText" name="whatsappText" placeholder="Ej: Hola, me interesa conocer más sobre..." class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
+      </div>
+    </div>
+  </div>
+
+  <!-- Sección 3: Credenciales de GitHub -->
+  <div class="bg-gray-50 p-6 rounded-lg">
+    <h2 class="text-xl font-semibold mb-4 text-primary">3. Credenciales de GitHub</h2>
+    <p class="text-sm text-gray-600 mb-4">Necesitamos que cree una cuenta en GitHub para el despliegue automático.</p>
+    <div class="grid grid-cols-1 gap-6">
+      <div>
+        <label for="githubUsername" class="block text-sm font-medium text-gray-700 mb-1">Nombre de usuario de GitHub *</label>
+        <input type="text" id="githubUsername" name="githubUsername" required class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
+      </div>
+      <div>
+        <p class="text-sm text-gray-600">La contraseña de GitHub debe ser enviada por un canal seguro. Nos pondremos en contacto para coordinar esto.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sección 4: Información Específica por Industria (Dinámica) -->
+  <div id="industrySpecificSection" class="hidden bg-blue-50 p-6 rounded-lg border-l-4 border-blue-500">
+    <h2 class="text-xl font-semibold mb-4 text-primary">4. Información Específica del Sector</h2>
+    <p class="text-sm text-gray-600 mb-6">Esta sección contiene preguntas específicas para su industria que nos ayudarán a personalizar mejor su página web.</p>
+    
+    <!-- Campos específicos para Restaurantes -->
+    <div id="restauranteFields" class="hidden space-y-6">
+      <div class="bg-white p-4 rounded-lg shadow-sm">
+        <h3 class="text-lg font-medium text-primary mb-3">Información gastronómica</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="md:col-span-2">
+            <label for="foodType" class="block text-sm font-medium text-gray-700 mb-1">Tipo de cocina/especialidad *</label>
+            <input type="text" id="foodType" name="foodType" placeholder="Ej: Italiana, Fusión, Parrilla, etc." class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
+          </div>
+          <div class="md:col-span-2">
+            <label for="menuCategories" class="block text-sm font-medium text-gray-700 mb-1">Categorías principales del menú *</label>
+            <textarea id="menuCategories" name="menuCategories" rows="3" placeholder="Ej: Entradas, Platos principales, Postres, Bebidas, etc." class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary"></textarea>
+          </div>
+          <div class="md:col-span-2">
+            <label for="specialties" class="block text-sm font-medium text-gray-700 mb-1">Platos destacados/especialidades de la casa</label>
+            <textarea id="specialties" name="specialties" rows="3" placeholder="Mencione los 3-5 platos más representativos de su restaurante" class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary"></textarea>
+          </div>
         </div>
-        <div>
-          <label for="contactPhone" class="block text-sm font-medium text-gray-700 mb-1">Teléfono *</label>
-          <input type="tel" id="contactPhone" name="contactPhone" required class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
+      </div>
+      
+      <div class="bg-white p-4 rounded-lg shadow-sm">
+        <h3 class="text-lg font-medium text-primary mb-3">Horarios y servicios</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="md:col-span-2">
+            <label for="openingHours" class="block text-sm font-medium text-gray-700 mb-1">Horarios de atención *</label>
+            <textarea id="openingHours" name="openingHours" rows="3" placeholder="Ej: Lunes a Viernes: 12:00 - 23:00, Sábados y Domingos: 13:00 - 00:00" class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary"></textarea>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Servicios adicionales</label>
+            <div class="space-y-2">
+              <div class="flex items-start">
+                <input id="delivery" name="additionalServices" type="checkbox" value="delivery" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
+                <label for="delivery" class="ml-2 block text-sm text-gray-700">Delivery/Para llevar</label>
+              </div>
+              <div class="flex items-start">
+                <input id="reservation" name="additionalServices" type="checkbox" value="reservation" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
+                <label for="reservation" class="ml-2 block text-sm text-gray-700">Reservas</label>
+              </div>
+              <div class="flex items-start">
+                <input id="events" name="additionalServices" type="checkbox" value="events" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
+                <label for="events" class="ml-2 block text-sm text-gray-700">Eventos privados</label>
+              </div>
+            </div>
+          </div>
+          <div>
+            <label for="ambience" class="block text-sm font-medium text-gray-700 mb-1">Ambiente/Estilo del local</label>
+            <select id="ambience" name="ambience" class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
+              <option value="">Seleccione una opción</option>
+              <option value="casual">Casual</option>
+              <option value="elegante">Elegante/Formal</option>
+              <option value="familiar">Familiar</option>
+              <option value="tematico">Temático</option>
+              <option value="otro">Otro</option>
+            </select>
+          </div>
         </div>
-        <div>
-          <label for="contactEmail" class="block text-sm font-medium text-gray-700 mb-1">Correo electrónico *</label>
-          <input type="email" id="contactEmail" name="contactEmail" required class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
+      </div>
+    </div>
+    
+    <!-- Campos específicos para Consultorios Médicos -->
+    <div id="medicoFields" class="hidden space-y-6">
+      <div class="bg-white p-4 rounded-lg shadow-sm">
+        <h3 class="text-lg font-medium text-primary mb-3">Especialidades y servicios</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="md:col-span-2">
+            <label for="medicalSpecialties" class="block text-sm font-medium text-gray-700 mb-1">Especialidades médicas *</label>
+            <textarea id="medicalSpecialties" name="medicalSpecialties" rows="3" placeholder="Ej: Cardiología, Pediatría, Medicina General, etc." class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary"></textarea>
+          </div>
+          <div class="md:col-span-2">
+            <label for="medicalServices" class="block text-sm font-medium text-gray-700 mb-1">Servicios principales *</label>
+            <textarea id="medicalServices" name="medicalServices" rows="3" placeholder="Ej: Consultas, Procedimientos, Exámenes, etc." class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary"></textarea>
+          </div>
+          <div class="md:col-span-2">
+            <label for="insuranceInfo" class="block text-sm font-medium text-gray-700 mb-1">Convenios/Seguros aceptados</label>
+            <textarea id="insuranceInfo" name="insuranceInfo" rows="2" placeholder="Liste los seguros y convenios médicos con los que trabaja" class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary"></textarea>
+          </div>
         </div>
-        <div>
-          <label for="whatsappNumber" class="block text-sm font-medium text-gray-700 mb-1">Número de WhatsApp para el botón de contacto *</label>
-          <input type="tel" id="whatsappNumber" name="whatsappNumber" required class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
+      </div>
+      
+      <div class="bg-white p-4 rounded-lg shadow-sm">
+        <h3 class="text-lg font-medium text-primary mb-3">Profesionales y atención</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="md:col-span-2">
+            <label for="doctorProfiles" class="block text-sm font-medium text-gray-700 mb-1">Información de médicos/profesionales</label>
+            <textarea id="doctorProfiles" name="doctorProfiles" rows="4" placeholder="Nombre, especialidad, formación y experiencia de cada profesional" class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary"></textarea>
+            <p class="mt-1 text-xs text-gray-500">Esta información será utilizada para crear perfiles profesionales en su página web.</p>
+          </div>
+          <div>
+            <label for="appointmentSystem" class="block text-sm font-medium text-gray-700 mb-1">Sistema de citas actual *</label>
+            <select id="appointmentSystem" name="appointmentSystem" class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
+              <option value="">Seleccione una opción</option>
+              <option value="telefono">Por teléfono</option>
+              <option value="whatsapp">Por WhatsApp</option>
+              <option value="email">Por email</option>
+              <option value="presencial">Presencial</option>
+              <option value="software">Software de gestión</option>
+              <option value="otro">Otro</option>
+            </select>
+          </div>
+          <div>
+            <label for="appointmentInfo" class="block text-sm font-medium text-gray-700 mb-1">Información para pacientes</label>
+            <textarea id="appointmentInfo" name="appointmentInfo" rows="3" placeholder="Documentos necesarios, preparación para citas, etc." class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary"></textarea>
+          </div>
         </div>
-        <div class="md:col-span-2">
-          <label for="whatsappText" class="block text-sm font-medium text-gray-700 mb-1">Texto predeterminado para el mensaje de WhatsApp</label>
-          <input type="text" id="whatsappText" name="whatsappText" placeholder="Ej: Hola, me interesa conocer más sobre..." class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
+      </div>
+    </div>
+    
+    <!-- Campos específicos para Servicios Psicológicos -->
+    <div id="psicologiaFields" class="hidden space-y-6">
+      <div class="bg-white p-4 rounded-lg shadow-sm">
+        <h3 class="text-lg font-medium text-primary mb-3">Enfoque terapéutico</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="md:col-span-2">
+            <label for="therapeuticApproaches" class="block text-sm font-medium text-gray-700 mb-1">Enfoques/modalidades terapéuticas *</label>
+            <textarea id="therapeuticApproaches" name="therapeuticApproaches" rows="3" placeholder="Ej: Terapia Cognitivo-Conductual, Gestalt, Sistémica, etc." class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary"></textarea>
+          </div>
+          <div>
+            <label for="therapeuticSpecialties" class="block text-sm font-medium text-gray-700 mb-1">Especialidades *</label>
+            <select id="therapeuticSpecialties" name="therapeuticSpecialties" multiple class="w-full p-2 h-32 border border-gray-300 rounded focus:ring-primary focus:border-primary">
+              <option value="adultos">Adultos</option>
+              <option value="ninos">Niños y adolescentes</option>
+              <option value="parejas">Parejas</option>
+              <option value="familiar">Terapia familiar</option>
+              <option value="grupal">Terapia grupal</option>
+              <option value="estres">Estrés y ansiedad</option>
+              <option value="depresion">Depresión</option>
+              <option value="trauma">Trauma</option>
+              <option value="adicciones">Adicciones</option>
+              <option value="duelo">Duelo</option>
+            </select>
+            <p class="mt-1 text-xs text-gray-500">Mantenga presionada la tecla Ctrl/Cmd para seleccionar múltiples opciones.</p>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Modalidades de atención</label>
+            <div class="space-y-2">
+              <div class="flex items-start">
+                <input id="presencial" name="attendanceMode" type="checkbox" value="presencial" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
+                <label for="presencial" class="ml-2 block text-sm text-gray-700">Presencial</label>
+              </div>
+              <div class="flex items-start">
+                <input id="online" name="attendanceMode" type="checkbox" value="online" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
+                <label for="online" class="ml-2 block text-sm text-gray-700">Online</label>
+              </div>
+              <div class="flex items-start">
+                <input id="mixta" name="attendanceMode" type="checkbox" value="mixta" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
+                <label for="mixta" class="ml-2 block text-sm text-gray-700">Modalidad mixta</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="bg-white p-4 rounded-lg shadow-sm">
+        <h3 class="text-lg font-medium text-primary mb-3">Información profesional</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="md:col-span-2">
+            <label for="therapistProfile" class="block text-sm font-medium text-gray-700 mb-1">Perfil del terapeuta/equipo *</label>
+            <textarea id="therapistProfile" name="therapistProfile" rows="4" placeholder="Información profesional, formación, certificaciones y experiencia" class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary"></textarea>
+            <p class="mt-1 text-xs text-gray-500">Esta información será utilizada para crear su perfil profesional en la página web.</p>
+          </div>
+          <div>
+            <label for="sessionDuration" class="block text-sm font-medium text-gray-700 mb-1">Duración típica de sesiones</label>
+            <select id="sessionDuration" name="sessionDuration" class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
+              <option value="">Seleccione una opción</option>
+              <option value="30">30 minutos</option>
+              <option value="45">45 minutos</option>
+              <option value="50">50 minutos</option>
+              <option value="60">60 minutos</option>
+              <option value="90">90 minutos</option>
+              <option value="otro">Otro</option>
+            </select>
+          </div>
+          <div>
+            <label for="frequencyInfo" class="block text-sm font-medium text-gray-700 mb-1">Frecuencia recomendada</label>
+            <input type="text" id="frequencyInfo" name="frequencyInfo" placeholder="Ej: Semanal, Quincenal, etc." class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Campos específicos para Servicios Profesionales -->
+    <div id="profesionalFields" class="hidden space-y-6">
+      <div class="bg-white p-4 rounded-lg shadow-sm">
+        <h3 class="text-lg font-medium text-primary mb-3">Servicios profesionales</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="md:col-span-2">
+            <label for="professionalServices" class="block text-sm font-medium text-gray-700 mb-1">Servicios específicos que ofrece *</label>
+            <textarea id="professionalServices" name="professionalServices" rows="4" placeholder="Detalle los servicios específicos que ofrece su empresa" class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary"></textarea>
+          </div>
+          <div class="md:col-span-2">
+            <label for="workMethodology" class="block text-sm font-medium text-gray-700 mb-1">Metodología de trabajo</label>
+            <textarea id="workMethodology" name="workMethodology" rows="3" placeholder="Describa su proceso de trabajo, fases o metodología que utiliza" class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary"></textarea>
+          </div>
+        </div>
+      </div>
+      
+      <div class="bg-white p-4 rounded-lg shadow-sm">
+        <h3 class="text-lg font-medium text-primary mb-3">Credenciales y diferenciación</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label for="certifications" class="block text-sm font-medium text-gray-700 mb-1">Certificaciones y acreditaciones</label>
+            <textarea id="certifications" name="certifications" rows="3" placeholder="Listado de certificaciones profesionales, licencias, etc." class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary"></textarea>
+          </div>
+          <div>
+            <label for="experience" class="block text-sm font-medium text-gray-700 mb-1">Experiencia relevante</label>
+            <textarea id="experience" name="experience" rows="3" placeholder="Años de experiencia, sectores en los que ha trabajado, etc." class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary"></textarea>
+          </div>
+          <div class="md:col-span-2">
+            <label for="differentiators" class="block text-sm font-medium text-gray-700 mb-1">Elementos diferenciadores de su servicio *</label>
+            <textarea id="differentiators" name="differentiators" rows="3" placeholder="¿Qué hace que sus servicios sean únicos o mejores que la competencia?" class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Campos específicos para Educación y Formación -->
+    <div id="educacionFields" class="hidden space-y-6">
+      <div class="bg-white p-4 rounded-lg shadow-sm">
+        <h3 class="text-lg font-medium text-primary mb-3">Programas educativos</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="md:col-span-2">
+            <label for="educationalPrograms" class="block text-sm font-medium text-gray-700 mb-1">Programas o cursos ofrecidos *</label>
+            <textarea id="educationalPrograms" name="educationalPrograms" rows="4" placeholder="Detalle los programas, cursos o talleres que ofrece su institución" class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary"></textarea>
+          </div>
+          <div>
+            <label for="methodology" class="block text-sm font-medium text-gray-700 mb-1">Metodología educativa</label>
+            <textarea id="methodology" name="methodology" rows="3" placeholder="Describa su enfoque pedagógico o metodología de enseñanza" class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary"></textarea>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Modalidades ofrecidas</label>
+            <div class="space-y-2">
+              <div class="flex items-start">
+                <input id="edu_presencial" name="educationMode" type="checkbox" value="presencial" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
+                <label for="edu_presencial" class="ml-2 block text-sm text-gray-700">Presencial</label>
+              </div>
+              <div class="flex items-start">
+                <input id="edu_online" name="educationMode" type="checkbox" value="online" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
+                <label for="edu_online" class="ml-2 block text-sm text-gray-700">Online</label>
+              </div>
+              <div class="flex items-start">
+                <input id="edu_hibrida" name="educationMode" type="checkbox" value="hibrida" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
+                <label for="edu_hibrida" class="ml-2 block text-sm text-gray-700">Híbrida</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="bg-white p-4 rounded-lg shadow-sm">
+        <h3 class="text-lg font-medium text-primary mb-3">Equipo e instalaciones</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="md:col-span-2">
+            <label for="facultyInfo" class="block text-sm font-medium text-gray-700 mb-1">Información sobre profesores/instructores</label>
+            <textarea id="facultyInfo" name="facultyInfo" rows="3" placeholder="Perfiles, experiencia y especialidades de los docentes" class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary"></textarea>
+          </div>
+          <div>
+            <label for="facilities" class="block text-sm font-medium text-gray-700 mb-1">Instalaciones y recursos</label>
+<textarea id="facilities" name="facilities" rows="3" placeholder="Describa las instalaciones, equipamiento y recursos disponibles" class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary"></textarea>
+            </div>
+            <div>
+              <label for="scheduleInfo" class="block text-sm font-medium text-gray-700 mb-1">Horarios y calendarios</label>
+              <textarea id="scheduleInfo" name="scheduleInfo" rows="3" placeholder="Información sobre horarios de clases, calendario académico, etc." class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Campos específicos para Otros tipos de negocio -->
+      <div id="otroFields" class="hidden space-y-6">
+        <div class="bg-white p-4 rounded-lg shadow-sm">
+          <div class="grid grid-cols-1 gap-4">
+            <div>
+              <label for="otherBusinessInfo" class="block text-sm font-medium text-gray-700 mb-1">Describa los detalles específicos de su negocio *</label>
+              <textarea id="otherBusinessInfo" name="otherBusinessInfo" rows="6" placeholder="Por favor, proporcione toda la información relevante que crea que debemos conocer sobre su tipo de negocio para crear un sitio web efectivo." class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary"></textarea>
+            </div>
+            <div>
+              <label for="otherBusinessFeatures" class="block text-sm font-medium text-gray-700 mb-1">Características o funcionalidades específicas que desea en su sitio web</label>
+              <textarea id="otherBusinessFeatures" name="otherBusinessFeatures" rows="4" placeholder="Mencione cualquier característica o funcionalidad específica que le gustaría incluir en su página web." class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary"></textarea>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   
-    <!-- Sección 3: Credenciales de GitHub -->
+    <!-- Sección 5: Productos o Servicios (General) -->
     <div class="bg-gray-50 p-6 rounded-lg">
-      <h2 class="text-xl font-semibold mb-4 text-primary">3. Credenciales de GitHub</h2>
-      <p class="text-sm text-gray-600 mb-4">Necesitamos que cree una cuenta en GitHub para el despliegue automático.</p>
-      <div class="grid grid-cols-1 gap-6">
-        <div>
-          <label for="githubUsername" class="block text-sm font-medium text-gray-700 mb-1">Nombre de usuario de GitHub *</label>
-          <input type="text" id="githubUsername" name="githubUsername" required class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
-        </div>
-        <div>
-          <p class="text-sm text-gray-600">La contraseña de GitHub debe ser enviada por un canal seguro. Nos pondremos en contacto para coordinar esto.</p>
-        </div>
-      </div>
-    </div>
-  
-    <!-- Sección 4: Productos o Servicios -->
-    <div class="bg-gray-50 p-6 rounded-lg">
-      <h2 class="text-xl font-semibold mb-4 text-primary">4. Productos o Servicios</h2>
+      <h2 class="text-xl font-semibold mb-4 text-primary">5. Productos o Servicios Generales</h2>
       <div class="grid grid-cols-1 gap-6">
         <div>
           <label for="services" class="block text-sm font-medium text-gray-700 mb-1">Liste sus principales productos/servicios (máximo 5) *</label>
@@ -103,9 +408,9 @@
       </div>
     </div>
   
-    <!-- Sección 5: Información sobre el Público Objetivo -->
+    <!-- Sección 6: Información sobre el Público Objetivo -->
     <div class="bg-gray-50 p-6 rounded-lg">
-      <h2 class="text-xl font-semibold mb-4 text-primary">5. Información sobre el Público Objetivo</h2>
+      <h2 class="text-xl font-semibold mb-4 text-primary">6. Información sobre el Público Objetivo</h2>
       <div class="grid grid-cols-1 gap-6">
         <div>
           <label for="targetAudience" class="block text-sm font-medium text-gray-700 mb-1">¿Quién es su cliente ideal? (Edad, ubicación, intereses, etc.) *</label>
@@ -122,15 +427,14 @@
       </div>
     </div>
   
-    <!-- Sección 6: Objetivos de la Página Web -->
+    <!-- Sección 7: Objetivos de la Página Web -->
     <div class="bg-gray-50 p-6 rounded-lg">
-      <h2 class="text-xl font-semibold mb-4 text-primary">6. Objetivos de la página web</h2>
+      <h2 class="text-xl font-semibold mb-4 text-primary">7. Objetivos de la página web</h2>
       <div class="grid grid-cols-1 gap-6">
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-2">¿Cuál es el objetivo principal de su página web? *</label>
           <div class="space-y-2">
             <div class="flex items-start">
-              <!-- Ajusta el value para que coincida con la opción permitida en Airtable -->
               <input id="objective1" name="pageObjective" type="radio" value="Generar contactos" class="mt-1 h-4 w-4 text-primary border-gray-300 focus:ring-primary" required>
               <label for="objective1" class="ml-2 block text-sm text-gray-700">Generar contactos (leads)</label>
             </div>
@@ -158,7 +462,6 @@
           <label class="block text-sm font-medium text-gray-700 mb-2">¿Qué acción específica quiere que realicen los visitantes? *</label>
           <div class="space-y-2">
             <div class="flex items-start">
-              <!-- Cambia el value a "Contactar por WhatsApp" si es lo permitido en Airtable -->
               <input id="action1" name="desiredAction" type="radio" value="Contactar por WhatsApp" class="mt-1 h-4 w-4 text-primary border-gray-300 focus:ring-primary" required>
               <label for="action1" class="ml-2 block text-sm text-gray-700">Contactar por WhatsApp</label>
             </div>
@@ -188,10 +491,9 @@
       </div>
     </div>
     
-  
-    <!-- Sección 7: Elementos Visuales - Modificado para limitar imágenes -->
+    <!-- Sección 8: Elementos Visuales -->
     <div class="bg-gray-50 p-6 rounded-lg">
-      <h2 class="text-xl font-semibold mb-4 text-primary">7. Elementos Visuales</h2>
+      <h2 class="text-xl font-semibold mb-4 text-primary">8. Elementos Visuales</h2>
       <p class="text-sm text-gray-600 mb-4">Por favor, proporcione todos los elementos visuales en alta resolución.</p>
       
       <div class="grid grid-cols-1 gap-6">
@@ -239,29 +541,23 @@
           </div>
         </div>
         
-        
-        
         <div>
           <div class="bg-gray-50 p-6 rounded-lg">
             <label class="block text-sm font-medium text-gray-700 mb-2">¿Tiene preferencia por algún estilo visual? *</label>
             <div class="space-y-2">
               <div class="flex items-start">
-                <!-- Cambia el value a "Minimalista" -->
                 <input id="style1" name="visualStyle" type="radio" value="Minimalista" class="mt-1 h-4 w-4 text-primary border-gray-300 focus:ring-primary" required>
                 <label for="style1" class="ml-2 block text-sm text-gray-700">Minimalista</label>
               </div>
               <div class="flex items-start">
-                <!-- Cambia el value a "Corporativo" -->
                 <input id="style2" name="visualStyle" type="radio" value="Corporativo" class="mt-1 h-4 w-4 text-primary border-gray-300 focus:ring-primary">
                 <label for="style2" class="ml-2 block text-sm text-gray-700">Corporativo</label>
               </div>
               <div class="flex items-start">
-                <!-- Cambia el value a "Moderno/Tecnológico" -->
                 <input id="style3" name="visualStyle" type="radio" value="Moderno/Tecnológico" class="mt-1 h-4 w-4 text-primary border-gray-300 focus:ring-primary">
                 <label for="style3" class="ml-2 block text-sm text-gray-700">Moderno/Tecnológico</label>
               </div>
               <div class="flex items-start">
-                <!-- Cambia el value a "Artístico/Creativo" -->
                 <input id="style4" name="visualStyle" type="radio" value="Artístico/Creativo" class="mt-1 h-4 w-4 text-primary border-gray-300 focus:ring-primary">
                 <label for="style4" class="ml-2 block text-sm text-gray-700">Artístico/Creativo</label>
               </div>
@@ -275,9 +571,9 @@
       </div>
     </div>
   
-    <!-- Sección 8: Estructura de la Página -->
+    <!-- Sección 9: Estructura de la Página -->
     <div class="bg-gray-50 p-6 rounded-lg">
-      <h2 class="text-xl font-semibold mb-4 text-primary">8. Estructura de la Página</h2>
+      <h2 class="text-xl font-semibold mb-4 text-primary">9. Estructura de la Página</h2>
       <p class="text-sm text-gray-600 mb-4">Su página web incluirá una página principal con varias secciones. Seleccione las que desea incluir:</p>
       
       <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
@@ -329,9 +625,9 @@
       </div>
     </div>
   
-    <!-- Sección 9: Contenido Adicional -->
+    <!-- Sección 10: Contenido Adicional -->
     <div class="bg-gray-50 p-6 rounded-lg">
-      <h2 class="text-xl font-semibold mb-4 text-primary">9. Contenido Adicional</h2>
+      <h2 class="text-xl font-semibold mb-4 text-primary">10. Contenido Adicional</h2>
       
       <div class="grid grid-cols-1 gap-6">
         <div>
@@ -351,9 +647,9 @@
       </div>
     </div>
   
-    <!-- Sección 10: Requisitos Técnicos Adicionales -->
+    <!-- Sección 11: Requisitos Técnicos Adicionales -->
     <div class="bg-gray-50 p-6 rounded-lg">
-        <h2 class="text-xl font-semibold mb-4 text-primary">10. Requisitos Técnicos Adicionales</h2>
+        <h2 class="text-xl font-semibold mb-4 text-primary">11. Requisitos Técnicos Adicionales</h2>
         
         <div class="grid grid-cols-1 gap-6">
           <div>
@@ -386,9 +682,9 @@
         </div>
       </div>
       
-      <!-- Sección 11: Referencias y Competencia -->
+      <!-- Sección 12: Referencias y Competencia -->
       <div class="bg-gray-50 p-6 rounded-lg">
-        <h2 class="text-xl font-semibold mb-4 text-primary">11. Referencias y Competencia</h2>
+        <h2 class="text-xl font-semibold mb-4 text-primary">12. Referencias y Competencia</h2>
         
         <div class="grid grid-cols-1 gap-6">
           <div>
@@ -403,9 +699,9 @@
         </div>
       </div>
       
-      <!-- Sección 12: Información Adicional -->
+      <!-- Sección 13: Información Adicional -->
       <div class="bg-gray-50 p-6 rounded-lg">
-        <h2 class="text-xl font-semibold mb-4 text-primary">12. Información Adicional</h2>
+        <h2 class="text-xl font-semibold mb-4 text-primary">13. Información Adicional</h2>
         
         <div>
           <label for="additionalInfo" class="block text-sm font-medium text-gray-700 mb-1">¿Hay algo más que debamos saber para desarrollar su página web de manera efectiva?</label>
@@ -424,27 +720,27 @@
           
           <p class="text-sm text-gray-700"><strong>Pago:</strong> El pago completo de $250,000 CLP debe realizarse antes de comenzar el proyecto.</p>
           
-          <div class="flex items-start mt-4">
-            <input id="termsAccepted" name="termsAccepted" type="checkbox" required class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
-            <label for="termsAccepted" class="ml-2 block text-sm text-gray-700">
-              Al enviar este formulario, confirmo que he leído y acepto los términos y condiciones del servicio.
-            </label>
-          </div>
+<div class="flex items-start mt-4">
+  <input id="termsAccepted" name="termsAccepted" type="checkbox" required class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
+  <label for="termsAccepted" class="ml-2 block text-sm text-gray-700">
+    Al enviar este formulario, confirmo que he leído y acepto los términos y condiciones del servicio.
+  </label>
+</div>
         </div>
       </div>
       
-  <!-- Botón de envío -->
-  <div class="text-center">
-    <button type="submit" class="bg-primary hover:bg-primary-dark text-white font-bold py-3 px-8 rounded-lg transition-colors">
-      Enviar Solicitud
-    </button>
-  </div>
-  
-  <!-- Estado de envío - Oculto inicialmente -->
-  <div id="formStatus" class="hidden mt-6 p-4 rounded-lg text-center"></div>
-</form>
+      <!-- Botón de envío -->
+      <div class="text-center">
+        <button type="submit" class="bg-primary hover:bg-primary-dark text-white font-bold py-3 px-8 rounded-lg transition-colors">
+          Enviar Solicitud
+        </button>
+      </div>
       
-
+      <!-- Estado de envío - Oculto inicialmente -->
+      <div id="formStatus" class="hidden mt-6 p-4 rounded-lg text-center"></div>
+    </form>
+      
+<!-- Script para manejar la validación de imágenes y el formulario dinámico -->
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('clientForm') as HTMLFormElement;
@@ -452,9 +748,69 @@
     const productImagesInput = document.getElementById('productImages') as HTMLInputElement;
     const imageErrorMessage = document.getElementById('imageErrorMessage');
     const imageCounter = document.getElementById('imageCounter');
+    const industrySelect = document.getElementById('industry') as HTMLSelectElement;
+    const otherIndustryField = document.getElementById('otherIndustryField');
+    
+    // Sección de campos específicos por industria
+    const industrySpecificSection = document.getElementById('industrySpecificSection');
+    
+    // Campos específicos para cada industria
+    const restauranteFields = document.getElementById('restauranteFields');
+    const medicoFields = document.getElementById('medicoFields');
+    const psicologiaFields = document.getElementById('psicologiaFields');
+    const profesionalFields = document.getElementById('profesionalFields');
+    const educacionFields = document.getElementById('educacionFields');
+    const otroFields = document.getElementById('otroFields');
     
     // Constante para el límite de imágenes
     const MAX_IMAGES = 15;
+    
+    // Mostrar/ocultar campos según la industria seleccionada
+    if (industrySelect) {
+      industrySelect.addEventListener('change', function() {
+        const selectedValue = this.value;
+        
+        // Mostrar/ocultar campo "Otro"
+        if (otherIndustryField) {
+          otherIndustryField.classList.toggle('hidden', selectedValue !== 'otro');
+        }
+        
+        // Mostrar/ocultar la sección específica de industria
+        if (industrySpecificSection) {
+          industrySpecificSection.classList.toggle('hidden', selectedValue === '');
+          
+          // Ocultar todos los campos específicos de industria
+          if (restauranteFields) restauranteFields.classList.add('hidden');
+          if (medicoFields) medicoFields.classList.add('hidden');
+          if (psicologiaFields) psicologiaFields.classList.add('hidden');
+          if (profesionalFields) profesionalFields.classList.add('hidden');
+          if (educacionFields) educacionFields.classList.add('hidden');
+          if (otroFields) otroFields.classList.add('hidden');
+          
+          // Mostrar solo los campos de la industria seleccionada
+          switch(selectedValue) {
+            case 'restaurante':
+              if (restauranteFields) restauranteFields.classList.remove('hidden');
+              break;
+            case 'medico':
+              if (medicoFields) medicoFields.classList.remove('hidden');
+              break;
+            case 'psicologia':
+              if (psicologiaFields) psicologiaFields.classList.remove('hidden');
+              break;
+            case 'profesional':
+              if (profesionalFields) profesionalFields.classList.remove('hidden');
+              break;
+            case 'educacion':
+              if (educacionFields) educacionFields.classList.remove('hidden');
+              break;
+            case 'otro':
+              if (otroFields) otroFields.classList.remove('hidden');
+              break;
+          }
+        }
+      });
+    }
     
     // Validar número de imágenes seleccionadas
     if (productImagesInput) {
@@ -495,6 +851,7 @@
       });
     }
     
+    // Envío del formulario
     if (form && formStatus) {
       form.addEventListener('submit', async function(e) {
         e.preventDefault();
@@ -513,6 +870,14 @@
         
         const formData = new FormData(form);
         
+        // Si se selecciona "otro" en industria, usar el valor personalizado
+        if (industrySelect?.value === 'otro') {
+          const otherIndustryValue = (document.getElementById('otherIndustry') as HTMLInputElement)?.value;
+          if (otherIndustryValue) {
+            formData.set('industry', otherIndustryValue);
+          }
+        }
+        
         try {
           const response = await fetch('/api/submit-form', {
             method: 'POST',
@@ -529,6 +894,11 @@
             // Resetear contador de imágenes
             if (imageCounter) {
               imageCounter.textContent = '0 imágenes seleccionadas';
+            }
+            
+            // Resetear la sección específica de industria
+            if (industrySpecificSection) {
+              industrySpecificSection.classList.add('hidden');
             }
           } else {
             throw new Error(result.message || 'Hubo un error al enviar el formulario');
