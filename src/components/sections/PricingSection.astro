@@ -1,38 +1,285 @@
 ---
-// PricingSection.astro - Sección de precios con diseño mejorado y oferta especial
+// PricingSection.astro - Sección de precios con diseño mejorado
 ---
 
 <section id="pricing" class="py-20 bg-gradient-to-b from-gray-50 to-gray-100">
   <div class="container mx-auto px-6">
     <div class="text-center mb-16">
-      <div class="inline-block mb-6 py-2 px-6 bg-rose-600 text-white rounded-full animate-pulse">
-        <span class="font-bold">OFERTA ESPECIAL</span> • Válida del 15 al 30 de abril
-      </div>
       <h2 class="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 inline-block text-transparent bg-clip-text">Precio Accesible</h2>
       <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-        Obtenga su Página web profesional con todo lo que necesita a un precio increíble.
+        Obtenga su landing page profesional con todo lo que necesita a un precio increíble.
       </p>
+    </div>
+    
+    <!-- Valor Justificado -->
+    <div class="max-w-4xl mx-auto mb-16 bg-white rounded-xl p-8 shadow-lg">
+      <h3 class="text-2xl font-bold mb-6 text-center">¿Por qué nuestras landing pages valen $300,000?</h3>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="flex items-start">
+          <div class="flex-shrink-0 w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <div>
+            <h4 class="font-bold text-lg mb-1">Diseño personalizado</h4>
+            <p class="text-gray-600">Cada sitio es creado a medida según tu negocio, no usamos plantillas genéricas como la competencia.</p>
+          </div>
+        </div>
+        <div class="flex items-start">
+          <div class="flex-shrink-0 w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <div>
+            <h4 class="font-bold text-lg mb-1">Sin costos mensuales</h4>
+            <p class="text-gray-600">A diferencia de otras soluciones que cobran mensualidades, tu inversión es única y el hosting está incluido.</p>
+          </div>
+        </div>
+        <div class="flex items-start">
+          <div class="flex-shrink-0 w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <div>
+            <h4 class="font-bold text-lg mb-1">Velocidad que convierte</h4>
+            <p class="text-gray-600">Páginas hasta 3 veces más rápidas que aumentan las conversiones hasta un 25% gracias a Astro Framework.</p>
+          </div>
+        </div>
+        <div class="flex items-start">
+          <div class="flex-shrink-0 w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+          <div>
+            <h4 class="font-bold text-lg mb-1">SEO incorporado desde la base</h4>
+            <p class="text-gray-600">Mayor visibilidad orgánica y menos necesidad de inversión en publicidad con nuestro SEO avanzado.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Detalles de SEO Avanzado -->
+    <div class="max-w-4xl mx-auto mb-16 bg-white rounded-xl p-8 shadow-lg">
+      <h3 class="text-2xl font-bold mb-6 text-center">SEO que realmente impulsa tu negocio</h3>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div>
+          <h4 class="font-bold text-lg mb-3 border-b border-gray-200 pb-2">Optimización técnica</h4>
+          <ul class="space-y-2">
+            <li class="flex items-start">
+              <svg class="h-5 w-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span>Estructura HTML5 semántica para mejor interpretación</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="h-5 w-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span>Tiempo de carga ultrarrápido (&lt;1 segundo)</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="h-5 w-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span>Core Web Vitals optimizados para mejor ranking</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="h-5 w-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span>Responsive design con prioridad para móviles</span>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold text-lg mb-3 border-b border-gray-200 pb-2">Optimización de contenido</h4>
+          <ul class="space-y-2">
+            <li class="flex items-start">
+              <svg class="h-5 w-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span>Estructura de headings optimizada (H1, H2, H3)</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="h-5 w-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span>Meta descripciones y títulos persuasivos</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="h-5 w-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span>Schema.org para rich snippets en resultados</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="h-5 w-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span>Sitemap.xml y robots.txt configurados</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="mt-6 bg-blue-50 p-4 rounded-lg text-center">
+        <p class="font-medium text-blue-800">Las páginas desarrolladas con nuestro sistema alcanzan el TOP 10 de Google un 40% más rápido que sitios tradicionales.</p>
+      </div>
+    </div>
+    
+    <!-- Clarificación del Proceso -->
+    <div class="max-w-4xl mx-auto mb-16 bg-white rounded-xl p-8 shadow-lg">
+      <h3 class="text-2xl font-bold mb-6 text-center">De idea a realidad en solo 3 horas</h3>
+      
+      <div class="relative">
+        <!-- Línea de tiempo vertical -->
+        <div class="absolute left-[49px] top-0 bottom-0 w-0.5 bg-blue-200"></div>
+        
+        <div class="space-y-8">
+          <!-- Fase 1 -->
+          <div class="flex">
+            <div class="flex-shrink-0 w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mr-4 z-10 border-4 border-white">
+              <span class="text-2xl font-bold text-blue-600">1</span>
+  </div>
+  <div class="bg-blue-50 rounded-lg p-4 flex-1 shadow-sm">
+    <h4 class="font-bold text-lg mb-2">Formulario Inicial (30 min)</h4>
+    <ul class="space-y-1 text-gray-600">
+      <li class="flex items-start">
+        <svg class="h-4 w-4 text-blue-500 mt-1 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+        <span>Completar nuestro formulario con la información de tu negocio</span>
+      </li>
+      <li class="flex items-start">
+        <svg class="h-4 w-4 text-blue-500 mt-1 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+        <span>Revisión de la información proporcionada</span>
+      </li>
+      <li class="flex items-start">
+        <svg class="h-4 w-4 text-blue-500 mt-1 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+        <span>Confirmación de objetivos y requisitos</span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+          
+          <!-- Fase 2 -->
+          <div class="flex">
+            <div class="flex-shrink-0 w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mr-4 z-10 border-4 border-white">
+              <span class="text-2xl font-bold text-blue-600">2</span>
+            </div>
+            <div class="bg-blue-50 rounded-lg p-4 flex-1 shadow-sm">
+              <h4 class="font-bold text-lg mb-2">Diseño y Estructura (45 min)</h4>
+              <ul class="space-y-1 text-gray-600">
+                <li class="flex items-start">
+                  <svg class="h-4 w-4 text-blue-500 mt-1 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Presentación de wireframe y estructura</span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="h-4 w-4 text-blue-500 mt-1 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Selección de elementos visuales clave</span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="h-4 w-4 text-blue-500 mt-1 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Aprobación de la dirección creativa</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <!-- Fase 3 -->
+          <div class="flex">
+            <div class="flex-shrink-0 w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mr-4 z-10 border-4 border-white">
+              <span class="text-2xl font-bold text-blue-600">3</span>
+            </div>
+            <div class="bg-blue-50 rounded-lg p-4 flex-1 shadow-sm">
+              <h4 class="font-bold text-lg mb-2">Desarrollo (60 min)</h4>
+              <ul class="space-y-1 text-gray-600">
+                <li class="flex items-start">
+                  <svg class="h-4 w-4 text-blue-500 mt-1 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Programación usando Astro Framework</span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="h-4 w-4 text-blue-500 mt-1 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Implementación de SEO técnico</span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="h-4 w-4 text-blue-500 mt-1 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Integración de sistema de contacto</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <!-- Fase 4 -->
+          <div class="flex">
+            <div class="flex-shrink-0 w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mr-4 z-10 border-4 border-white">
+              <span class="text-2xl font-bold text-blue-600">4</span>
+            </div>
+            <div class="bg-blue-50 rounded-lg p-4 flex-1 shadow-sm">
+              <h4 class="font-bold text-lg mb-2">Revisión y Lanzamiento (45 min)</h4>
+              <ul class="space-y-1 text-gray-600">
+                <li class="flex items-start">
+                  <svg class="h-4 w-4 text-blue-500 mt-1 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Revisión conjunta del sitio</span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="h-4 w-4 text-blue-500 mt-1 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Ajustes finales (una corrección incluida)</span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="h-4 w-4 text-blue-500 mt-1 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Despliegue y configuración de dominio</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="mt-8 bg-green-50 p-4 rounded-lg text-center">
+        <p class="italic text-green-800">"Inicié la reunión a las 10 AM y a la 1 PM ya tenía mi landing page generando contactos. El ROI fue inmediato." - María González, Fundadora de EcoStyle</p>
+      </div>
     </div>
     
     <div class="max-w-lg mx-auto">
       <!-- Tarjeta de Precio Principal -->
-      <div class="bg-white rounded-2xl shadow-xl overflow-hidden transform hover:scale-105 transition-transform duration-300 border border-blue-50 relative">
-        <!-- Etiqueta de descuento -->
-        <div class="absolute -right-12 top-10 bg-rose-600 text-white px-14 py-1 rotate-45 transform shadow-lg">
-          <span class="text-sm font-bold">¡24% OFF!</span>
-        </div>
-        
+      <div class="bg-white rounded-2xl shadow-xl overflow-hidden transform hover:scale-105 transition-transform duration-300 border border-blue-50">
         <!-- Encabezado -->
         <div class="bg-gradient-to-r from-blue-600 to-purple-600 p-8 text-center text-white relative">
           <h3 class="text-3xl font-bold mb-2">Paquete Completo</h3>
-          <div class="flex justify-center items-center">
-            <div class="text-lg line-through opacity-75 mr-2">$250,000</div>
-            <div class="text-5xl font-extrabold">$190,000</div>
+          <div class="relative">
+            <div class="text-xl line-through opacity-75 mb-1">$300,000</div>
+            <div class="text-5xl font-extrabold mb-2">$190,000</div>
+            <span class="absolute -right-2 -top-3 bg-yellow-400 text-blue-900 text-xs font-bold px-2 py-1 rounded-lg transform rotate-12">OFERTA</span>
           </div>
-          <p class="text-lg opacity-90 mt-4">Todo lo que necesitas para lanzar tu presencia web</p>
-          <div class="mt-3 inline-block px-4 py-1 bg-white/20 rounded-full text-white text-sm">
-            Oferta por tiempo limitado
-          </div>
+          <p class="text-lg opacity-90">Todo lo que necesitas para lanzar tu presencia web</p>
         </div>
         
         <!-- Características -->
@@ -60,7 +307,7 @@
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <span>Hosting gratuito permanente</span>
+              <span>Hosting incluido</span>
             </li>
             <li class="flex items-start">
               <div class="flex-shrink-0 w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mr-3">
@@ -84,20 +331,32 @@
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <span>Entrega en tiempo récord</span>
+              <span>Entrega en tiempo récord (3 horas)</span>
             </li>
           </ul>
           
-          <div class="mt-8">
+          <!-- Recuadro de confianza -->
+          <div class="mt-6 mb-6 bg-blue-50 p-4 rounded-lg text-center">
+            <p class="font-medium text-blue-800">El 85% de nuestros clientes logran sus objetivos de negocio con el paquete base sin necesidad de añadidos.</p>
+          </div>
+          
+          <div class="grid grid-cols-2 gap-4 mt-8">
             <a 
-              href="https://wa.me/+573181123660?text=Hola%20Fazil%20AI,%20me%20interesa%20una%20landing%20page%20por%20$190,000"
+              href="https://wa.me/+XXXXXXXXXXX?text=Hola%20FaziI%20AI,%20tengo%20preguntas%20sobre%20la%20landing%20page"
               target="_blank"
               rel="noopener noreferrer"
-              class="block w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white text-center py-4 px-6 rounded-lg font-bold transition-all duration-300 shadow-md hover:shadow-lg"
+              class="block text-center py-3 px-4 border-2 border-blue-600 text-blue-600 rounded-lg font-bold hover:bg-blue-50 transition-colors"
+            >
+              Tengo preguntas
+            </a>
+            <a 
+              href="https://wa.me/+XXXXXXXXXXX?text=Hola%20FaziI%20AI,%20quiero%20contratar%20una%20landing%20page%20por%20$190,000"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="block bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white text-center py-3 px-4 rounded-lg font-bold transition-all duration-300 shadow-md hover:shadow-lg"
             >
               Contratar Ahora
             </a>
-            <p class="text-center mt-3 text-sm text-rose-600 font-medium">Oferta válida hasta el 30 de abril</p>
           </div>
         </div>
       </div>
@@ -161,6 +420,60 @@
             <span class="text-gray-600">$150,000</span>
           </li>
         </ul>
+        
+        <!-- Páginas Especializadas -->
+        <div class="mt-8 pt-6 border-t border-gray-200">
+          <h4 class="text-xl font-bold mb-4">Páginas Especializadas</h4>
+          <p class="text-gray-600 mb-4">
+            Además de nuestras landing pages corporativas estándar, ofrecemos desarrollo de sitios web especializados para necesidades específicas:
+          </p>
+          <ul class="space-y-3">
+            <li class="flex items-start">
+              <div class="flex-shrink-0 w-5 h-5 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                <svg class="h-3 w-3 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                </svg>
+              </div>
+              <div class="flex-1">
+                <span class="font-medium">E-commerce</span>
+                <p class="text-sm text-gray-500 mt-1">Tiendas online con sistema de pagos, catálogo de productos y gestión de inventario</p>
+              </div>
+            </li>
+            <li class="flex items-start">
+              <div class="flex-shrink-0 w-5 h-5 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                <svg class="h-3 w-3 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                </svg>
+              </div>
+              <div class="flex-1">
+                <span class="font-medium">Plataformas de Reservas</span>
+                <p class="text-sm text-gray-500 mt-1">Sistemas de reservas para hoteles, restaurantes, servicios y citas</p>
+              </div>
+            </li>
+            <li class="flex items-start">
+              <div class="flex-shrink-0 w-5 h-5 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                <svg class="h-3 w-3 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                </svg>
+              </div>
+              <div class="flex-1">
+                <span class="font-medium">Agencias de Viajes</span>
+                <p class="text-sm text-gray-500 mt-1">Portales de viajes con búsqueda de destinos, tours y experiencias</p>
+              </div>
+            </li>
+          </ul>
+          <div class="mt-4 bg-blue-50 rounded-lg p-4 text-center">
+            <p class="text-blue-800 font-medium">Estas soluciones requieren un presupuesto personalizado y un tiempo de desarrollo mayor a 3 horas.</p>
+            <a 
+              href="https://wa.me/+XXXXXXXXXXX?text=Hola%20FaziI%20AI,%20me%20interesa%20una%20página%20web%20especializada" 
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-block mt-2 text-blue-600 hover:text-blue-800 font-medium"
+            >
+              Contáctanos para más información →
+            </a>
+          </div>          
+        </div>
       </div>
     </div>
   </div>
