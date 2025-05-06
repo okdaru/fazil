@@ -1,0 +1,129 @@
+---
+// GoogleReviewsSection.astro
+// Importamos las reseñas desde un archivo de datos local (para las reseñas manuales)
+import customReviews from '../data/customReviews.json';
+
+// Configuración de la API de Google (necesitarás tu propia API key)
+const GOOGLE_PLACE_ID = 'TU_PLACE_ID'; // Reemplaza con tu Google Place ID
+const GOOGLE_API_KEY = 'TU_API_KEY'; // Reemplaza con tu API key
+
+// Función para obtener reseñas de Google Places API
+async function fetchGoogleReviews() {
+  try {
+    const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${GOOGLE_PLACE_ID}&fields=reviews&key=${GOOGLE_API_KEY}`;
+    const response = await fetch(url);
+    const data = await response.json();
+    
+    if (data.result && data.result.reviews) {
+      return data.result.reviews;
+    } else {
+      console.error('No se encontraron reseñas en la respuesta de Google');
+      return [];
+    }
+  } catch (error) {
+    console.error('Error al obtener reseñas de Google:', error);
+    return [];
+  }
+}
+
+// Obtenemos las reseñas (si estamos en modo de producción)
+let googleReviews = [];
+if (import.meta.env.PROD) {
+  googleReviews = await fetchGoogleReviews();
+}
+
+// Combinamos reseñas de Google y personalizadas
+const allReviews = [...googleReviews, ...customReviews];
+
+// Función para formatear la fecha correctamente tipada
+function formatDate(date: Date | number | string): string {
+  const options: Intl.DateTimeFormatOptions = { 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric' 
+  };
+  
+  // Asegurarnos de que date sea un objeto Date
+  const dateObj = date instanceof Date ? date : new Date(date);
+  
+  return dateObj.toLocaleDateString('es-ES', options);
+}
+---
+
+<section id="testimonials" class="py-20 bg-gray-50">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold mb-4">Lo que dicen nuestros clientes</h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        Opiniones reales de clientes satisfechos
+      </p>
+    </div>
+
+    <!-- Logo de Google Reviews -->
+    <div class="flex justify-center items-center mb-10">
+      <img src="/images/google-reviews-logo.png" alt="Google Reviews" class="h-12" onerror="this.src='/images/placeholder-google.png'; this.onerror=null;" />
+      <div class="flex items-center ml-4">
+        <div class="flex">
+          {Array(5).fill(0).map(() => (
+            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+            </svg>
+          ))}
+        </div>
+        <span class="ml-2 text-gray-600 font-medium">4.9/5</span>
+      </div>
+    </div>
+
+    <!-- Carrusel de testimonios -->
+    <div class="testimonial-carousel relative">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {allReviews.slice(0, 6).map((review) => (
+          <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow">
+            <div class="flex items-center mb-4">
+              <div class="flex">
+                {Array(review.rating || 5).fill(0).map(() => (
+                  <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                  </svg>
+                ))}
+              </div>
+              {review.time && <span class="ml-2 text-xs text-gray-500">{formatDate(review.time * 1000)}</span>}
+            </div>
+            <p class="text-gray-700 mb-4 italic">
+              "{review.text || review.comment}"
+            </p>
+            <div class="flex items-center">
+              {review.profile_photo_url ? 
+                <img src={review.profile_photo_url} alt={review.author_name} class="w-10 h-10 rounded-full mr-3" /> :
+                <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                  <span class="text-blue-600 font-bold">{(review.author_name || review.name || "Usuario").charAt(0)}</span>
+                </div>
+              }
+              <div>
+                <h4 class="font-bold">{review.author_name || review.name || "Usuario"}</h4>
+                {review.company && <p class="text-sm text-gray-600">{review.company}</p>}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      
+      <!-- Ver más reseñas -->
+      <div class="text-center mt-8">
+        <a 
+          href="https://g.page/r/YOUR_GOOGLE_PAGE_ID/reviews" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="inline-block px-6 py-3 bg-white border border-gray-300 rounded-lg text-primary hover:bg-gray-50 transition font-medium"
+        >
+          Ver todas las reseñas en Google
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Aquí puedes añadir JavaScript para controlar el carrusel si lo deseas
+  // Por ejemplo, con bibliotecas como Swiper.js o un carrusel personalizado
+</script>

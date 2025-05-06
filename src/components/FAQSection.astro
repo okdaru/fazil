@@ -1,0 +1,121 @@
+---
+// FAQSection.astro - Sección de preguntas frecuentes
+// Define un array con las preguntas y respuestas
+const faqs = [
+  {
+    question: "¿Qué necesito para empezar?",
+    answer: "Solo necesitas tener claro qué servicio o producto ofreces, algunas imágenes y la información básica de tu negocio. Nosotros nos encargamos del resto. Contáctanos por WhatsApp y te guiaremos en todo el proceso."
+  },
+  {
+    question: "¿Cómo se paga?",
+    answer: "Aceptamos transferencias bancarias, PSE, Nequi, y tarjetas de crédito/débito. Lo mejor es que solo pagas después de ver y aprobar el mockup de tu página, así que no hay riesgo para ti."
+  },
+  {
+    question: "¿Puedo modificar la página después?",
+    answer: "Sí, todos nuestros paquetes incluyen una modificación sin costo adicional. Si necesitas más cambios después, cada uno tiene un costo de $20,000. Un cambio completo de diseño tiene un costo de $150,000."
+  },
+  {
+    question: "¿Qué pasa si no me gusta el diseño?",
+    answer: "Si no estás satisfecho con el mockup inicial, no tienes ninguna obligación de continuar. Solo pagas cuando estás 100% conforme con el diseño propuesto. Nuestra tasa de satisfacción es del 98%, pero entendemos que cada cliente tiene sus preferencias."
+  },
+  {
+    question: "¿Cuánto tiempo tarda en estar lista mi página web?",
+    answer: "Tu página web estará lista en tan solo 180 minutos (3 horas) después de que apruebes el diseño. Todo el proceso desde el primer contacto hasta la entrega final normalmente toma menos de 24 horas."
+  },
+  {
+    question: "¿El hosting está incluido?",
+    answer: "Sí, todos nuestros paquetes incluyen hosting gratuito. El dominio personalizado tiene un costo adicional. Pregúntanos por el servicio de compra y configuración de dominio personalizado."
+  },
+  {
+    question: "¿Las páginas son optimizadas para SEO?",
+    answer: "Absolutamente. Nuestras páginas están construidas con Astro, un framework que genera HTML puro, lo que las hace extremadamente rápidas y bien optimizadas para buscadores. Incluimos configuración SEO básica como meta tags, sitemap y estructura semántica."
+  },
+  {
+    question: "¿Puedo actualizar mi página web más adelante?",
+    answer: "Sí, siempre podrás solicitar actualizaciones o mejoras para tu página web. Después de la primera corrección gratuita, cada actualización adicional tiene un costo según su complejidad."
+  }
+];
+---
+
+<section id="faq" class="py-20 bg-gray-50">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold mb-4">Preguntas Frecuentes</h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        Respondemos tus dudas para que puedas tomar la mejor decisión
+      </p>
+    </div>
+
+    <div class="max-w-3xl mx-auto">
+      {faqs.map((faq, index) => (
+        <div class="mb-5 bg-white rounded-xl overflow-hidden shadow-md" data-faq-item>
+          <button 
+            class="w-full flex justify-between items-center p-5 text-left font-bold text-lg focus:outline-none"
+            data-faq-toggle
+          >
+            <span>{faq.question}</span>
+            <svg class="w-5 h-5 transform transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div class="px-5 pb-5 hidden" data-faq-content>
+            <p class="text-gray-600">{faq.answer}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- CTA Final -->
+    <div class="mt-12 text-center">
+      <a 
+        href="https://wa.me/+573181123660?text=Hola%20Fazil,%20tengo%20una%20pregunta%20sobre%20tu%20servicio" 
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-block px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-lg font-bold transition shadow-lg hover:shadow-xl"
+      >
+        ¿Tienes dudas? Escríbenos
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Funcionalidad para mostrar/ocultar respuestas
+  document.addEventListener('DOMContentLoaded', () => {
+    const faqItems = document.querySelectorAll('[data-faq-item]');
+    
+    faqItems.forEach((item) => {
+      // Usamos type assertion y comprobaciones null para evitar errores
+      const toggle = item.querySelector('[data-faq-toggle]') as HTMLButtonElement | null;
+      const content = item.querySelector('[data-faq-content]') as HTMLDivElement | null;
+      const arrow = toggle?.querySelector('svg') as SVGElement | null;
+      
+      // Solo continuamos si todos los elementos existen
+      if (!toggle || !content || !arrow) return;
+      
+      // Mostrar el primer elemento por defecto
+      if (item === faqItems[0]) {
+        content.classList.remove('hidden');
+        arrow.classList.add('rotate-180');
+      }
+      
+      toggle.addEventListener('click', () => {
+        // Cerrar todos los demás
+        faqItems.forEach((otherItem) => {
+          if (otherItem !== item) {
+            const otherContent = otherItem.querySelector('[data-faq-content]') as HTMLDivElement | null;
+            const otherToggle = otherItem.querySelector('[data-faq-toggle]') as HTMLButtonElement | null;
+            const otherArrow = otherToggle?.querySelector('svg') as SVGElement | null;
+            
+            if (otherContent) otherContent.classList.add('hidden');
+            if (otherArrow) otherArrow.classList.remove('rotate-180');
+          }
+        });
+        
+        // Toggle el actual
+        content.classList.toggle('hidden');
+        arrow.classList.toggle('rotate-180');
+      });
+    });
+  });
+</script>
