@@ -124,55 +124,6 @@ export async function POST({ request }) {
       return [];
     };
 
-    // Procesar campos específicos por industria según la selección
-    const industrySpecificFields = {};
-    const selectedIndustry = fields.industry;
-    
-    if (selectedIndustry === 'restaurante') {
-      industrySpecificFields.foodType = fields.foodType || '';
-      industrySpecificFields.menuCategories = fields.menuCategories || '';
-      industrySpecificFields.specialties = fields.specialties || '';
-      industrySpecificFields.openingHours = fields.openingHours || '';
-      // Para servicios adicionales de restaurante, no enviamos el campo
-      //industrySpecificFields.restaurantServices = [];
-      //industrySpecificFields.ambience = '';
-    } 
-    else if (selectedIndustry === 'medico') {
-      industrySpecificFields.medicalSpecialties = fields.medicalSpecialties || '';
-      industrySpecificFields.medicalServices = fields.medicalServices || '';
-      industrySpecificFields.insuranceInfo = fields.insuranceInfo || '';
-      industrySpecificFields.doctorProfiles = fields.doctorProfiles || '';
-      //industrySpecificFields.appointmentSystem = '';
-      industrySpecificFields.appointmentInfo = fields.appointmentInfo || '';
-    }
-    else if (selectedIndustry === 'psicologia') {
-      industrySpecificFields.therapeuticApproaches = fields.therapeuticApproaches || '';
-      //industrySpecificFields.therapeuticSpecialties = [];
-      //industrySpecificFields.attendanceMode = [];
-      industrySpecificFields.therapistProfile = fields.therapistProfile || '';
-      //industrySpecificFields.sessionDuration = '';
-      industrySpecificFields.frequencyInfo = fields.frequencyInfo || '';
-    }
-    else if (selectedIndustry === 'profesional') {
-      industrySpecificFields.professionalServices = fields.professionalServices || '';
-      industrySpecificFields.workMethodology = fields.workMethodology || '';
-      industrySpecificFields.certifications = fields.certifications || '';
-      industrySpecificFields.experience = fields.experience || '';
-      industrySpecificFields.differentiators = fields.differentiators || '';
-    }
-    else if (selectedIndustry === 'educacion') {
-      industrySpecificFields.educationalPrograms = fields.educationalPrograms || '';
-      industrySpecificFields.methodology = fields.methodology || '';
-      //industrySpecificFields.educationMode = [];
-      industrySpecificFields.facultyInfo = fields.facultyInfo || '';
-      industrySpecificFields.facilities = fields.facilities || '';
-      industrySpecificFields.scheduleInfo = fields.scheduleInfo || '';
-    }
-    else if (selectedIndustry === 'otro') {
-      industrySpecificFields.otherBusinessInfo = fields.otherBusinessInfo || '';
-      industrySpecificFields.otherBusinessFeatures = fields.otherBusinessFeatures || '';
-    }
-    
     // Configurar Airtable
     const AIRTABLE_API_KEY = import.meta.env.AIRTABLE_API_KEY;
     const AIRTABLE_BASE_ID = 'appbfmLQXTsLrgSVt';
@@ -234,27 +185,102 @@ export async function POST({ request }) {
     if (fields.secondaryColor) recordData.fields['fld27KgcN62owM0RW'] = fields.secondaryColor;
     if (fields.accentColor) recordData.fields['fldaGE7gX4b2ARYfY'] = fields.accentColor;
     
-    // Objetivos - utilizando solo valores válidos
-    const pageObjective = getValidSelection(fields.pageObjective, validPageObjectives);
-    if (pageObjective.length > 0) recordData.fields['fld0gMITTWljoMz6u'] = pageObjective;
+    // Procesar datos de websiteObjectives si existe
+    if (fields.websiteObjectives) {
+      try {
+        const websiteObjectives = JSON.parse(fields.websiteObjectives);
+        
+        // Objetivos - utilizando solo valores válidos
+        const pageObjective = websiteObjectives.pageObjective;
+        if (pageObjective && validPageObjectives.includes(pageObjective)) {
+          recordData.fields['fld0gMITTWljoMz6u'] = [pageObjective];
+        }
+        
+        // Otros campos relacionados con objetivos
+        if (websiteObjectives.objectiveOther) {
+          recordData.fields['fldWiX2RnKrfvWc2K'] = websiteObjectives.objectiveOther;
+        }
+        
+        const desiredAction = websiteObjectives.desiredAction;
+        if (desiredAction && validDesiredActions.includes(desiredAction)) {
+          recordData.fields['fldOgoMBwBysUdzg2'] = [desiredAction];
+        }
+        
+        if (websiteObjectives.actionOther) {
+          recordData.fields['fldFtAc7JnGxmpsjr'] = websiteObjectives.actionOther;
+        }
+        
+      } catch (error) {
+        console.error('Error al procesar los objetivos del sitio web:', error);
+      }
+    } else {
+      // Objetivos - enfoque alternativo si no se envía websiteObjectives
+      const pageObjective = getValidSelection(fields.pageObjective, validPageObjectives);
+      if (pageObjective.length > 0) recordData.fields['fld0gMITTWljoMz6u'] = pageObjective;
+      
+      if (fields.objectiveOther) recordData.fields['fldWiX2RnKrfvWc2K'] = fields.objectiveOther;
+      
+      const desiredAction = getValidSelection(fields.desiredAction, validDesiredActions);
+      if (desiredAction.length > 0) recordData.fields['fldOgoMBwBysUdzg2'] = desiredAction;
+      
+      if (fields.actionOther) recordData.fields['fldFtAc7JnGxmpsjr'] = fields.actionOther;
+    }
     
-    if (fields.objectiveOther) recordData.fields['fldWiX2RnKrfvWc2K'] = fields.objectiveOther;
-    
-    const desiredAction = getValidSelection(fields.desiredAction, validDesiredActions);
-    if (desiredAction.length > 0) recordData.fields['fldOgoMBwBysUdzg2'] = desiredAction;
-    
-    if (fields.actionOther) recordData.fields['fldFtAc7JnGxmpsjr'] = fields.actionOther;
-    
+    // Estilo visual
     const visualStyle = getValidSelection(fields.visualStyle, validVisualStyles);
     if (visualStyle.length > 0) recordData.fields['fldl6xvgSUowYuL8J'] = visualStyle;
     
     if (fields.styleOther) recordData.fields['fldYjZprcX4hptWCS'] = fields.styleOther;
+    
+    // Procesar datos de pageSections si existe
+    if (fields.pageSections) {
+  try {
+    const pageSections = JSON.parse(fields.pageSections);
+    if (Array.isArray(pageSections) && pageSections.length > 0) {
+      // Eliminar cualquier comilla extra alrededor de los valores
+      const sanitizedSections = pageSections.map(section => {
+        // Si el valor comienza y termina con comillas, las elimina
+        if (typeof section === 'string') {
+          return section.replace(/^["'](.*)["']$/, '$1');
+        }
+        return section;
+      });
+      
+      recordData.fields['fldm5Q1ReLjxEzyol'] = sanitizedSections;
+    }
+  } catch (error) {
+    console.error('Error al procesar las secciones de página:', error);
+  }
+}
+
     
     // Otras secciones - opcionales
     if (fields.sectionsOther) recordData.fields['fldC4r2mvgZJuPGPJ'] = fields.sectionsOther;
     if (fields.testimonials) recordData.fields['fldken0GDLnbdh5uL'] = fields.testimonials;
     if (fields.faq) recordData.fields['fldhNvkrZ4uQ1XJ6d'] = fields.faq;
     if (fields.socialLinks) recordData.fields['fldG432F4JenJIbkG'] = fields.socialLinks;
+    
+    // Procesar servicios técnicos adicionales
+    if (fields.additionalTechServices) {
+      try {
+        const additionalServices = JSON.parse(fields.additionalTechServices);
+        if (Array.isArray(additionalServices) && additionalServices.length > 0) {
+          recordData.fields['fld2gwGziVJRluBot'] = additionalServices;
+        }
+      } catch (error) {
+        console.error('Error al procesar los servicios técnicos adicionales:', error);
+      }
+    } else {
+      // Enfoque alternativo si no se envía additionalTechServices
+      const additionalTechServicesEntries = Array.from(formData.entries())
+        .filter(([key]) => key === 'additionalTechServices[]')
+        .map(([_, value]) => value.toString());
+
+      if (additionalTechServicesEntries.length > 0) {
+        recordData.fields['fld2gwGziVJRluBot'] = additionalTechServicesEntries;
+      }
+    }
+    
     if (fields.addonsOther) recordData.fields['fldy6lw31bxXW4IOt'] = fields.addonsOther;
     if (fields.analyticsId) recordData.fields['fldT16sB1l0fGBtBB'] = fields.analyticsId;
     
@@ -268,42 +294,126 @@ export async function POST({ request }) {
       recordData.fields['fldCwWA0sK9J15C4y'] = true;
     }
     
-    // Campos específicos por industria - solo incluir si tienen valores
-    if (selectedIndustry === 'restaurante') {
-      if (industrySpecificFields.foodType) recordData.fields['fldoOnkrdD0i4MoQv'] = industrySpecificFields.foodType;
-      if (industrySpecificFields.menuCategories) recordData.fields['fldAnmaaGWcNI8Csz'] = industrySpecificFields.menuCategories;
-      if (industrySpecificFields.specialties) recordData.fields['fldwMDj4pJkDKwxXc'] = industrySpecificFields.specialties;
-      if (industrySpecificFields.openingHours) recordData.fields['fldAi2iXRfpZ1zy59'] = industrySpecificFields.openingHours;
-    } 
-    else if (selectedIndustry === 'medico') {
-      if (industrySpecificFields.medicalSpecialties) recordData.fields['fldtUpRMh95CU9rVG'] = industrySpecificFields.medicalSpecialties;
-      if (industrySpecificFields.medicalServices) recordData.fields['fldxy7KGKxMUPUiSx'] = industrySpecificFields.medicalServices;
-      if (industrySpecificFields.insuranceInfo) recordData.fields['fldfCYB6QbCt6kPL7'] = industrySpecificFields.insuranceInfo;
-      if (industrySpecificFields.doctorProfiles) recordData.fields['fldi1luy0IMlMJyPG'] = industrySpecificFields.doctorProfiles;
-      if (industrySpecificFields.appointmentInfo) recordData.fields['fldIYQB9j1iDEaZ0U'] = industrySpecificFields.appointmentInfo;
-    }
-    else if (selectedIndustry === 'psicologia') {
-      if (industrySpecificFields.therapeuticApproaches) recordData.fields['fldL5UN3QNyMiOmJi'] = industrySpecificFields.therapeuticApproaches;
-      if (industrySpecificFields.therapistProfile) recordData.fields['fldIiq7avMfFyhnDu'] = industrySpecificFields.therapistProfile;
-      if (industrySpecificFields.frequencyInfo) recordData.fields['fld6jxhxZko9CYz6q'] = industrySpecificFields.frequencyInfo;
-    }
-    else if (selectedIndustry === 'profesional') {
-      if (industrySpecificFields.professionalServices) recordData.fields['fld149IHxAnd82vRS'] = industrySpecificFields.professionalServices;
-      if (industrySpecificFields.workMethodology) recordData.fields['fldNX2gmTvfYFRzTj'] = industrySpecificFields.workMethodology;
-      if (industrySpecificFields.certifications) recordData.fields['fldtqjGYItOqVybGV'] = industrySpecificFields.certifications;
-      if (industrySpecificFields.experience) recordData.fields['fldTnZcOPedfp1RNz'] = industrySpecificFields.experience;
-      if (industrySpecificFields.differentiators) recordData.fields['fldAsHMXiPU0P1IDq'] = industrySpecificFields.differentiators;
-    }
-    else if (selectedIndustry === 'educacion') {
-      if (industrySpecificFields.educationalPrograms) recordData.fields['fldCS5GVNCNVgoqWD'] = industrySpecificFields.educationalPrograms;
-      if (industrySpecificFields.methodology) recordData.fields['fldtoFeWr0Fcxwp3z'] = industrySpecificFields.methodology;
-      if (industrySpecificFields.facultyInfo) recordData.fields['fldG5PTAeLbW1P9k6'] = industrySpecificFields.facultyInfo;
-      if (industrySpecificFields.facilities) recordData.fields['fldLr6w59Rh3IBAS9'] = industrySpecificFields.facilities;
-      if (industrySpecificFields.scheduleInfo) recordData.fields['fldB6onwmKXMhiI4w'] = industrySpecificFields.scheduleInfo;
-    }
-    else if (selectedIndustry === 'otro') {
-      if (industrySpecificFields.otherBusinessInfo) recordData.fields['fldaVCWMZ0OA8oxRr'] = industrySpecificFields.otherBusinessInfo;
-      if (industrySpecificFields.otherBusinessFeatures) recordData.fields['fld0BBlCUSQfP2CeF'] = industrySpecificFields.otherBusinessFeatures;
+    // Procesar datos de industrySpecificData si existe (sección 4)
+    if (fields.industrySpecificData) {
+      try {
+        const industryData = JSON.parse(fields.industrySpecificData);
+        const selectedIndustry = fields.industry;
+        
+        if (selectedIndustry === 'restaurante') {
+          // Campos de texto
+          if (industryData.foodType) recordData.fields['fldoOnkrdD0i4MoQv'] = industryData.foodType;
+          if (industryData.menuCategories) recordData.fields['fldAnmaaGWcNI8Csz'] = industryData.menuCategories;
+          if (industryData.specialties) recordData.fields['fldwMDj4pJkDKwxXc'] = industryData.specialties;
+          if (industryData.openingHours) recordData.fields['fldAi2iXRfpZ1zy59'] = industryData.openingHours;
+          
+          // Multi-select para servicios
+          if (industryData.restaurantServices && Array.isArray(industryData.restaurantServices) && industryData.restaurantServices.length > 0) {
+            recordData.fields['fldBkRvrJEYplRipW'] = industryData.restaurantServices;
+          }
+          
+          // Select para ambiente
+          if (industryData.ambience) recordData.fields['fldCXIoImuKg8Y8op'] = industryData.ambience;
+        } 
+        else if (selectedIndustry === 'medico') {
+          // Campos de texto
+          if (industryData.medicalSpecialties) recordData.fields['fldtUpRMh95CU9rVG'] = industryData.medicalSpecialties;
+          if (industryData.medicalServices) recordData.fields['fldxy7KGKxMUPUiSx'] = industryData.medicalServices;
+          if (industryData.insuranceInfo) recordData.fields['fldfCYB6QbCt6kPL7'] = industryData.insuranceInfo;
+          if (industryData.doctorProfiles) recordData.fields['fldi1luy0IMlMJyPG'] = industryData.doctorProfiles;
+          if (industryData.appointmentInfo) recordData.fields['fldIYQB9j1iDEaZ0U'] = industryData.appointmentInfo;
+          
+          // Select para sistema de citas
+          if (industryData.appointmentSystem) recordData.fields['fldNLImwKkaCVzzpr'] = industryData.appointmentSystem;
+        }
+        else if (selectedIndustry === 'psicologia') {
+          // Campos de texto
+          if (industryData.therapeuticApproaches) recordData.fields['fldL5UN3QNyMiOmJi'] = industryData.therapeuticApproaches;
+          if (industryData.therapistProfile) recordData.fields['fldIiq7avMfFyhnDu'] = industryData.therapistProfile;
+          if (industryData.frequencyInfo) recordData.fields['fld6jxhxZko9CYz6q'] = industryData.frequencyInfo;
+          
+          // Multi-select para especialidades
+          if (industryData.therapeuticSpecialties && Array.isArray(industryData.therapeuticSpecialties) && industryData.therapeuticSpecialties.length > 0) {
+            recordData.fields['fld8efTfvFtMOieSg'] = industryData.therapeuticSpecialties;
+          }
+          
+          // Multi-select para modalidades
+          if (industryData.attendanceMode && Array.isArray(industryData.attendanceMode) && industryData.attendanceMode.length > 0) {
+            recordData.fields['fldgJR65NxGaLKLvv'] = industryData.attendanceMode;
+          }
+          
+          // Select para duración de sesiones
+          if (industryData.sessionDuration) recordData.fields['fldOpIvobyO63EKfE'] = industryData.sessionDuration;
+        }
+        else if (selectedIndustry === 'profesional') {
+          // Campos de texto
+          if (industryData.professionalServices) recordData.fields['fld149IHxAnd82vRS'] = industryData.professionalServices;
+          if (industryData.workMethodology) recordData.fields['fldNX2gmTvfYFRzTj'] = industryData.workMethodology;
+          if (industryData.certifications) recordData.fields['fldtqjGYItOqVybGV'] = industryData.certifications;
+          if (industryData.experience) recordData.fields['fldTnZcOPedfp1RNz'] = industryData.experience;
+          if (industryData.differentiators) recordData.fields['fldAsHMXiPU0P1IDq'] = industryData.differentiators;
+        }
+        else if (selectedIndustry === 'educacion') {
+          // Campos de texto
+          if (industryData.educationalPrograms) recordData.fields['fldCS5GVNCNVgoqWD'] = industryData.educationalPrograms;
+          if (industryData.methodology) recordData.fields['fldtoFeWr0Fcxwp3z'] = industryData.methodology;
+          if (industryData.facultyInfo) recordData.fields['fldG5PTAeLbW1P9k6'] = industryData.facultyInfo;
+          if (industryData.facilities) recordData.fields['fldLr6w59Rh3IBAS9'] = industryData.facilities;
+          if (industryData.scheduleInfo) recordData.fields['fldB6onwmKXMhiI4w'] = industryData.scheduleInfo;
+          
+          // Multi-select para modalidades educativas
+          if (industryData.educationMode && Array.isArray(industryData.educationMode) && industryData.educationMode.length > 0) {
+            recordData.fields['fldyqvNxyX4hrTBE5'] = industryData.educationMode;
+          }
+        }
+        else if (selectedIndustry === 'otro') {
+          // Campos de texto
+          if (industryData.otherBusinessInfo) recordData.fields['fldaVCWMZ0OA8oxRr'] = industryData.otherBusinessInfo;
+          if (industryData.otherBusinessFeatures) recordData.fields['fld0BBlCUSQfP2CeF'] = industryData.otherBusinessFeatures;
+        }
+      } catch (error) {
+        console.error('Error al procesar los datos específicos de la industria:', error);
+      }
+    } else {
+      // Procesar campos específicos por industria según la selección (enfoque antiguo)
+      const selectedIndustry = fields.industry;
+      
+      if (selectedIndustry === 'restaurante') {
+        if (fields.foodType) recordData.fields['fldoOnkrdD0i4MoQv'] = fields.foodType;
+        if (fields.menuCategories) recordData.fields['fldAnmaaGWcNI8Csz'] = fields.menuCategories;
+        if (fields.specialties) recordData.fields['fldwMDj4pJkDKwxXc'] = fields.specialties;
+        if (fields.openingHours) recordData.fields['fldAi2iXRfpZ1zy59'] = fields.openingHours;
+      } 
+      else if (selectedIndustry === 'medico') {
+        if (fields.medicalSpecialties) recordData.fields['fldtUpRMh95CU9rVG'] = fields.medicalSpecialties;
+        if (fields.medicalServices) recordData.fields['fldxy7KGKxMUPUiSx'] = fields.medicalServices;
+        if (fields.insuranceInfo) recordData.fields['fldfCYB6QbCt6kPL7'] = fields.insuranceInfo;
+        if (fields.doctorProfiles) recordData.fields['fldi1luy0IMlMJyPG'] = fields.doctorProfiles;
+        if (fields.appointmentInfo) recordData.fields['fldIYQB9j1iDEaZ0U'] = fields.appointmentInfo;
+      }
+      else if (selectedIndustry === 'psicologia') {
+        if (fields.therapeuticApproaches) recordData.fields['fldL5UN3QNyMiOmJi'] = fields.therapeuticApproaches;
+        if (fields.therapistProfile) recordData.fields['fldIiq7avMfFyhnDu'] = fields.therapistProfile;
+        if (fields.frequencyInfo) recordData.fields['fld6jxhxZko9CYz6q'] = fields.frequencyInfo;
+      }
+      else if (selectedIndustry === 'profesional') {
+        if (fields.professionalServices) recordData.fields['fld149IHxAnd82vRS'] = fields.professionalServices;
+        if (fields.workMethodology) recordData.fields['fldNX2gmTvfYFRzTj'] = fields.workMethodology;
+        if (fields.certifications) recordData.fields['fldtqjGYItOqVybGV'] = fields.certifications;
+        if (fields.experience) recordData.fields['fldTnZcOPedfp1RNz'] = fields.experience;
+        if (fields.differentiators) recordData.fields['fldAsHMXiPU0P1IDq'] = fields.differentiators;
+      }
+      else if (selectedIndustry === 'educacion') {
+        if (fields.educationalPrograms) recordData.fields['fldCS5GVNCNVgoqWD'] = fields.educationalPrograms;
+        if (fields.methodology) recordData.fields['fldtoFeWr0Fcxwp3z'] = fields.methodology;
+        if (fields.facultyInfo) recordData.fields['fldG5PTAeLbW1P9k6'] = fields.facultyInfo;
+        if (fields.facilities) recordData.fields['fldLr6w59Rh3IBAS9'] = fields.facilities;
+        if (fields.scheduleInfo) recordData.fields['fldB6onwmKXMhiI4w'] = fields.scheduleInfo;
+      }
+      else if (selectedIndustry === 'otro') {
+        if (fields.otherBusinessInfo) recordData.fields['fldaVCWMZ0OA8oxRr'] = fields.otherBusinessInfo;
+        if (fields.otherBusinessFeatures) recordData.fields['fld0BBlCUSQfP2CeF'] = fields.otherBusinessFeatures;
+      }
     }
 
     // Habilitar typecast para manejar automáticamente los tipos de datos

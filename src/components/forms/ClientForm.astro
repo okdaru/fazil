@@ -1,5 +1,5 @@
 ---
-// ClientForm.astro - Mejorado con campos específicos por industria
+// ClientForm.astro - Corregido para asegurar la captura de todas las secciones en Airtable
 ---
 
 <form id="clientForm" class="space-y-8 max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg">
@@ -88,7 +88,7 @@
     <div class="grid grid-cols-1 gap-6">
       <div>
         <label for="githubUsername" class="block text-sm font-medium text-gray-700 mb-1">Nombre de usuario de GitHub </label>
-        <input type="text" id="githubUsername" name="githubUsername"  class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
+        <input type="text" id="githubUsername" name="githubUsername" class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
       </div>
       <div>
         <p class="text-sm text-gray-600">La contraseña de GitHub debe ser enviada por un canal seguro. Nos pondremos en contacto para coordinar esto.</p>
@@ -132,15 +132,15 @@
             <label class="block text-sm font-medium text-gray-700 mb-2">Servicios adicionales</label>
             <div class="space-y-2">
               <div class="flex items-start">
-                <input id="delivery" name="additionalServices" type="checkbox" value="delivery" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
+                <input id="delivery" name="additionalRestaurantServices" type="checkbox" value="delivery" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
                 <label for="delivery" class="ml-2 block text-sm text-gray-700">Delivery/Para llevar</label>
               </div>
               <div class="flex items-start">
-                <input id="reservation" name="additionalServices" type="checkbox" value="reservation" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
+                <input id="reservation" name="additionalRestaurantServices" type="checkbox" value="reservation" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
                 <label for="reservation" class="ml-2 block text-sm text-gray-700">Reservas</label>
               </div>
               <div class="flex items-start">
-                <input id="events" name="additionalServices" type="checkbox" value="events" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
+                <input id="events" name="additionalRestaurantServices" type="checkbox" value="events" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
                 <label for="events" class="ml-2 block text-sm text-gray-700">Eventos privados</label>
               </div>
             </div>
@@ -267,7 +267,7 @@
               <option value="">Seleccione una opción</option>
               <option value="30">30 minutos</option>
               <option value="45">45 minutos</option>
-              <option value="50">180 minutos</option>
+              <option value="50">50 minutos</option>
               <option value="60">60 minutos</option>
               <option value="90">90 minutos</option>
               <option value="otro">Otro</option>
@@ -577,51 +577,53 @@
       
       <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
         <div class="flex items-start">
-          <input id="section1" name="pageSections" type="checkbox" value="hero" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary" checked disabled>
+          <input id="section1" name="pageSections[]" type="checkbox" value="hero" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary" checked disabled>
           <label for="section1" class="ml-2 block text-sm text-gray-700">Hero (sección principal con mensaje clave) - Siempre incluida</label>
         </div>
         <div class="flex items-start">
-          <input id="section2" name="pageSections" type="checkbox" value="about" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
+          <input id="section2" name="pageSections[]" type="checkbox" value="about" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
           <label for="section2" class="ml-2 block text-sm text-gray-700">Sobre Nosotros/Historia</label>
         </div>
         <div class="flex items-start">
-          <input id="section3" name="pageSections" type="checkbox" value="services" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
+          <input id="section3" name="pageSections[]" type="checkbox" value="services" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
           <label for="section3" class="ml-2 block text-sm text-gray-700">Servicios/Productos</label>
         </div>
         <div class="flex items-start">
-          <input id="section4" name="pageSections" type="checkbox" value="benefits" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
+          <input id="section4" name="pageSections[]" type="checkbox" value="benefits" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
           <label for="section4" class="ml-2 block text-sm text-gray-700">Beneficios/Características</label>
         </div>
         <div class="flex items-start">
-          <input id="section5" name="pageSections" type="checkbox" value="testimonials" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
+          <input id="section5" name="pageSections[]" type="checkbox" value="testimonials" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
           <label for="section5" class="ml-2 block text-sm text-gray-700">Testimonios de clientes</label>
         </div>
         <div class="flex items-start">
-          <input id="section6" name="pageSections" type="checkbox" value="portfolio" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
+          <input id="section6" name="pageSections[]" type="checkbox" value="portfolio" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
           <label for="section6" class="ml-2 block text-sm text-gray-700">Portafolio/Trabajos realizados</label>
         </div>
         <div class="flex items-start">
-          <input id="section7" name="pageSections" type="checkbox" value="team" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
+          <input id="section7" name="pageSections[]" type="checkbox" value="team" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
           <label for="section7" class="ml-2 block text-sm text-gray-700">Equipo</label>
         </div>
         <div class="flex items-start">
-          <input id="section8" name="pageSections" type="checkbox" value="pricing" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
+          <input id="section8" name="pageSections[]" type="checkbox" value="pricing" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
           <label for="section8" class="ml-2 block text-sm text-gray-700">Precios</label>
         </div>
         <div class="flex items-start">
-          <input id="section9" name="pageSections" type="checkbox" value="faq" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
+          <input id="section9" name="pageSections[]" type="checkbox" value="faq" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
           <label for="section9" class="ml-2 block text-sm text-gray-700">FAQ (Preguntas frecuentes)</label>
         </div>
         <div class="flex items-start">
-          <input id="section10" name="pageSections" type="checkbox" value="contact" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary" checked disabled>
+          <input id="section10" name="pageSections[]" type="checkbox" value="contact" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary" checked disabled>
           <label for="section10" class="ml-2 block text-sm text-gray-700">Contacto - Siempre incluida</label>
         </div>
         <div class="flex items-start md:col-span-2">
-          <input id="section11" name="pageSections" type="checkbox" value="other" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
+          <input id="section11" name="pageSections[]" type="checkbox" value="other" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
           <label for="section11" class="ml-2 block text-sm text-gray-700">Otras (especificar):</label>
           <input type="text" id="sectionsOther" name="sectionsOther" class="ml-2 p-1 border border-gray-300 rounded focus:ring-primary focus:border-primary">
         </div>
       </div>
+      <!-- Campo oculto para asegurarse de que los valores siempre se envíen -->
+      <input type="hidden" name="pageSectionsData" id="pageSectionsData" value="">
     </div>
   
     <!-- Sección 10: Contenido Adicional -->
@@ -655,19 +657,19 @@
             <label class="block text-sm font-medium text-gray-700 mb-2">¿Necesita alguno de estos servicios adicionales?</label>
             <div class="space-y-2">
               <div class="flex items-start">
-                <input id="addon1" name="additionalServices" type="checkbox" value="domain" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
+                <input id="addon1" name="additionalTechServices[]" type="checkbox" value="domain" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
                 <label for="addon1" class="ml-2 block text-sm text-gray-700">Dominio personalizado (Costo adicional: precio del dominio + 10%)</label>
               </div>
               <div class="flex items-start">
-                <input id="addon2" name="additionalServices" type="checkbox" value="form" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
+                <input id="addon2" name="additionalTechServices[]" type="checkbox" value="form" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
                 <label for="addon2" class="ml-2 block text-sm text-gray-700">Formulario de contacto (Costo adicional: $30,000)</label>
               </div>
               <div class="flex items-start">
-                <input id="addon3" name="additionalServices" type="checkbox" value="analytics" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
+                <input id="addon3" name="additionalTechServices[]" type="checkbox" value="analytics" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
                 <label for="addon3" class="ml-2 block text-sm text-gray-700">Google Tag Manager y Analytics (Costo adicional: $50,000, GRATIS si proporciona los tags antes)</label>
               </div>
               <div class="flex items-start">
-                <input id="addon4" name="additionalServices" type="checkbox" value="other" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
+                <input id="addon4" name="additionalTechServices[]" type="checkbox" value="other" class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
                 <label for="addon4" class="ml-2 block text-sm text-gray-700">Otro (especificar):</label>
                 <input type="text" id="addonsOther" name="addonsOther" class="ml-2 p-1 border border-gray-300 rounded focus:ring-primary focus:border-primary">
               </div>
@@ -707,17 +709,6 @@
           <textarea id="additionalInfo" name="additionalInfo" rows="4" class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary"></textarea>
         </div>
       </div>
-      
-      <!-- Términos y Condiciones 
-      <div class="bg-gray-50 p-6 rounded-lg">
-        <h2 class="text-xl font-semibold mb-4 text-primary">Términos y Condiciones</h2>
-        
-        <div class="space-y-4">
-          <p class="text-sm text-gray-700"><strong>Tiempo de entrega:</strong> Se presentará un wireframe inmediatamente después de recibir el formulario completo y el pago. La página web estará lista en hora y media después de la aprobación del wireframe.</p>
-          
-          <p class="text-sm text-gray-700"><strong>Correcciones:</strong> El servicio incluye una (1) corrección sin costo adicional. Cada corrección adicional tendrá un costo de $20,000 COP. Un cambio total de diseño costará $150,000 COP.</p>
-          
-          <p class="text-sm text-gray-700"><strong>Pago:</strong> El pago completo de $500,000 COP debe realizarse antes de comenzar el proyecto.</p>-->
           
 <div class="flex items-start mt-4">
   <input id="termsAccepted" name="termsAccepted" type="checkbox" required class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
@@ -726,7 +717,6 @@
   </label>
 </div>
         </div>
-      </div>
       
       <!-- Botón de envío -->
       <div class="text-center">
@@ -743,26 +733,208 @@
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('clientForm') as HTMLFormElement;
-    const formStatus = document.getElementById('formStatus');
+    const formStatus = document.getElementById('formStatus') as HTMLDivElement;
     const productImagesInput = document.getElementById('productImages') as HTMLInputElement;
-    const imageErrorMessage = document.getElementById('imageErrorMessage');
-    const imageCounter = document.getElementById('imageCounter');
+    const imageErrorMessage = document.getElementById('imageErrorMessage') as HTMLDivElement;
+    const imageCounter = document.getElementById('imageCounter') as HTMLDivElement;
     const industrySelect = document.getElementById('industry') as HTMLSelectElement;
-    const otherIndustryField = document.getElementById('otherIndustryField');
+    const otherIndustryField = document.getElementById('otherIndustryField') as HTMLDivElement;
     
     // Sección de campos específicos por industria
-    const industrySpecificSection = document.getElementById('industrySpecificSection');
+    const industrySpecificSection = document.getElementById('industrySpecificSection') as HTMLDivElement;
     
     // Campos específicos para cada industria
-    const restauranteFields = document.getElementById('restauranteFields');
-    const medicoFields = document.getElementById('medicoFields');
-    const psicologiaFields = document.getElementById('psicologiaFields');
-    const profesionalFields = document.getElementById('profesionalFields');
-    const educacionFields = document.getElementById('educacionFields');
-    const otroFields = document.getElementById('otroFields');
+    const restauranteFields = document.getElementById('restauranteFields') as HTMLDivElement;
+    const medicoFields = document.getElementById('medicoFields') as HTMLDivElement;
+    const psicologiaFields = document.getElementById('psicologiaFields') as HTMLDivElement;
+    const profesionalFields = document.getElementById('profesionalFields') as HTMLDivElement;
+    const educacionFields = document.getElementById('educacionFields') as HTMLDivElement;
+    const otroFields = document.getElementById('otroFields') as HTMLDivElement;
     
     // Constante para el límite de imágenes
     const MAX_IMAGES = 15;
+    
+    // Función para recopilar campos de selección múltiple (checkbox y select multiple)
+    function collectMultiSelectData(container: HTMLElement, checkboxName: string): string[] {
+      const values: string[] = [];
+      if (!container) return values;
+      
+      // Recopilar todos los checkbox marcados
+      const checkboxes = container.querySelectorAll(`input[name="${checkboxName}"]:checked`);
+      checkboxes.forEach((checkbox) => {
+        const inputEl = checkbox as HTMLInputElement;
+        if (inputEl.value) {
+          values.push(inputEl.value);
+        }
+      });
+      
+      return values;
+    }
+    
+    // Función para manejar la sección 4 (Información Específica del Sector)
+    function serializeIndustrySpecificData(): Record<string, any> {
+      const industryType = industrySelect?.value;
+      const industryData: Record<string, any> = {};
+      
+      if (industryType === 'restaurante' && !restauranteFields?.classList.contains('hidden')) {
+        // Texto simple
+        const foodTypeEl = document.getElementById('foodType') as HTMLInputElement;
+        industryData.foodType = foodTypeEl?.value || '';
+        
+        const menuCategoriesEl = document.getElementById('menuCategories') as HTMLTextAreaElement;
+        industryData.menuCategories = menuCategoriesEl?.value || '';
+        
+        const specialtiesEl = document.getElementById('specialties') as HTMLTextAreaElement;
+        industryData.specialties = specialtiesEl?.value || '';
+        
+        const openingHoursEl = document.getElementById('openingHours') as HTMLTextAreaElement;
+        industryData.openingHours = openingHoursEl?.value || '';
+        
+        // Multi-select para servicios adicionales
+        industryData.restaurantServices = collectMultiSelectData(restauranteFields, 'additionalRestaurantServices');
+        
+        // Select
+        const ambienceEl = document.getElementById('ambience') as HTMLSelectElement;
+        industryData.ambience = ambienceEl?.value || '';
+      } 
+      else if (industryType === 'medico' && !medicoFields?.classList.contains('hidden')) {
+        // Texto simple
+        const medicalSpecialtiesEl = document.getElementById('medicalSpecialties') as HTMLTextAreaElement;
+        industryData.medicalSpecialties = medicalSpecialtiesEl?.value || '';
+        
+        const medicalServicesEl = document.getElementById('medicalServices') as HTMLTextAreaElement;
+        industryData.medicalServices = medicalServicesEl?.value || '';
+        
+        const insuranceInfoEl = document.getElementById('insuranceInfo') as HTMLTextAreaElement;
+        industryData.insuranceInfo = insuranceInfoEl?.value || '';
+        
+        const doctorProfilesEl = document.getElementById('doctorProfiles') as HTMLTextAreaElement;
+        industryData.doctorProfiles = doctorProfilesEl?.value || '';
+        
+        const appointmentInfoEl = document.getElementById('appointmentInfo') as HTMLTextAreaElement;
+        industryData.appointmentInfo = appointmentInfoEl?.value || '';
+        
+        // Select
+        const appointmentSystemEl = document.getElementById('appointmentSystem') as HTMLSelectElement;
+        industryData.appointmentSystem = appointmentSystemEl?.value || '';
+      }
+      else if (industryType === 'psicologia' && !psicologiaFields?.classList.contains('hidden')) {
+        // Texto simple
+        const therapeuticApproachesEl = document.getElementById('therapeuticApproaches') as HTMLTextAreaElement;
+        industryData.therapeuticApproaches = therapeuticApproachesEl?.value || '';
+        
+        const therapistProfileEl = document.getElementById('therapistProfile') as HTMLTextAreaElement;
+        industryData.therapistProfile = therapistProfileEl?.value || '';
+        
+        const frequencyInfoEl = document.getElementById('frequencyInfo') as HTMLInputElement;
+        industryData.frequencyInfo = frequencyInfoEl?.value || '';
+        
+        // Select múltiple
+        const therapeuticSpecialtiesSelect = document.getElementById('therapeuticSpecialties') as HTMLSelectElement;
+        if (therapeuticSpecialtiesSelect) {
+          industryData.therapeuticSpecialties = Array.from(therapeuticSpecialtiesSelect.selectedOptions).map(option => option.value);
+        }
+        
+        // Multi-select para modalidades
+        industryData.attendanceMode = collectMultiSelectData(psicologiaFields, 'attendanceMode');
+        
+        // Select
+        const sessionDurationEl = document.getElementById('sessionDuration') as HTMLSelectElement;
+        industryData.sessionDuration = sessionDurationEl?.value || '';
+      }
+      else if (industryType === 'profesional' && !profesionalFields?.classList.contains('hidden')) {
+        // Texto simple
+        const professionalServicesEl = document.getElementById('professionalServices') as HTMLTextAreaElement;
+        industryData.professionalServices = professionalServicesEl?.value || '';
+        
+        const workMethodologyEl = document.getElementById('workMethodology') as HTMLTextAreaElement;
+        industryData.workMethodology = workMethodologyEl?.value || '';
+        
+        const certificationsEl = document.getElementById('certifications') as HTMLTextAreaElement;
+        industryData.certifications = certificationsEl?.value || '';
+        
+        const experienceEl = document.getElementById('experience') as HTMLTextAreaElement;
+        industryData.experience = experienceEl?.value || '';
+        
+        const differentiatorsEl = document.getElementById('differentiators') as HTMLTextAreaElement;
+        industryData.differentiators = differentiatorsEl?.value || '';
+      }
+      else if (industryType === 'educacion' && !educacionFields?.classList.contains('hidden')) {
+        // Texto simple
+        const educationalProgramsEl = document.getElementById('educationalPrograms') as HTMLTextAreaElement;
+        industryData.educationalPrograms = educationalProgramsEl?.value || '';
+        
+        const methodologyEl = document.getElementById('methodology') as HTMLTextAreaElement;
+        industryData.methodology = methodologyEl?.value || '';
+        
+        const facultyInfoEl = document.getElementById('facultyInfo') as HTMLTextAreaElement;
+        industryData.facultyInfo = facultyInfoEl?.value || '';
+        
+        const facilitiesEl = document.getElementById('facilities') as HTMLTextAreaElement;
+        industryData.facilities = facilitiesEl?.value || '';
+        
+        const scheduleInfoEl = document.getElementById('scheduleInfo') as HTMLTextAreaElement;
+        industryData.scheduleInfo = scheduleInfoEl?.value || '';
+        
+        // Multi-select para modalidades educativas
+        industryData.educationMode = collectMultiSelectData(educacionFields, 'educationMode');
+      }
+      else if (industryType === 'otro' && !otroFields?.classList.contains('hidden')) {
+        // Texto simple
+        const otherBusinessInfoEl = document.getElementById('otherBusinessInfo') as HTMLTextAreaElement;
+        industryData.otherBusinessInfo = otherBusinessInfoEl?.value || '';
+        
+        const otherBusinessFeaturesEl = document.getElementById('otherBusinessFeatures') as HTMLTextAreaElement;
+        industryData.otherBusinessFeatures = otherBusinessFeaturesEl?.value || '';
+      }
+      
+      return industryData;
+    }
+    
+    // Función para recopilar información sobre los objetivos de la página web (sección 7)
+    function collectWebsiteObjectives(): Record<string, string> {
+      const pageObjectiveEl = document.querySelector('input[name="pageObjective"]:checked') as HTMLInputElement;
+      const objectiveOtherEl = document.getElementById('objectiveOther') as HTMLInputElement;
+      const desiredActionEl = document.querySelector('input[name="desiredAction"]:checked') as HTMLInputElement;
+      const actionOtherEl = document.getElementById('actionOther') as HTMLInputElement;
+      
+      const objectives: Record<string, string> = {
+        pageObjective: pageObjectiveEl?.value || '',
+        objectiveOther: objectiveOtherEl?.value || '',
+        desiredAction: desiredActionEl?.value || '',
+        actionOther: actionOtherEl?.value || ''
+      };
+      
+      return objectives;
+    }
+    
+    // Función para recopilar los datos de la sección 9 (Estructura de la Página)
+    function collectPageSections(): string[] {
+      const selectedSections: string[] = [];
+      
+      // Recopilar todas las secciones marcadas (activas y disabled)
+      document.querySelectorAll('input[name="pageSections[]"]').forEach((checkbox) => {
+        const inputEl = checkbox as HTMLInputElement;
+        if (inputEl.checked) {
+          selectedSections.push(inputEl.value);
+        }
+      });
+      
+      // Manejar opciones adicionales
+      const otherSectionsOption = document.getElementById('section11') as HTMLInputElement;
+      const otherSectionsText = document.getElementById('sectionsOther') as HTMLInputElement;
+      
+      if (otherSectionsOption?.checked && otherSectionsText?.value) {
+        selectedSections.push(`other:${otherSectionsText.value}`);
+      }
+      
+      return selectedSections;
+    }
+    
+    // Recopilar datos de servicios técnicos adicionales (sección 11)
+    function collectAdditionalTechServices(): string[] {
+      return collectMultiSelectData(document.body, 'additionalTechServices[]');
+    }
     
     // Mostrar/ocultar campos según la industria seleccionada
     if (industrySelect) {
@@ -876,6 +1048,22 @@
             formData.set('industry', otherIndustryValue);
           }
         }
+        
+        // Procesar campos de industria específica
+        const industrySpecificData = serializeIndustrySpecificData();
+        formData.set('industrySpecificData', JSON.stringify(industrySpecificData));
+        
+        // Procesar objetivos de la página web
+        const websiteObjectives = collectWebsiteObjectives();
+        formData.set('websiteObjectives', JSON.stringify(websiteObjectives));
+        
+        // Procesar secciones de página
+        const pageSections = collectPageSections();
+        formData.set('pageSections', JSON.stringify(pageSections));
+        
+        // Procesar servicios técnicos adicionales
+        const additionalTechServices = collectAdditionalTechServices();
+        formData.set('additionalTechServices', JSON.stringify(additionalTechServices));
         
         try {
           const response = await fetch('/api/submit-form', {
