@@ -4,15 +4,11 @@ import '../styles/global.css';
 export interface Props {
   title: string;
   description?: string;
-  googleAnalyticsId?: string;
-  googleTagManagerId?: string;
 }
 
 const { 
   title, 
-  description = "Páginas web profesional, rápida y sin complicaciones",
-  googleAnalyticsId,
-  googleTagManagerId
+  description = "Páginas web profesional, rápida y sin complicaciones"
 } = Astro.props;
 ---
 
@@ -31,18 +27,8 @@ const {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    
   </head>
   <body class="font-sans antialiased text-gray-900 bg-white">
-    <!-- Google Tag Manager (noscript) -->
-    {googleTagManagerId && (
-      <noscript>
-        <iframe src={`https://www.googletagmanager.com/ns.html?id=${googleTagManagerId}`}
-          height="0" width="0" style="display:none;visibility:hidden"></iframe>
-      </noscript>
-    )}
-    
     <slot />
   </body>
 </html>
