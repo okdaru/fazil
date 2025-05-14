@@ -293,6 +293,23 @@ export async function POST({ request }) {
     if (fields.termsAccepted === 'on' || fields.termsAccepted === true) {
       recordData.fields['fldCwWA0sK9J15C4y'] = true;
     }
+    // Procesar preguntas del formulario de contacto
+if (fields.contactFormQuestions) {
+  // Dividir el texto en líneas para obtener cada pregunta
+  const questions = fields.contactFormQuestions
+    .split('\n')
+    .filter(line => line.trim() !== '')  // Eliminar líneas vacías
+    .slice(0, 15);  // Limitar a máximo 15 preguntas
+  
+  if (questions.length > 0) {
+    recordData.fields['fldContactFormQuestions'] = questions.join('\n');
+  }
+}
+
+// Comprobar si se ha solicitado incluir el formulario de contacto
+if (fields.includeContactForm === 'on' || fields.includeContactForm === true) {
+  recordData.fields['fldHerIGuf4mDvjCJ'] = true;
+}
     
     // Procesar datos de industrySpecificData si existe (sección 4)
     if (fields.industrySpecificData) {
