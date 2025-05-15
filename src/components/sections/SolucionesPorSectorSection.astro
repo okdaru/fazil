@@ -1,0 +1,109 @@
+---
+// SolucionesPorSectorSection.astro - Componente para mostrar soluciones por sector en la homepage
+
+// Definir los sectores con sus íconos
+const sectores = [
+  {
+    nombre: "Restaurantes",
+    icono: "utensils",
+    descripcion: "Páginas web para restaurantes y cafeterías",
+    url: "/paginas-web-para-restaurantes"
+  },
+  {
+    nombre: "Profesionales",
+    icono: "briefcase",
+    descripcion: "Soluciones para consultores, médicos y abogados",
+    url: "/paginas-web-para-profesionales"
+  },
+  {
+    nombre: "Emprendedores",
+    icono: "store",
+    descripcion: "Presencia digital para pequeños negocios",
+    url: "/paginas-web-para-emprendedores"
+  },
+  {
+    nombre: "Academias",
+    icono: "school",
+    descripcion: "Páginas para centros educativos y consultorios",
+    url: "/paginas-web-para-academias"
+  },
+  {
+    nombre: "Eventos",
+    icono: "calendar",
+    descripcion: "Landing pages para eventos y promociones",
+    url: "/landing-page-para-eventos"
+  }
+];
+
+// Definir el tipo para el parámetro tipo
+type IconType = 'utensils' | 'briefcase' | 'store' | 'school' | 'calendar' | string;
+
+// Función para generar el ícono SVG según el tipo
+const getIconSVG = (tipo: IconType) => {
+  switch (tipo) {
+    case 'utensils':
+      return `<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+              </svg>`;
+    case 'briefcase':
+      return `<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>`;
+    case 'store':
+      return `<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+              </svg>`;
+    case 'school':
+      return `<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path d="M12 14l9-5-9-5-9 5 9 5z" />
+                <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
+              </svg>`;
+    case 'calendar':
+      return `<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>`;
+    default:
+      return `<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+              </svg>`;
+  }
+};
+---
+
+<section id="soluciones-industria" class="py-16 bg-gray-50">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold mb-4">Soluciones para tu industria</h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        Tenemos páginas web diseñadas específicamente para las necesidades de tu sector.
+      </p>
+    </div>
+    
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+      {sectores.map(sector => (
+        <a href={sector.url} class="bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow text-center">
+          <div class="w-16 h-16 mx-auto mb-3 bg-blue-100 rounded-full flex items-center justify-center">
+            <Fragment set:html={getIconSVG(sector.icono)} />
+          </div>
+          <h3 class="font-bold">{sector.nombre}</h3>
+          <p class="text-sm text-gray-600 mt-1 hidden md:block">{sector.descripcion}</p>
+        </a>
+      ))}
+    </div>
+    
+    <div class="mt-8 text-center">
+      <p class="text-gray-600 mb-4">
+        Cada tipo de negocio tiene necesidades específicas. Nuestras soluciones están optimizadas para tu industria.
+      </p>
+      <a 
+        href="https://wa.me/+573181123660?text=Hola%20Fazil,%20me%20interesa%20una%20página%20web%20para%20mi%20negocio%20específico"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-block px-6 py-3 border-2 border-blue-600 text-blue-600 hover:bg-blue-50 rounded-lg font-medium transition-colors"
+      >
+        ¿No encuentras tu sector? Contáctanos
+      </a>
+    </div>
+  </div>
+</section>

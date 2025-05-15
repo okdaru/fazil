@@ -1,5 +1,5 @@
 ---
-// HeaderInternal.astro - Componente para la navegación principal de páginas internas
+// HeaderInternal.astro - Con menú desplegable mejorado
 ---
 
 <header class="bg-gradient-to-r from-blue-700 to-purple-700 shadow-lg z-30 py-4">
@@ -7,7 +7,7 @@
       <!-- Banner de oferta especial -->
       <div class="bg-rose-600 text-white text-center py-2 px-4 rounded-lg mb-3 shadow-md">
         <p class="text-sm font-medium">
-          <span class="font-bold">¡OFERTA ESPECIAL!</span> página webs a $250,000 (antes $500,000) - Solo hasta el 30 de mayo
+          <span class="font-bold">¡OFERTA ESPECIAL!</span> Páginas web a $250,000 (antes $500,000) - Solo hasta el 30 de mayo
         </p>
       </div>
       
@@ -17,11 +17,33 @@
           <img src="/images/logo-fazil.svg" alt="Fazil AI" class="h-10 mr-2" />
         </a>
         
-        <!-- Menú de navegación para desktop -->
+        <!-- Menú de navegación para desktop con menú desplegable mejorado -->
         <nav class="hidden md:flex space-x-8">
           <a href="/" class="text-white hover:text-accent transition-colors">Inicio</a>
           <a href="/process" class="text-white hover:text-accent transition-colors">Proceso</a>
           <a href="/astro-benefits" class="text-white hover:text-accent transition-colors">Astro</a>
+          
+          <!-- Soluciones por sector (con botón click instead of hover) -->
+          <div class="relative">
+            <button 
+              id="solutionsDropdownBtn"
+              class="text-white hover:text-accent transition-colors flex items-center"
+            >
+              Soluciones por Sector
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            
+            <div id="solutionsDropdown" class="absolute left-0 mt-2 w-64 rounded-md shadow-lg bg-white py-1 hidden z-50">
+              <a href="/restaurantes" class="block px-4 py-2 text-gray-800 hover:bg-blue-50">Para Restaurantes</a>
+              <a href="/profesionales-independientes" class="block px-4 py-2 text-gray-800 hover:bg-blue-50">Para Profesionales</a>
+              <a href="/emprendedores" class="block px-4 py-2 text-gray-800 hover:bg-blue-50">Para Emprendedores</a>
+              <a href="/consultorios" class="block px-4 py-2 text-gray-800 hover:bg-blue-50">Para Academias y Consultorios</a>
+              <a href="/eventos-servicios-temporales" class="block px-4 py-2 text-gray-800 hover:bg-blue-50">Para Eventos y Promociones</a>
+            </div>
+          </div>
+          
           <a href="/porquefazil" class="text-white hover:text-accent transition-colors">Por qué elegirnos</a>
           <a href="/CMSExplanation" class="text-white hover:text-accent transition-colors">Gestor de Contenido</a>
         </nav>
@@ -48,11 +70,30 @@
       </div>
       
       <!-- Menú móvil (oculto por defecto) -->
-      <div id="mobileMenu" class="hidden md:hidden bg-white rounded-lg mt-4 shadow-lg p-4 absolute left-6 right-6">
+      <div id="mobileMenu" class="hidden md:hidden bg-white rounded-lg mt-4 shadow-lg p-4 absolute left-6 right-6 z-50">
         <nav class="flex flex-col space-y-3">
           <a href="/" class="text-gray-800 hover:text-primary font-medium">Inicio</a>
           <a href="/process" class="text-gray-800 hover:text-primary font-medium">Proceso</a>
           <a href="/astro-benefits" class="text-gray-800 hover:text-primary font-medium">Astro</a>
+          
+          <!-- Acordeón para soluciones por sector en móvil -->
+          <div class="py-2">
+            <button id="solutionsToggle" class="flex justify-between items-center w-full text-left text-gray-800 hover:text-primary font-medium">
+              <span>Soluciones por Sector</span>
+              <svg id="solutionsArrow" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            
+            <div id="solutionsSubMenu" class="hidden pl-4 mt-2 space-y-2 border-l-2 border-gray-200">
+              <a href="/restaurantes" class="block text-gray-700 hover:text-primary">Para Restaurantes</a>
+              <a href="/profesionales-independientes" class="block text-gray-700 hover:text-primary">Para Profesionales</a>
+              <a href="/emprendedores" class="block text-gray-700 hover:text-primary">Para Emprendedores</a>
+              <a href="/consultorios" class="block text-gray-700 hover:text-primary">Para Academias y Consultorios</a>
+              <a href="/eventos-servicios-temporales" class="block text-gray-700 hover:text-primary">Para Eventos y Promociones</a>
+            </div>
+          </div>
+          
           <a href="/porquefazil" class="text-gray-800 hover:text-primary font-medium">Por qué elegirnos</a>
           <a href="/CMSExplanation" class="text-gray-800 hover:text-primary font-medium">Gestor de Contenido</a>
           <a 
@@ -72,18 +113,17 @@
   </header>
   
   <script>
-    // Script para controlar el menú móvil
+    // Script para controlar el menú móvil y el desplegable
     document.addEventListener('DOMContentLoaded', () => {
+      // Mobile menu
       const menuButton = document.getElementById('menuButton');
       const mobileMenu = document.getElementById('mobileMenu');
       
-      // Verificar que ambos elementos existan antes de añadir event listeners
       if (menuButton && mobileMenu) {
         menuButton.addEventListener('click', () => {
           mobileMenu.classList.toggle('hidden');
         });
         
-        // Cerrar el menú al hacer clic en un enlace
         const mobileLinks = mobileMenu.querySelectorAll('a');
         mobileLinks.forEach(link => {
           link.addEventListener('click', () => {
@@ -91,5 +131,66 @@
           });
         });
       }
+      
+      // Menú desplegable en móvil
+      const solutionsToggle = document.getElementById('solutionsToggle');
+      const solutionsSubMenu = document.getElementById('solutionsSubMenu');
+      const solutionsArrow = document.getElementById('solutionsArrow');
+      
+      if (solutionsToggle && solutionsSubMenu && solutionsArrow) {
+        solutionsToggle.addEventListener('click', () => {
+          solutionsSubMenu.classList.toggle('hidden');
+          solutionsArrow.classList.toggle('rotate-180');
+        });
+      }
+      
+      // Menú desplegable de escritorio con clic (no hover)
+      const solutionsDropdownBtn = document.getElementById('solutionsDropdownBtn');
+      const solutionsDropdown = document.getElementById('solutionsDropdown');
+      
+      if (solutionsDropdownBtn && solutionsDropdown) {
+        // Toggle al hacer clic en el botón
+        solutionsDropdownBtn.addEventListener('click', (e) => {
+          e.stopPropagation(); // Prevenir que el clic se propague al documento
+          solutionsDropdown.classList.toggle('hidden');
+        });
+        
+        // Mantener abierto cuando se mueve al menú
+        solutionsDropdown.addEventListener('mouseover', () => {
+          solutionsDropdown.classList.remove('hidden');
+        });
+        
+        // Cerrar al hacer clic en cualquier lugar fuera
+        // Cerrar al hacer clic en cualquier lugar fuera
+document.addEventListener('click', (e) => {
+  // Corregir con conversión explícita de tipos
+  const target = e.target as Node;
+  
+  if (!solutionsDropdownBtn.contains(target) && !solutionsDropdown.contains(target)) {
+    solutionsDropdown.classList.add('hidden');
+  }
+});
+        
+        // Mantener abierto durante la interacción
+        const dropdownLinks = solutionsDropdown.querySelectorAll('a');
+        dropdownLinks.forEach(link => {
+          link.addEventListener('mouseover', () => {
+            solutionsDropdown.classList.remove('hidden');
+          });
+        });
+      }
+      
+      // Cerrar menú al hacer clic fuera
+      document.addEventListener('click', (event) => {
+        if (event.target instanceof Element) {
+          const target = event.target;
+          const isClickInsideMenu = mobileMenu?.contains(target);
+          const isClickMenuButton = menuButton?.contains(target);
+          
+          if (!isClickInsideMenu && !isClickMenuButton && mobileMenu && !mobileMenu.classList.contains('hidden')) {
+            mobileMenu.classList.add('hidden');
+          }
+        }
+      });
     });
   </script>

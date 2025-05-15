@@ -12,6 +12,8 @@ import Footer from '../components/Footer.astro';
 import OurPagesSection from '../components/sections/OurPagesSection.astro';
 import FAQSection from '../components/FAQSection.astro';
 import Testimonials from '../components/TestimonialsSection.astro';
+import SolucionesPorSectorSection from '../components/sections/SolucionesPorSectorSection.astro';
+
 
 
 
@@ -19,7 +21,7 @@ import Testimonials from '../components/TestimonialsSection.astro';
 
 ---
 
-<Layout title="FaziI AI - Paginas Web  Profesionales en 180 minutos">
+<Layout isHomepage={true} title="Fazil - Páginas Web Profesionales en 180 minutos para Empresas en Colombia">
   <Header />
   <main>
     <HeroSection />
@@ -28,6 +30,7 @@ import Testimonials from '../components/TestimonialsSection.astro';
     <FeaturesSection />
     <PricingPack />
     <OurPagesSection />
+    <SolucionesPorSectorSection />
     <Testimonials />
     <FAQSection />
     <CTASection />
