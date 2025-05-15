@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /formulario/
+Sitemap: https://fazil.pro/sitemap.xml

@@ -4,12 +4,17 @@ import '../styles/global.css';
 export interface Props {
   title: string;
   description?: string;
+  ogImage?: string;
 }
 
 const { 
   title, 
-  description = "Páginas web profesional, rápida y sin complicaciones"
+  description = "Desarrollamos páginas web profesionales en Bogotá, optimizadas para SEO y entregadas en solo 180 minutos. Diseño web personalizado que convierte.",
+  ogImage = "/images/fazil-og-image.jpg"
 } = Astro.props;
+
+// Construir URL canónica absoluta
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
 ---
 
 <!DOCTYPE html>
@@ -19,9 +24,27 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+    
+    <!-- SEO Primary Meta Tags -->
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
     <meta name="google-site-verification" content="o-I4W8las9JCrx4ieB0rYP-lJxQdu10OQJK-U26dcRw" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(ogImage, Astro.site).href} />
+    <meta property="og:locale" content="es_CO" />
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(ogImage, Astro.site).href} />
     
     <!-- Google Tag Manager -->
     <script is:inline>
@@ -37,6 +60,26 @@ const {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Schema.org - Local Business -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebDesignService",
+        "name": "Fazil AI",
+        "image": "https://fazil.pro/images/logo-fazil.svg",
+        "description": "Servicios de desarrollo web profesional con entrega en 180 minutos",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Bogotá",
+          "addressRegion": "Bogota D.C.",
+          "addressCountry": "CO"
+        },
+        "priceRange": "$$$",
+        "telephone": "+573181123660",
+        "url": "https://fazil.pro"
+      }
+    </script>
   </head>
   <body class="font-sans antialiased text-gray-900 bg-white">
     <!-- Google Tag Manager (noscript) -->
