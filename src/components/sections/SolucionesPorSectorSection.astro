@@ -75,7 +75,7 @@ const getIconSVG = (tipo: IconType) => {
   <div class="container mx-auto px-6">
     <div class="text-center mb-12">
       <h2 class="text-3xl font-bold mb-4">Soluciones para tu industria</h2>
-      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+      <p class="text-xl text-gray-300 max-w-3xl mx-auto">
         Tenemos páginas web diseñadas específicamente para las necesidades de tu sector.
       </p>
     </div>
@@ -87,13 +87,13 @@ const getIconSVG = (tipo: IconType) => {
             <Fragment set:html={getIconSVG(sector.icono)} />
           </div>
           <h3 class="font-bold">{sector.nombre}</h3>
-          <p class="text-sm text-gray-600 mt-1 hidden md:block">{sector.descripcion}</p>
+          <p class="text-sm text-gray-300 mt-1 hidden md:block">{sector.descripcion}</p>
         </a>
       ))}
     </div>
     
     <div class="mt-8 text-center">
-      <p class="text-gray-600 mb-4">
+      <p class="text-gray-300 mb-4">
         Cada tipo de negocio tiene necesidades específicas. Nuestras soluciones están optimizadas para tu industria.
       </p>
       <a 

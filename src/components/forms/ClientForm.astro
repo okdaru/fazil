@@ -4,7 +4,7 @@
 
 <form id="clientForm" class="space-y-8 max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg">
   <h1 class="text-3xl font-bold text-center text-primary mb-8">Formulario de Información para Desarrollo Web</h1>
-  <p class="text-gray-600 mb-8">Este formulario nos ayudará a recopilar toda la información necesaria para crear su página web profesional. Por favor, complete todos los campos posibles para garantizar un resultado óptimo y personalizado.</p>
+  <p class="text-gray-300 mb-8">Este formulario nos ayudará a recopilar toda la información necesaria para crear su página web profesional. Por favor, complete todos los campos posibles para garantizar un resultado óptimo y personalizado.</p>
 
   <!-- Sección 1: Información Básica del Negocio -->
   <div class="bg-gray-50 p-6 rounded-lg">
@@ -84,14 +84,14 @@
   <!-- Sección 3: Credenciales de GitHub -->
   <div class="bg-gray-50 p-6 rounded-lg">
     <h2 class="text-xl font-semibold mb-4 text-primary">3. Credenciales de GitHub</h2>
-    <p class="text-sm text-gray-600 mb-4">Necesitamos que cree una cuenta en GitHub para el despliegue automático.</p>
+    <p class="text-sm text-gray-300 mb-4">Necesitamos que cree una cuenta en GitHub para el despliegue automático.</p>
     <div class="grid grid-cols-1 gap-6">
       <div>
         <label for="githubUsername" class="block text-sm font-medium text-gray-700 mb-1">Nombre de usuario de GitHub </label>
         <input type="text" id="githubUsername" name="githubUsername" class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary">
       </div>
       <div>
-        <p class="text-sm text-gray-600">La contraseña de GitHub debe ser enviada por un canal seguro. Nos pondremos en contacto para coordinar esto.</p>
+        <p class="text-sm text-gray-300">La contraseña de GitHub debe ser enviada por un canal seguro. Nos pondremos en contacto para coordinar esto.</p>
       </div>
     </div>
   </div>
@@ -99,7 +99,7 @@
   <!-- Sección 4: Información Específica por Industria (Dinámica) -->
   <div id="industrySpecificSection" class="hidden bg-blue-50 p-6 rounded-lg border-l-4 border-blue-500">
     <h2 class="text-xl font-semibold mb-4 text-primary">4. Información Específica del Sector</h2>
-    <p class="text-sm text-gray-600 mb-6">Esta sección contiene preguntas específicas para su industria que nos ayudarán a personalizar mejor su página web.</p>
+    <p class="text-sm text-gray-300 mb-6">Esta sección contiene preguntas específicas para su industria que nos ayudarán a personalizar mejor su página web.</p>
     
     <!-- Campos específicos para Restaurantes -->
     <div id="restauranteFields" class="hidden space-y-6">
@@ -186,7 +186,7 @@
           <div class="md:col-span-2">
             <label for="doctorProfiles" class="block text-sm font-medium text-gray-700 mb-1">Información de médicos/profesionales</label>
             <textarea id="doctorProfiles" name="doctorProfiles" rows="4" placeholder="Nombre, especialidad, formación y experiencia de cada profesional" class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary"></textarea>
-            <p class="mt-1 text-xs text-gray-500">Esta información será utilizada para crear perfiles profesionales en su página web.</p>
+            <p class="mt-1 text-xs text-gray-300">Esta información será utilizada para crear perfiles profesionales en su página web.</p>
           </div>
           <div>
             <label for="appointmentSystem" class="block text-sm font-medium text-gray-700 mb-1">Sistema de citas actual *</label>
@@ -231,7 +231,7 @@
               <option value="adicciones">Adicciones</option>
               <option value="duelo">Duelo</option>
             </select>
-            <p class="mt-1 text-xs text-gray-500">Mantenga presionada la tecla Ctrl/Cmd para seleccionar múltiples opciones.</p>
+            <p class="mt-1 text-xs text-gray-300">Mantenga presionada la tecla Ctrl/Cmd para seleccionar múltiples opciones.</p>
           </div>
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-2">Modalidades de atención</label>
@@ -259,7 +259,7 @@
           <div class="md:col-span-2">
             <label for="therapistProfile" class="block text-sm font-medium text-gray-700 mb-1">Perfil del terapeuta/equipo *</label>
             <textarea id="therapistProfile" name="therapistProfile" rows="4" placeholder="Información profesional, formación, certificaciones y experiencia" class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary"></textarea>
-            <p class="mt-1 text-xs text-gray-500">Esta información será utilizada para crear su perfil profesional en la página web.</p>
+            <p class="mt-1 text-xs text-gray-300">Esta información será utilizada para crear su perfil profesional en la página web.</p>
           </div>
           <div>
             <label for="sessionDuration" class="block text-sm font-medium text-gray-700 mb-1">Duración típica de sesiones</label>
@@ -494,7 +494,7 @@
     <!-- Sección 8: Elementos Visuales -->
     <div class="bg-gray-50 p-6 rounded-lg">
       <h2 class="text-xl font-semibold mb-4 text-primary">8. Elementos Visuales</h2>
-      <p class="text-sm text-gray-600 mb-4">Por favor, proporcione todos los elementos visuales en alta resolución.</p>
+      <p class="text-sm text-gray-300 mb-4">Por favor, proporcione todos los elementos visuales en alta resolución.</p>
       
       <div class="grid grid-cols-1 gap-6">
         <div>
@@ -520,7 +520,7 @@
         <!-- Campo de imágenes de productos modificado con límite de 15 -->
         <div>
           <label for="productImages" class="block text-sm font-medium text-gray-700 mb-1">
-            Imágenes de productos/servicios  <span class="text-xs text-gray-500">(Máximo 15 imágenes)</span>
+            Imágenes de productos/servicios  <span class="text-xs text-gray-300">(Máximo 15 imágenes)</span>
           </label>
           <input 
             type="file" 
@@ -535,7 +535,7 @@
             Solo se permiten hasta 15 imágenes. Si necesita subir más, por favor contacte al administrador.
           </div>
           <!-- Contador de imágenes seleccionadas -->
-          <div id="imageCounter" class="mt-2 text-sm text-gray-600">
+          <div id="imageCounter" class="mt-2 text-sm text-gray-300">
             0 imágenes seleccionadas
           </div>
         </div>
@@ -573,7 +573,7 @@
     <!-- Sección 9: Estructura de la Página -->
     <div class="bg-gray-50 p-6 rounded-lg">
       <h2 class="text-xl font-semibold mb-4 text-primary">9. Estructura de la Página</h2>
-      <p class="text-sm text-gray-600 mb-4">Su página web incluirá una página principal con varias secciones. Seleccione las que desea incluir:</p>
+      <p class="text-sm text-gray-300 mb-4">Su página web incluirá una página principal con varias secciones. Seleccione las que desea incluir:</p>
       
       <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
         <div class="flex items-start">
@@ -667,7 +667,7 @@
             </div>
           </div>
           
-          <p class="text-sm text-gray-600 mb-4">Para solicitar la instalación de Google Tag Manager o Analytics, por favor mencione esta necesidad directamente a nuestro contacto de WhatsApp una vez enviado el formulario.</p>
+          <p class="text-sm text-gray-300 mb-4">Para solicitar la instalación de Google Tag Manager o Analytics, por favor mencione esta necesidad directamente a nuestro contacto de WhatsApp una vez enviado el formulario.</p>
 
         </div>
       </div>
@@ -701,7 +701,7 @@
       <!-- Sección para Formulario de Contacto (No obligatorio) -->
 <div class="bg-gray-50 p-6 rounded-lg">
   <h2 class="text-xl font-semibold mb-4 text-primary">14. Preguntas para el Formulario de Contacto</h2>
-  <p class="text-sm text-gray-600 mb-4">Introduzca las preguntas que desea incluir en su formulario de contacto (máximo 15). Escriba una pregunta por línea.</p>
+  <p class="text-sm text-gray-300 mb-4">Introduzca las preguntas que desea incluir en su formulario de contacto (máximo 15). Escriba una pregunta por línea.</p>
   
   <div>
     <label for="contactFormQuestions" class="block text-sm font-medium text-gray-700 mb-1">Preguntas para su formulario de contacto (opcional)</label>
@@ -718,7 +718,7 @@ Teléfono
 ..." 
       class="w-full p-2 border border-gray-300 rounded focus:ring-primary focus:border-primary"
     ></textarea>
-    <p class="mt-2 text-xs text-gray-500">Cada línea será una pregunta separada en el formulario. El sistema automáticamente incluirá campos para nombre, correo y mensaje si no los especifica.</p>
+    <p class="mt-2 text-xs text-gray-300">Cada línea será una pregunta separada en el formulario. El sistema automáticamente incluirá campos para nombre, correo y mensaje si no los especifica.</p>
   </div>
   
   

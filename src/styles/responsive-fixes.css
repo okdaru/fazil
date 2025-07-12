@@ -1,0 +1,328 @@
+/* Responsive Fixes CSS - Agrega este CSS a tu layout principal */
+
+/* Base responsive settings */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* Container responsive fixes */
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px;
+  }
+}
+
+/* Header fixes */
+header {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  width: 100%;
+}
+
+/* Content spacing for fixed header */
+main {
+  padding-top: 80px; /* Altura del header */
+}
+
+/* Mobile menu improvements */
+@media (max-width: 1023px) {
+  .mobile-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border-top: 1px solid #e5e7eb;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+  }
+  
+  .mobile-menu.hidden {
+    display: none;
+  }
+  
+  .mobile-menu.visible {
+    display: block;
+  }
+}
+
+/* Text size responsive */
+@media (max-width: 640px) {
+  h1 {
+    font-size: 2rem !important;
+    line-height: 2.5rem !important;
+  }
+  
+  h2 {
+    font-size: 1.5rem !important;
+    line-height: 2rem !important;
+  }
+  
+  h3 {
+    font-size: 1.25rem !important;
+    line-height: 1.75rem !important;
+  }
+  
+  .text-xl {
+    font-size: 1.125rem !important;
+    line-height: 1.75rem !important;
+  }
+  
+  .text-lg {
+    font-size: 1rem !important;
+    line-height: 1.5rem !important;
+  }
+}
+
+/* Grid responsive fixes */
+.grid {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .md\:grid-cols-2 {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .lg\:grid-cols-3 {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .md\:col-span-2 {
+    grid-column: span 1 !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .md\:grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .lg\:grid-cols-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:grid-cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Flexbox responsive fixes */
+@media (max-width: 640px) {
+  .flex {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+  
+  .sm\:flex-row {
+    flex-direction: row !important;
+  }
+  
+  .justify-between {
+    justify-content: center !important;
+  }
+  
+  .space-x-4 > * + * {
+    margin-left: 0 !important;
+    margin-top: 1rem;
+  }
+  
+  .sm\:space-x-4 > * + * {
+    margin-top: 0;
+    margin-left: 1rem;
+  }
+}
+
+/* Button responsive */
+@media (max-width: 640px) {
+  .btn {
+    width: 100%;
+    text-align: center;
+    padding: 0.75rem 1rem;
+  }
+  
+  .flex.gap-4 {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .sm\:flex-row.gap-4 {
+    flex-direction: row;
+    gap: 1rem;
+  }
+}
+
+/* Image responsive */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Padding and margin responsive */
+@media (max-width: 640px) {
+  .py-16 {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+  
+  .lg\:py-24 {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+  
+  .px-6 {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  
+  .mb-16 {
+    margin-bottom: 2rem !important;
+  }
+  
+  .mb-12 {
+    margin-bottom: 1.5rem !important;
+  }
+}
+
+/* Hero section responsive */
+@media (max-width: 640px) {
+  .hero-section {
+    padding-top: 6rem;
+    padding-bottom: 3rem;
+  }
+  
+  .hero-section h1 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+  }
+  
+  .hero-section p {
+    font-size: 1.125rem;
+    line-height: 1.6;
+  }
+}
+
+/* Services and cards responsive */
+@media (max-width: 640px) {
+  .card {
+    margin-bottom: 1rem;
+  }
+  
+  .card-grid {
+    gap: 1rem;
+  }
+}
+
+/* Footer responsive */
+@media (max-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    text-align: center;
+    gap: 2rem;
+  }
+  
+  .footer-links {
+    justify-content: center;
+  }
+}
+
+/* Fix for elements that might cause horizontal scroll */
+.overflow-hidden {
+  overflow: hidden;
+}
+
+/* Ensure no element exceeds viewport width */
+* {
+  max-width: 100vw;
+}
+
+/* Hide scrollbar for mobile menu if needed */
+.mobile-menu {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.mobile-menu::-webkit-scrollbar {
+  display: none;
+}
+
+/* Z-index hierarchy */
+.z-50 { z-index: 50; }
+.z-40 { z-index: 40; }
+.z-30 { z-index: 30; }
+.z-20 { z-index: 20; }
+.z-10 { z-index: 10; }
+
+/* Smooth transitions */
+* {
+  transition: all 0.3s ease;
+}
+
+/* Focus states for accessibility */
+button:focus,
+a:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Active states for mobile */
+@media (max-width: 1023px) {
+  button:active,
+  a:active {
+    transform: scale(0.95);
+  }
+}

@@ -54,7 +54,7 @@ function formatDate(date: Date | number | string): string {
   <div class="container mx-auto px-6">
     <div class="text-center mb-16">
       <h2 class="text-4xl font-bold mb-4">Lo que dicen nuestros clientes</h2>
-      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+      <p class="text-xl text-gray-300 max-w-3xl mx-auto">
         Opiniones reales de clientes satisfechos
       </p>
     </div>
@@ -70,7 +70,7 @@ function formatDate(date: Date | number | string): string {
             </svg>
           ))}
         </div>
-        <span class="ml-2 text-gray-600 font-medium">4.9/5</span>
+        <span class="ml-2 text-gray-300 font-medium">4.9/5</span>
       </div>
     </div>
 
@@ -87,7 +87,7 @@ function formatDate(date: Date | number | string): string {
                   </svg>
                 ))}
               </div>
-              {review.time && <span class="ml-2 text-xs text-gray-500">{formatDate(review.time * 1000)}</span>}
+              {review.time && <span class="ml-2 text-xs text-gray-300">{formatDate(review.time * 1000)}</span>}
             </div>
             <p class="text-gray-700 mb-4 italic">
               "{review.text || review.comment}"
@@ -101,7 +101,7 @@ function formatDate(date: Date | number | string): string {
               }
               <div>
                 <h4 class="font-bold">{review.author_name || review.name || "Usuario"}</h4>
-                {review.company && <p class="text-sm text-gray-600">{review.company}</p>}
+                {review.company && <p class="text-sm text-gray-300">{review.company}</p>}
               </div>
             </div>
           </div>

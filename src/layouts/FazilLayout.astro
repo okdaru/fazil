@@ -1,204 +1,338 @@
 ---
-// src/layouts/FazilLayout.astro
-import '../styles/global.css';
-
+// FazilLayout.astro - Versión corregida con SEO completo
 export interface Props {
-	title: string;
-	description?: string;
-	ogImage?: string;
-	canonical?: string;
-	noindex?: boolean;
-	structuredData?: object;
+  title: string;
+  description: string;
+  canonical?: string;
+  ogImage?: string;
+  noindex?: boolean;
 }
 
-const { 
-	title, 
-	description = "FAZIL - Empresa de desarrollo tecnológico especializada en APIs, landing pages, optimización de performance y consultoría tecnológica.", 
-	ogImage = "/images/fazil-og.jpg",
-	canonical,
-	noindex = false,
-	structuredData = null
-} = Astro.props;
-
-const pathname = Astro.url.pathname;
-const siteUrl = "https://fazil.pro";
-const canonicalUrl = canonical || `${siteUrl}${pathname}`;
-
-// Structured data para FAZIL
-const defaultStructuredData = {
-	"@context": "https://schema.org",
-	"@graph": [
-		{
-			"@type": "Organization",
-			"@id": `${siteUrl}/#organization`,
-			"name": "FAZIL",
-			"url": siteUrl,
-			"logo": {
-				"@type": "ImageObject",
-				"@id": `${siteUrl}/#logo`,
-				"url": `${siteUrl}/images/logo-fazil.svg`,
-				"width": 300,
-				"height": 100
-			},
-			"contactPoint": {
-				"@type": "ContactPoint",
-				"telephone": "+57-318-112-3660",
-				"contactType": "customer service",
-				"availableLanguage": "Spanish"
-			},
-			"address": {
-				"@type": "PostalAddress",
-				"addressLocality": "Bogotá",
-				"addressCountry": "CO"
-			},
-			"sameAs": [
-				"https://instagram.com/fazil.pro",
-				"https://linkedin.com/company/fazil"
-			]
-		},
-		{
-			"@type": "WebSite",
-			"@id": `${siteUrl}/#website`,
-			"url": siteUrl,
-			"name": "FAZIL",
-			"description": description,
-			"publisher": {
-				"@id": `${siteUrl}/#organization`
-			}
-		},
-		{
-			"@type": "SoftwareApplication",
-			"@id": `${siteUrl}/#service`,
-			"name": "Servicios de Desarrollo FAZIL",
-			"description": "Desarrollo de APIs, landing pages optimizadas, consultoría tecnológica",
-			"provider": {
-				"@id": `${siteUrl}/#organization`
-			},
-			"applicationCategory": "DeveloperApplication",
-			"operatingSystem": "Web"
-		}
-	]
-};
-
-const finalStructuredData = structuredData || defaultStructuredData;
+const { title, description, canonical, ogImage, noindex } = Astro.props;
+const currentUrl = Astro.url;
+const defaultOgImage = '/images/fazil-og-image.webp';
 ---
 
 <!DOCTYPE html>
-<html lang="es" dir="ltr">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta name="generator" content={Astro.generator} />
-		
-		<!-- SEO básico -->
-		<title>{title}</title>
-		<meta name="description" content={description} />
-		<link rel="canonical" href={canonicalUrl} />
-		{noindex && <meta name="robots" content="noindex, nofollow" />}
-		
-		<!-- Open Graph -->
-		<meta property="og:type" content="website" />
-		<meta property="og:url" content={canonicalUrl} />
-		<meta property="og:title" content={title} />
-		<meta property="og:description" content={description} />
-		<meta property="og:image" content={ogImage} />
-		<meta property="og:site_name" content="FAZIL" />
-		<meta property="og:locale" content="es_CO" />
-		
-		<!-- Twitter -->
-		<meta name="twitter:card" content="summary_large_image" />
-		<meta name="twitter:url" content={canonicalUrl} />
-		<meta name="twitter:title" content={title} />
-		<meta name="twitter:description" content={description} />
-		<meta name="twitter:image" content={ogImage} />
-		
-		<!-- Favicons -->
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" type="image/png" href="/favicon.png" />
-		
-		<!-- Fonts -->
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-		
-		<!-- Structured Data -->
-		<script type="application/ld+json" set:html={JSON.stringify(finalStructuredData)}></script>
-		
-		<!-- Security headers -->
-		<meta http-equiv="X-Content-Type-Options" content="nosniff" />
-		<meta http-equiv="X-Frame-Options" content="DENY" />
-		<meta http-equiv="X-XSS-Protection" content="1; mode=block" />
-		<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
-		
-		<!-- Performance hints -->
-		<meta http-equiv="x-dns-prefetch-control" content="on" />
-		
-		<!-- Theme -->
-		<meta name="theme-color" content="#1e40af" />
-	</head>
-	
-	<body class="font-inter text-gray-800 bg-white">
-		<!-- Skip Links -->
-		<div class="skip-links">
-			<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
-			<a href="#navigation" class="skip-link">Saltar a navegación</a>
-		</div>
-		
-		<!-- Main content wrapper -->
-		<main id="main-content" class="main-content" role="main">
-			<slot />
-		</main>
-		
-		<!-- Live region para anuncios de screen reader -->
-		<div id="live-region" aria-live="polite" aria-atomic="true" class="sr-only"></div>
-	</body>
-</html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Primary Meta Tags -->
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  <meta name="robots" content={noindex ? "noindex,nofollow" : "index,follow"}>
+  
+  <!-- Keywords for better SEO -->
+  <meta name="keywords" content="desarrollo web, páginas web a medida, desarrollo de apps, software personalizado, gamificación web, APIs, consultoría tecnológica, desarrollo tecnológico, FAZIL, Colombia, Bogotá">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href={canonical || currentUrl}>
+  
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content={currentUrl}>
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:image" content={ogImage || defaultOgImage}>
+  <meta property="og:site_name" content="FAZIL">
+  <meta property="og:locale" content="es_CO">
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content={currentUrl}>
+  <meta name="twitter:title" content={title}>
+  <meta name="twitter:description" content={description}>
+  <meta name="twitter:image" content={ogImage || defaultOgImage}>
+  
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  
+  <!-- Critical CSS inline -->
+  <style>
+    /* Critical CSS for above-the-fold content */
+    body { margin: 0; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+    .hero-section { min-height: 100vh; display: flex; align-items: center; }
+    header { position: fixed; top: 0; width: 100%; z-index: 50; }
+  </style>
+  
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "FAZIL",
+      "url": "https://fazil.pro",
+      "logo": "https://fazil.pro/images/logo-fazil.svg",
+      "description": "Empresa de desarrollo tecnológico especializada en páginas web a medida, desarrollo de apps, software personalizado, gamificación web, APIs y consultoría tecnológica",
+      "foundingDate": "2023",
+      "founder": {
+        "@type": "Person",
+        "name": "Fazil Team"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Bogotá",
+        "addressCountry": "CO"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+573181123660",
+        "contactType": "customer service",
+        "availableLanguage": "Spanish"
+      },
+      "sameAs": [
+        "https://linkedin.com/company/fazil",
+        "https://instagram.com/fazil.pro"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Servicios de Desarrollo Tecnológico",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Desarrollo de Páginas Web a Medida",
+              "description": "Sitios web completamente personalizados optimizados para conversión"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Desarrollo de Aplicaciones",
+              "description": "Apps web progresivas (PWA) y aplicaciones móviles nativas"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Software a Medida",
+              "description": "Software personalizado adaptado a procesos específicos de negocio"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Gamificación Web",
+              "description": "Experiencias web interactivas y gamificadas para mayor engagement"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Desarrollo de APIs",
+              "description": "APIs robustas y escalables para conectar sistemas"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Consultoría Tecnológica",
+              "description": "Asesoramiento en arquitectura tecnológica y optimización"
+            }
+          }
+        ]
+      }
+    }
+  </script>
 
-<style>
-	/* Skip links para accesibilidad */
-	.skip-links {
-		position: absolute;
-		top: -40px;
-		left: 6px;
-		z-index: 1000;
-	}
-	
-	.skip-link {
-		position: absolute;
-		top: -40px;
-		left: 6px;
-		background: #1e40af;
-		color: white;
-		padding: 8px;
-		text-decoration: none;
-		border-radius: 4px;
-		z-index: 1000;
-	}
-	
-	.skip-link:focus {
-		top: 6px;
-	}
-	
-	/* Screen reader only */
-	.sr-only {
-		position: absolute;
-		width: 1px;
-		height: 1px;
-		padding: 0;
-		margin: -1px;
-		overflow: hidden;
-		clip: rect(0, 0, 0, 0);
-		white-space: nowrap;
-		border: 0;
-	}
-	
-	/* Smooth scroll */
-	html {
-		scroll-behavior: smooth;
-	}
-	
-	/* Font families */
-	.font-inter {
-		font-family: 'Inter', system-ui, -apple-system, sans-serif;
-	}
-</style>
+  <!-- Local Business Schema -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "FAZIL",
+      "image": "https://fazil.pro/images/fazil-og-image.webp",
+      "url": "https://fazil.pro",
+      "telephone": "+573181123660",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Bogotá",
+        "addressCountry": "CO"
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday", 
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "opens": "09:00",
+        "closes": "18:00"
+      },
+      "sameAs": [
+        "https://linkedin.com/company/fazil",
+        "https://instagram.com/fazil.pro"
+      ]
+    }
+  </script>
+</head>
+<body>
+  <slot />
+  
+  <!-- Global styles integrados -->
+  <style>
+    /* Global CSS integrado */
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
+
+    /* Variables personalizadas */
+    :root {
+      --color-primary: #2D3BF5;
+      --color-secondary: #8C52FF;
+      --color-accent: #10DAE7;
+      --color-accent-2: #FF3D8A;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Responsive Fixes integrados */
+    * {
+      box-sizing: border-box;
+      max-width: 100vw;
+    }
+
+    /* Container responsive fixes */
+    .container {
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    @media (min-width: 640px) {
+      .container {
+        max-width: 640px;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .container {
+        max-width: 768px;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .container {
+        max-width: 1024px;
+      }
+    }
+
+    @media (min-width: 1280px) {
+      .container {
+        max-width: 1280px;
+      }
+    }
+
+    @media (min-width: 1536px) {
+      .container {
+        max-width: 1536px;
+      }
+    }
+
+    /* Header fixes */
+    header {
+      position: fixed !important;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      width: 100%;
+    }
+
+    /* Content spacing for fixed header */
+    main {
+      padding-top: 80px;
+    }
+
+    /* Text size responsive */
+    @media (max-width: 640px) {
+      h1 {
+        font-size: 2rem !important;
+        line-height: 2.5rem !important;
+      }
+      
+      h2 {
+        font-size: 1.5rem !important;
+        line-height: 2rem !important;
+      }
+      
+      h3 {
+        font-size: 1.25rem !important;
+        line-height: 1.75rem !important;
+      }
+    }
+
+    /* Grid responsive fixes */
+    @media (max-width: 768px) {
+      .grid {
+        grid-template-columns: 1fr !important;
+      }
+      
+      .md\:grid-cols-2 {
+        grid-template-columns: 1fr !important;
+      }
+      
+      .lg\:grid-cols-3 {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
+    /* Button responsive */
+    @media (max-width: 640px) {
+      .btn {
+        width: 100%;
+        text-align: center;
+        padding: 0.75rem 1rem;
+      }
+    }
+
+    /* Image responsive */
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Smooth transitions */
+    * {
+      transition: all 0.3s ease;
+    }
+
+    /* Focus states for accessibility */
+    button:focus,
+    a:focus {
+      outline: 2px solid #3b82f6;
+      outline-offset: 2px;
+    }
+  </style>
+</body>
+</html>
