@@ -1,5 +1,5 @@
 ---
-// src/pages/index.astro - Versión corregida con SEO completo
+// src/pages/index.astro - Versión final SIN errores TypeScript
 import FazilLayout from '../layouts/FazilLayout.astro';
 import FazilHeader from '../components/FazilHeader.astro';
 import FazilHero from '../components/FazilHero.astro';
@@ -21,212 +21,156 @@ import FazilFooter from '../components/FazilFooter.astro';
   <FazilFooter />
 </FazilLayout>
 
-<!-- Hero Interactive Script -->
-<script>
-// Script interactivo para Hero Section estilo React Bits
-document.addEventListener('DOMContentLoaded', () => {
-  // Cursor seguidor con efecto glow
-  const cursor = document.createElement('div') as HTMLDivElement;
-  cursor.className = 'custom-cursor';
-  cursor.innerHTML = '<div class="cursor-glow"></div>';
-  document.body.appendChild(cursor);
-
-  let mouseX: number = 0;
-  let mouseY: number = 0;
-  let cursorX: number = 0;
-  let cursorY: number = 0;
-
-  document.addEventListener('mousemove', (e: MouseEvent) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-  });
-
-  // Smooth cursor follow
-  function animateCursor(): void {
-    const dx = mouseX - cursorX;
-    const dy = mouseY - cursorY;
-    
-    cursorX += dx * 0.1;
-    cursorY += dy * 0.1;
-    
-    cursor.style.left = cursorX + 'px';
-    cursor.style.top = cursorY + 'px';
-    
-    requestAnimationFrame(animateCursor);
-  }
-  animateCursor();
-
-  // Parallax effect para orbs basado en mouse
-  const orbs = document.querySelectorAll('.gradient-orb') as NodeListOf<HTMLElement>;
-  document.addEventListener('mousemove', (e: MouseEvent) => {
-    const x = e.clientX / window.innerWidth;
-    const y = e.clientY / window.innerHeight;
-    
-    orbs.forEach((orb: HTMLElement, index: number) => {
-      const speed = (index + 1) * 0.5;
-      const xMove = (x - 0.5) * speed * 50;
-      const yMove = (y - 0.5) * speed * 50;
-      
-      orb.style.transform = `translate(${xMove}px, ${yMove}px)`;
-    });
-  });
-
-  // Efecto de particle burst en clicks
-  document.addEventListener('click', (e: MouseEvent) => {
-    createParticleBurst(e.clientX, e.clientY);
-  });
-
-  function createParticleBurst(x: number, y: number): void {
-    const colors: string[] = ['#3B82F6', '#8B5CF6', '#10B981', '#F59E0B', '#EF4444'];
-    
-    for (let i = 0; i < 6; i++) {
-      const particle = document.createElement('div') as HTMLDivElement;
-      particle.className = 'click-particle';
-      particle.style.cssText = `
-        position: fixed;
-        width: 4px;
-        height: 4px;
-        background: ${colors[Math.floor(Math.random() * colors.length)]};
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 9999;
-        left: ${x}px;
-        top: ${y}px;
-      `;
-      
-      document.body.appendChild(particle);
-      
-      const angle = (i / 6) * Math.PI * 2;
-      const velocity = 100 + Math.random() * 50;
-      const vx = Math.cos(angle) * velocity;
-      const vy = Math.sin(angle) * velocity;
-      
-      const startTime = Date.now();
-      
-      function animateParticle(): void {
-        const elapsed = Date.now() - startTime;
-        const progress = elapsed / 1000;
-        
-        if (progress < 1) {
-          const currentX = x + vx * progress;
-          const currentY = y + vy * progress + 0.5 * 300 * progress * progress;
-          const opacity = 1 - progress;
-          
-          particle.style.left = currentX + 'px';
-          particle.style.top = currentY + 'px';
-          particle.style.opacity = opacity.toString();
-          
-          requestAnimationFrame(animateParticle);
-        } else {
-          particle.remove();
-        }
-      }
-      
-      animateParticle();
-    }
-  }
-
-  // Animated gradient background que sigue el mouse
-  const heroSection = document.querySelector('.hero-section') as HTMLElement;
-  if (heroSection) {
-    document.addEventListener('mousemove', (e: MouseEvent) => {
-      const x = (e.clientX / window.innerWidth) * 100;
-      const y = (e.clientY / window.innerHeight) * 100;
-      
-      heroSection.style.background = `
-        radial-gradient(circle at ${x}% ${y}%, 
-          rgba(59, 130, 246, 0.15) 0%, 
-          transparent 50%),
-        linear-gradient(135deg, 
-          rgb(15, 23, 42) 0%, 
-          rgb(30, 58, 138) 35%, 
-          rgb(88, 28, 135) 100%)
-      `;
-    });
-  }
-
-  // Preload critical resources
-  const preloadLinks: string[] = ['/images/logo-fazil.svg'];
-  preloadLinks.forEach((href: string) => {
-    const link = document.createElement('link') as HTMLLinkElement;
-    link.rel = 'preload';
-    link.href = href;
-    link.as = 'image';
-    document.head.appendChild(link);
-  });
-});
-
-// CSS adicional para efectos
-const additionalStyles: string = `
-  <style>
-  .custom-cursor {
-    position: fixed;
-    width: 20px;
-    height: 20px;
-    pointer-events: none;
-    z-index: 9999;
-    mix-blend-mode: difference;
-  }
-  
-  .cursor-glow {
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 70%);
-    border-radius: 50%;
-  }
-  
-  @keyframes text-shimmer {
-    0% { background-position: -200% center; }
-    100% { background-position: 200% center; }
-  }
-  
-  @media (max-width: 768px) {
-    .custom-cursor { display: none; }
-  }
-  
-  @media (prefers-reduced-motion: reduce) {
-    .custom-cursor { display: none; }
-    * {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-    }
-  }
-  </style>
-`;
-
-document.head.insertAdjacentHTML('beforeend', additionalStyles);
-</script>
-
 <style>
-  /* Animation classes */
-  .loading {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.6s ease-out;
-  }
-
-  .animate-in {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* Ensure no horizontal scroll */
+  /* Estilos para animaciones básicas */
   body {
     overflow-x: hidden;
+    margin: 0;
+    padding: 0;
   }
 
-  /* Performance optimizations */
   * {
     box-sizing: border-box;
   }
 
-  /* Preload critical fonts */
-  @font-face {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  /* Hover effects mejorados */
+  a, button, .service-item { 
+    transition: all 0.3s ease; 
+    cursor: pointer; 
+  }
+  
+  a:hover, button:hover { 
+    transform: translateY(-2px);
+    filter: brightness(1.1); 
+  }
+  
+  .service-item:hover {
+    transform: translateY(-5px);
+  }
+  
+  .service-item:hover .glassmorphism { 
+    background: rgba(255, 255, 255, 0.15); 
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Performance optimization */
+  .hero-section {
+    will-change: background;
+  }
+  
+  @media (prefers-reduced-motion: reduce) { 
+    * { 
+      animation-duration: 0.01ms !important; 
+      animation-iteration-count: 1 !important; 
+      transition-duration: 0.01ms !important; 
+    } 
   }
 </style>
+
+<!-- Script optimizado sin errores TypeScript -->
+<script is:inline>
+(function() {
+  'use strict';
+  
+  function initEffects() {
+    // Parallax effect para orbs
+    var orbs = document.querySelectorAll('.gradient-orb');
+    if (orbs.length > 0) {
+      document.addEventListener('mousemove', function(e) {
+        var x = e.clientX / window.innerWidth;
+        var y = e.clientY / window.innerHeight;
+        
+        for (var i = 0; i < orbs.length; i++) {
+          var orb = orbs[i];
+          var speed = (i + 1) * 0.5;
+          var xMove = (x - 0.5) * speed * 50;
+          var yMove = (y - 0.5) * speed * 50;
+          
+          orb.style.transform = 'translate(' + xMove + 'px, ' + yMove + 'px)';
+        }
+      });
+    }
+
+    // Particle burst en clicks
+    document.addEventListener('click', function(e) {
+      var colors = ['#3B82F6', '#8B5CF6', '#10B981', '#F59E0B', '#EF4444'];
+      
+      for (var i = 0; i < 6; i++) {
+        var particle = document.createElement('div');
+        var color = colors[Math.floor(Math.random() * colors.length)];
+        
+        particle.style.cssText = 
+          'position:fixed;width:4px;height:4px;background:' + color + 
+          ';border-radius:50%;pointer-events:none;z-index:9999;left:' + 
+          e.clientX + 'px;top:' + e.clientY + 'px;';
+        
+        document.body.appendChild(particle);
+        
+        (function(p, startX, startY, idx) {
+          var angle = (idx / 6) * Math.PI * 2;
+          var velocity = 100 + Math.random() * 50;
+          var vx = Math.cos(angle) * velocity;
+          var vy = Math.sin(angle) * velocity;
+          var start = Date.now();
+          
+          function animate() {
+            var elapsed = Date.now() - start;
+            var progress = elapsed / 1000;
+            
+            if (progress < 1 && p.parentNode) {
+              var currentX = startX + vx * progress;
+              var currentY = startY + vy * progress + 0.5 * 300 * progress * progress;
+              var opacity = 1 - progress;
+              
+              p.style.left = currentX + 'px';
+              p.style.top = currentY + 'px';
+              p.style.opacity = opacity;
+              
+              requestAnimationFrame(animate);
+            } else if (p.parentNode) {
+              p.remove();
+            }
+          }
+          animate();
+        })(particle, e.clientX, e.clientY, i);
+      }
+    });
+
+    // Background gradient que sigue el mouse
+    var heroSection = document.querySelector('.hero-section');
+    if (heroSection) {
+      document.addEventListener('mousemove', function(e) {
+        var x = (e.clientX / window.innerWidth) * 100;
+        var y = (e.clientY / window.innerHeight) * 100;
+        
+        heroSection.style.background = 
+          'radial-gradient(circle at ' + x + '% ' + y + 
+          '%, rgba(59, 130, 246, 0.15) 0%, transparent 50%), ' +
+          'linear-gradient(135deg, rgb(15, 23, 42) 0%, rgb(30, 58, 138) 35%, rgb(88, 28, 135) 100%)';
+      });
+    }
+
+    // Hover effects mejorados
+    var elements = document.querySelectorAll('a, button, .service-item');
+    for (var i = 0; i < elements.length; i++) {
+      var element = elements[i];
+      
+      element.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-3px) scale(1.02)';
+        this.style.transition = 'all 0.3s ease';
+      });
+      
+      element.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0) scale(1)';
+      });
+    }
+  }
+
+  // Inicializar cuando esté listo
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initEffects);
+  } else {
+    initEffects();
+  }
+})();
+</script>
