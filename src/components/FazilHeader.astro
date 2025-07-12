@@ -1,0 +1,159 @@
+---
+// src/components/FazilHeader.astro
+---
+
+<header class="bg-white shadow-lg fixed top-0 w-full z-50">
+  <div class="container mx-auto px-6">
+    <div class="flex items-center justify-between py-4">
+      
+      <!-- Logo -->
+      <a href="/" class="text-2xl font-bold text-white flex items-center">
+        <img src="/images/logo-fazil.svg" alt="Fazil AI" class="h-10 mr-2" />
+      </a>
+      
+      <!-- Navigation Desktop -->
+      <nav id="navigation" class="hidden md:flex space-x-8">
+        <a href="#inicio" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">
+          Inicio
+        </a>
+        <a href="#servicios" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">
+          Servicios
+        </a>
+        <a href="#unidades" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">
+          Unidades de Negocio
+        </a>
+        <a href="#sobre-fazil" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">
+          Sobre FAZIL
+        </a>
+        <a href="#contacto" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">
+          Contacto
+        </a>
+      </nav>
+      
+      <!-- CTA Button -->
+      <a 
+        href="#contacto" 
+        class="hidden md:flex bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors items-center"
+      >
+        Cotizar Proyecto
+      </a>
+      
+      <!-- Mobile Menu Button -->
+      <button 
+        id="mobile-menu-btn"
+        class="md:hidden flex flex-col space-y-1 p-2"
+        aria-label="Abrir menú de navegación"
+        aria-expanded="false"
+      >
+        <span class="w-6 h-0.5 bg-gray-700 transition-all duration-300"></span>
+        <span class="w-6 h-0.5 bg-gray-700 transition-all duration-300"></span>
+        <span class="w-6 h-0.5 bg-gray-700 transition-all duration-300"></span>
+      </button>
+    </div>
+  </div>
+  
+  <!-- Mobile Menu -->
+  <div 
+    id="mobile-menu"
+    class="md:hidden bg-white border-t border-gray-200 transform -translate-y-full opacity-0 transition-all duration-300"
+  >
+    <nav class="container mx-auto px-6 py-4 space-y-4">
+      <a href="#inicio" class="block text-gray-700 hover:text-blue-600 font-medium py-2">
+        Inicio
+      </a>
+      <a href="#servicios" class="block text-gray-700 hover:text-blue-600 font-medium py-2">
+        Servicios
+      </a>
+      <a href="#unidades" class="block text-gray-700 hover:text-blue-600 font-medium py-2">
+        Unidades de Negocio
+      </a>
+      <a href="#sobre-fazil" class="block text-gray-700 hover:text-blue-600 font-medium py-2">
+        Sobre FAZIL
+      </a>
+      <a href="#contacto" class="block text-gray-700 hover:text-blue-600 font-medium py-2">
+        Contacto
+      </a>
+      <a 
+        href="#contacto" 
+        class="block bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold text-center mt-4"
+      >
+        Cotizar Proyecto
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  // Mobile menu functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    let isMenuOpen = false;
+
+    if (mobileMenuBtn && mobileMenu) {
+      mobileMenuBtn.addEventListener('click', () => {
+        isMenuOpen = !isMenuOpen;
+        
+        // Toggle menu visibility
+        if (isMenuOpen) {
+          mobileMenu.classList.remove('-translate-y-full', 'opacity-0');
+          mobileMenu.classList.add('translate-y-0', 'opacity-100');
+          mobileMenuBtn.setAttribute('aria-expanded', 'true');
+          
+          // Animate hamburger to X
+          const spans = mobileMenuBtn.querySelectorAll('span');
+          spans[0].style.transform = 'rotate(45deg) translate(6px, 6px)';
+          spans[1].style.opacity = '0';
+          spans[2].style.transform = 'rotate(-45deg) translate(6px, -6px)';
+        } else {
+          mobileMenu.classList.add('-translate-y-full', 'opacity-0');
+          mobileMenu.classList.remove('translate-y-0', 'opacity-100');
+          mobileMenuBtn.setAttribute('aria-expanded', 'false');
+          
+          // Reset hamburger
+          const spans = mobileMenuBtn.querySelectorAll('span');
+          spans[0].style.transform = '';
+          spans[1].style.opacity = '';
+          spans[2].style.transform = '';
+        }
+      });
+
+      // Close menu when clicking on links
+      mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          isMenuOpen = false;
+          mobileMenu.classList.add('-translate-y-full', 'opacity-0');
+          mobileMenu.classList.remove('translate-y-0', 'opacity-100');
+          mobileMenuBtn.setAttribute('aria-expanded', 'false');
+          
+          // Reset hamburger
+          const spans = mobileMenuBtn.querySelectorAll('span');
+          spans[0].style.transform = '';
+          spans[1].style.opacity = '';
+          spans[2].style.transform = '';
+        });
+      });
+    }
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', (e) => {
+        e.preventDefault();
+        const href = anchor.getAttribute('href');
+        if (href) {
+          const target = document.querySelector(href) as HTMLElement;
+          if (target) {
+            const headerHeight = 80; // Fixed header height
+            const elementPosition = target.offsetTop;
+            const offsetPosition = elementPosition - headerHeight;
+
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+          }
+        }
+      });
+    });
+  });
+</script>

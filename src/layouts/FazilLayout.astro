@@ -1,0 +1,204 @@
+---
+// src/layouts/FazilLayout.astro
+import '../styles/global.css';
+
+export interface Props {
+	title: string;
+	description?: string;
+	ogImage?: string;
+	canonical?: string;
+	noindex?: boolean;
+	structuredData?: object;
+}
+
+const { 
+	title, 
+	description = "FAZIL - Empresa de desarrollo tecnológico especializada en APIs, landing pages, optimización de performance y consultoría tecnológica.", 
+	ogImage = "/images/fazil-og.jpg",
+	canonical,
+	noindex = false,
+	structuredData = null
+} = Astro.props;
+
+const pathname = Astro.url.pathname;
+const siteUrl = "https://fazil.pro";
+const canonicalUrl = canonical || `${siteUrl}${pathname}`;
+
+// Structured data para FAZIL
+const defaultStructuredData = {
+	"@context": "https://schema.org",
+	"@graph": [
+		{
+			"@type": "Organization",
+			"@id": `${siteUrl}/#organization`,
+			"name": "FAZIL",
+			"url": siteUrl,
+			"logo": {
+				"@type": "ImageObject",
+				"@id": `${siteUrl}/#logo`,
+				"url": `${siteUrl}/images/logo-fazil.svg`,
+				"width": 300,
+				"height": 100
+			},
+			"contactPoint": {
+				"@type": "ContactPoint",
+				"telephone": "+57-318-112-3660",
+				"contactType": "customer service",
+				"availableLanguage": "Spanish"
+			},
+			"address": {
+				"@type": "PostalAddress",
+				"addressLocality": "Bogotá",
+				"addressCountry": "CO"
+			},
+			"sameAs": [
+				"https://instagram.com/fazil.pro",
+				"https://linkedin.com/company/fazil"
+			]
+		},
+		{
+			"@type": "WebSite",
+			"@id": `${siteUrl}/#website`,
+			"url": siteUrl,
+			"name": "FAZIL",
+			"description": description,
+			"publisher": {
+				"@id": `${siteUrl}/#organization`
+			}
+		},
+		{
+			"@type": "SoftwareApplication",
+			"@id": `${siteUrl}/#service`,
+			"name": "Servicios de Desarrollo FAZIL",
+			"description": "Desarrollo de APIs, landing pages optimizadas, consultoría tecnológica",
+			"provider": {
+				"@id": `${siteUrl}/#organization`
+			},
+			"applicationCategory": "DeveloperApplication",
+			"operatingSystem": "Web"
+		}
+	]
+};
+
+const finalStructuredData = structuredData || defaultStructuredData;
+---
+
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="generator" content={Astro.generator} />
+		
+		<!-- SEO básico -->
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<link rel="canonical" href={canonicalUrl} />
+		{noindex && <meta name="robots" content="noindex, nofollow" />}
+		
+		<!-- Open Graph -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={ogImage} />
+		<meta property="og:site_name" content="FAZIL" />
+		<meta property="og:locale" content="es_CO" />
+		
+		<!-- Twitter -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:url" content={canonicalUrl} />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImage} />
+		
+		<!-- Favicons -->
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/png" href="/favicon.png" />
+		
+		<!-- Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+		
+		<!-- Structured Data -->
+		<script type="application/ld+json" set:html={JSON.stringify(finalStructuredData)}></script>
+		
+		<!-- Security headers -->
+		<meta http-equiv="X-Content-Type-Options" content="nosniff" />
+		<meta http-equiv="X-Frame-Options" content="DENY" />
+		<meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+		<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+		
+		<!-- Performance hints -->
+		<meta http-equiv="x-dns-prefetch-control" content="on" />
+		
+		<!-- Theme -->
+		<meta name="theme-color" content="#1e40af" />
+	</head>
+	
+	<body class="font-inter text-gray-800 bg-white">
+		<!-- Skip Links -->
+		<div class="skip-links">
+			<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+			<a href="#navigation" class="skip-link">Saltar a navegación</a>
+		</div>
+		
+		<!-- Main content wrapper -->
+		<main id="main-content" class="main-content" role="main">
+			<slot />
+		</main>
+		
+		<!-- Live region para anuncios de screen reader -->
+		<div id="live-region" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+	</body>
+</html>
+
+<style>
+	/* Skip links para accesibilidad */
+	.skip-links {
+		position: absolute;
+		top: -40px;
+		left: 6px;
+		z-index: 1000;
+	}
+	
+	.skip-link {
+		position: absolute;
+		top: -40px;
+		left: 6px;
+		background: #1e40af;
+		color: white;
+		padding: 8px;
+		text-decoration: none;
+		border-radius: 4px;
+		z-index: 1000;
+	}
+	
+	.skip-link:focus {
+		top: 6px;
+	}
+	
+	/* Screen reader only */
+	.sr-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
+	}
+	
+	/* Smooth scroll */
+	html {
+		scroll-behavior: smooth;
+	}
+	
+	/* Font families */
+	.font-inter {
+		font-family: 'Inter', system-ui, -apple-system, sans-serif;
+	}
+</style>

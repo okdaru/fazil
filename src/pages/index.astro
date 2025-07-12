@@ -1,39 +1,20 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import HeroSection from '../components/sections/HeroSection.astro';
-import BenefitsSection from '../components/sections/BenefitsSection.astro';
-import ProcessSection from '../components/sections/ProcessSection.astro';
-import FeaturesSection from '../components/sections/FeaturesSection.astro';
-import PricingPack from '../components/sections/PricingPackagesSection.astro';
-import CTASection from '../components/sections/CTASection.astro';
-import GoogleReviews from '../components/GoogleReviewsSection.astro';
-import Footer from '../components/Footer.astro';
-import OurPagesSection from '../components/sections/OurPagesSection.astro';
-import FAQSection from '../components/FAQSection.astro';
-import Testimonials from '../components/TestimonialsSection.astro';
-import SolucionesPorSectorSection from '../components/sections/SolucionesPorSectorSection.astro';
-
-
-
-
-
-
+// src/pages/index.astro
+import FazilLayout from '../layouts/FazilLayout.astro';
+import FazilHeader from '../components/FazilHeader.astro';
+import FazilHero from '../components/FazilHero.astro';
+import FazilServices from '../components/FazilServices.astro';
+import FazilBusinessUnits from '../components/FazilBusinessUnits.astro';
+import FazilFooter from '../components/FazilFooter.astro';
 ---
 
-<Layout isHomepage={true} title="Fazil - Páginas Web Profesionales en 180 minutos para Empresas en Colombia">
-  <Header />
-  <main>
-    <HeroSection />
-    <BenefitsSection />
-    <ProcessSection />
-    <FeaturesSection />
-    <PricingPack />
-    <OurPagesSection />
-    <SolucionesPorSectorSection />
-    <Testimonials />
-    <FAQSection />
-    <CTASection />
-  </main>
-  <Footer />
-</Layout>
+<FazilLayout 
+  title="FAZIL - Empresa de Desarrollo Tecnológico | APIs, Web, Consultoría"
+  description="FAZIL es una empresa de desarrollo tecnológico especializada en APIs, landing pages optimizadas, consultoría tecnológica y desarrollo web. Cotización personalizada según requerimientos."
+>
+  <FazilHeader />
+  <FazilHero />
+  <FazilServices />
+  <FazilBusinessUnits />
+  <FazilFooter />
+</FazilLayout>
