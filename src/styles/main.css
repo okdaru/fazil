@@ -1,0 +1,24 @@
+/* Solo esto en tu main.css */
+@keyframes gradient-x {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+body {
+  font-family: 'Lexend', sans-serif;
+}
+
+.animate-gradient {
+    background-size: 400% 400%;
+    animation: gradient-x 3s ease infinite;
+}
+
+.animate-gradient-slow {
+    background-size: 400% 400%;
+    animation: gradient-x 4s ease infinite;
+}
+
+.animate-gradient-fast {
+    background-size: 400% 400%;
+    animation: gradient-x 2s ease infinite;
+}
