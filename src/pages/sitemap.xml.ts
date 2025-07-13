@@ -1,96 +1,19 @@
-// src/pages/sitemap.xml.ts - Versión optimizada
+// src/pages/sitemap.xml.ts - Versión actualizada y optimizada
 import type { APIRoute } from 'astro';
 
-// Configuración de páginas del sitio
+// Configuración de páginas del sitio - Solo páginas que existen
 const pages = [
-  // Páginas principales
+  // PÁGINA PRINCIPAL
   {
     url: '',
     priority: 1.0,
     changefreq: 'weekly',
     lastmod: new Date().toISOString().split('T')[0]
   },
+  // FORMULARIO DE PROYECTO
   {
     url: '/formulario',
     priority: 0.9,
-    changefreq: 'weekly', // Se actualiza frecuentemente
-    lastmod: new Date().toISOString().split('T')[0]
-  },
-  
-  // Páginas de información
-  {
-    url: '/process',
-    priority: 0.8,
-    changefreq: 'monthly',
-    lastmod: new Date().toISOString().split('T')[0]
-  },
-  {
-    url: '/astro-benefits',
-    priority: 0.8,
-    changefreq: 'monthly',
-    lastmod: new Date().toISOString().split('T')[0]
-  },
-  {
-    url: '/porquefazil',
-    priority: 0.8,
-    changefreq: 'monthly',
-    lastmod: new Date().toISOString().split('T')[0]
-  },
-  {
-    url: '/CMSExplanation', // Considera renombrar a /cms-explanation para consistencia
-    priority: 0.7,
-    changefreq: 'monthly',
-    lastmod: new Date().toISOString().split('T')[0]
-  },
-  
-  // Landing pages por nicho (alta prioridad para conversión)
-  {
-    url: '/paginas-web-para-restaurantes',
-    priority: 0.9,
-    changefreq: 'monthly',
-    lastmod: new Date().toISOString().split('T')[0]
-  },
-  {
-    url: '/paginas-web-para-profesionales',
-    priority: 0.9,
-    changefreq: 'monthly',
-    lastmod: new Date().toISOString().split('T')[0]
-  },
-  {
-    url: '/paginas-web-para-emprendedores',
-    priority: 0.9,
-    changefreq: 'monthly',
-    lastmod: new Date().toISOString().split('T')[0]
-  },
-  {
-    url: '/paginas-web-para-academias',
-    priority: 0.9,
-    changefreq: 'monthly',
-    lastmod: new Date().toISOString().split('T')[0]
-  },
-  {
-    url: '/landing-page-para-eventos',
-    priority: 0.9,
-    changefreq: 'monthly',
-    lastmod: new Date().toISOString().split('T')[0]
-  },
-  
-  // Páginas adicionales sugeridas (si las tienes o planeas crearlas)
-  {
-    url: '/blog',
-    priority: 0.7,
-    changefreq: 'weekly',
-    lastmod: new Date().toISOString().split('T')[0]
-  },
-  {
-    url: '/casos-de-exito',
-    priority: 0.8,
-    changefreq: 'monthly',
-    lastmod: new Date().toISOString().split('T')[0]
-  },
-  {
-    url: '/precios',
-    priority: 0.8,
     changefreq: 'monthly',
     lastmod: new Date().toISOString().split('T')[0]
   }
@@ -98,9 +21,10 @@ const pages = [
 
 export const GET: APIRoute = async () => {
   const baseUrl = 'https://fazil.pro';
+  const currentDate = new Date().toISOString().split('T')[0];
   
   try {
-    // Generar XML del sitemap
+    // Generar XML del sitemap optimizado
     const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
@@ -116,8 +40,9 @@ ${pages.map(page => `  <url>
     return new Response(sitemap, {
       headers: {
         'Content-Type': 'application/xml; charset=utf-8',
-        'Cache-Control': 'public, max-age=3600, s-maxage=3600', // Cache público y en CDN
+        'Cache-Control': 'public, max-age=3600, s-maxage=3600', // Cache 1 hora
         'X-Robots-Tag': 'noindex', // El sitemap no debe indexarse
+        'Last-Modified': new Date().toUTCString(),
       }
     });
     
@@ -129,9 +54,21 @@ ${pages.map(page => `  <url>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>${baseUrl}/</loc>
-    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
+    <lastmod>${currentDate}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/formulario</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/servicios</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>`;
 
