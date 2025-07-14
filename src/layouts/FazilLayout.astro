@@ -1,196 +1,190 @@
 ---
-// FazilLayout.astro - Versión corregida con SEO completo
 import '../styles/global.css';
 
 export interface Props {
-  title: string;
-  description: string;
-  canonical?: string;
+  title?: string;
+  description?: string;
   ogImage?: string;
-  noindex?: boolean;
+  isHomepage?: boolean;
 }
 
-const { title, description, canonical, ogImage, noindex } = Astro.props;
-const currentUrl = Astro.url;
-const defaultOgImage = '/images/fazil-og-image.webp';
+const { 
+  title = "Fazil - Empresa de Desarrollo Tecnológico",
+  description = "Desarrollamos páginas web a medida, aplicaciones, software personalizado y experiencias gamificadas.",
+  ogImage = "/images/og-image-colombia.jpg",
+  isHomepage = false
+} = Astro.props;
+
+// Construir URL canónica absoluta
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
 ---
 
 <!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <!-- Primary Meta Tags -->
-  <title>{title}</title>
-  <meta name="description" content={description}>
-  <meta name="robots" content={noindex ? "noindex,nofollow" : "index,follow"}>
-  
-  <!-- Keywords for better SEO -->
-  <meta name="keywords" content="desarrollo web, páginas web a medida, desarrollo de apps, software personalizado, gamificación web, APIs, consultoría tecnológica, desarrollo tecnológico, FAZIL, Colombia, Bogotá">
-  
-  <!-- Canonical URL -->
-  <link rel="canonical" href={canonical || currentUrl}>
-  
-  <!-- Open Graph -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content={currentUrl}>
-  <meta property="og:title" content={title}>
-  <meta property="og:description" content={description}>
-  <meta property="og:image" content={ogImage || defaultOgImage}>
-  <meta property="og:site_name" content="FAZIL">
-  <meta property="og:locale" content="es_CO">
-  
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content={currentUrl}>
-  <meta name="twitter:title" content={title}>
-  <meta name="twitter:description" content={description}>
-  <meta name="twitter:image" content={ogImage || defaultOgImage}>
-  
-  <!-- Favicons -->
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <link rel="icon" type="image/png" href="/favicon.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  
-  <!-- Preconnect -->
-<!-- Preconnect -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-  
-  <!-- Critical CSS inline -->
-  <style>
-    /* Critical CSS for above-the-fold content */
-body { margin: 0; font-family: 'Lexend', sans-serif; overflow-x: hidden; }
-    .hero-section { min-height: 100vh; display: flex; align-items: center; }
-    header { position: fixed; top: 0; width: 100%; z-index: 50; }
-  </style>
-  
-  <!-- Schema.org JSON-LD -->
-  <script type="application/ld+json">
+<html lang="es-CO">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- SEO Primary Meta Tags -->
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalURL} />
+<meta name="google-site-verification" content="o-I4W8las9JCrx4ieB0rYP-lJxQdu10OQJK-U26dcRw" />
+<meta name="facebook-domain-verification" content="wnr4k0840iui5idkh9fnxxudnt0kho" />
+    
+    <!-- Meta tags adicionales para SEO -->
+    <meta name="keywords" content="Desarrollamos páginas web a medida, aplicaciones, software personalizado y experiencias gamificadas" />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Fazil AI" />
+    <meta name="geo.region" content="CO" />
+    <meta name="geo.placename" content="Bogotá" />
+    <meta name="geo.position" content="4.624335;-74.063644" />
+    <meta name="ICBM" content="4.624335, -74.063644" />
+    
+    <!-- Etiquetas hreflang para SEO internacional -->
+    <link rel="alternate" hreflang="es-CO" href={canonicalURL} />
+    <link rel="alternate" hreflang="es" href={canonicalURL} />
+    <link rel="alternate" hreflang="x-default" href={canonicalURL} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={isHomepage ? "Desarrollamos páginas web a medida, aplicaciones, software personalizado y experiencias gamificadas" : title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(ogImage, Astro.site).href} />
+    <meta property="og:locale" content="es_CO" />
+    <meta property="og:site_name" content="Fazil AI Colombia" />
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={isHomepage ? "Desarrollamos páginas web a medida, aplicaciones, software personalizado y experiencias gamificadas" : title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(ogImage, Astro.site).href} />
+    
+    <!-- Google Tag Manager -->
+    <script is:inline>
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-KSFF8BST');
+    </script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Schema.org para negocio local en Colombia -->
+    <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "FAZIL",
-      "url": "https://fazil.pro",
+      "@type": "WebDesignService",
+      "name": "Fazil AI - Diseño Web Profesional en Colombia",
+      "url": "https://fazil.pro/",
       "logo": "https://fazil.pro/images/logo-fazil.svg",
-      "description": "Empresa de desarrollo tecnológico especializada en páginas web a medida, desarrollo de apps, software personalizado, gamificación web, APIs y consultoría tecnológica",
-      "foundingDate": "2023",
-      "founder": {
-        "@type": "Person",
-        "name": "Fazil Team"
-      },
+      "image": "https://fazil.pro/images/fazil-office-colombia.jpg",
+      "description": "Desarrollamos páginas web a medida, aplicaciones, software personalizado y experiencias gamificadas",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Bogotá",
+        "addressRegion": "Bogota D.C.",
         "addressCountry": "CO"
       },
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "telephone": "+573181123660",
-        "contactType": "customer service",
-        "availableLanguage": "Spanish"
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "4.624335",
+        "longitude": "-74.063644"
       },
-      "sameAs": [
-        "https://linkedin.com/company/fazil",
-        "https://instagram.com/fazil.pro"
+      "telephone": "+573181123660",
+      "email": "info@fazil.pro",
+      "priceRange": "$$$",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "08:00",
+          "closes": "18:00"
+        }
       ],
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Servicios de Desarrollo Tecnológico",
+      "areaServed": [
+        {
+          "@type": "Country",
+          "name": "Colombia"
+        },
+        {
+          "@type": "Country",
+          "name": "México"
+        },
+        {
+          "@type": "Country",
+          "name": "Perú"
+        },
+        {
+          "@type": "Country",
+          "name": "Ecuador"
+        }
+      ],
+      "sameAs": [
+        "https://www.facebook.com/fazilweb",
+        "https://www.instagram.com/fazilweb"
+      ]
+    }
+    </script>
+    
+    <!-- Schema.org para servicios y precios (solo en homepage) -->
+    {isHomepage && (
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "serviceType": "Empresa de Desarrollo Tecnológico",
+        "provider": {
+          "@type": "Organization",
+          "name": "Fazil - Colombia"
+        },
+        "areaServed": "Colombia",
+        "description": "Desarrollamos páginas web a medida, aplicaciones, software personalizado y experiencias gamificadas",
+      }
+      </script>
+    )}
+  </head>
+  <body class="font-sans antialiased text-gray-900 bg-white">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KSFF8BST"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    
+    <slot />
+    
+    <!-- Microdata adicional para breadcrumbs (solo en páginas interiores) -->
+    {!isHomepage && (
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
         "itemListElement": [
           {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Desarrollo de Páginas Web a Medida",
-              "description": "Sitios web completamente personalizados optimizados para conversión"
-            }
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Inicio",
+            "item": "https://fazil.pro/"
           },
           {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Desarrollo de Aplicaciones",
-              "description": "Apps web progresivas (PWA) y aplicaciones móviles nativas"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Software a Medida",
-              "description": "Software personalizado adaptado a procesos específicos de negocio"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Gamificación Web",
-              "description": "Experiencias web interactivas y gamificadas para mayor engagement"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Desarrollo de APIs",
-              "description": "APIs robustas y escalables para conectar sistemas"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Consultoría Tecnológica",
-              "description": "Asesoramiento en arquitectura tecnológica y optimización"
-            }
+            "@type": "ListItem",
+            "position": 2,
+            "name": title,
+            "item": canonicalURL
           }
         ]
       }
-    }
-  </script>
-
-  <!-- Local Business Schema -->
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "FAZIL",
-      "image": "https://fazil.pro/images/fazil-og-image.webp",
-      "url": "https://fazil.pro",
-      "telephone": "+573181123660",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Bogotá",
-        "addressCountry": "CO"
-      },
-      "openingHoursSpecification": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": [
-          "Monday",
-          "Tuesday", 
-          "Wednesday",
-          "Thursday",
-          "Friday"
-        ],
-        "opens": "09:00",
-        "closes": "18:00"
-      },
-      "sameAs": [
-        "https://linkedin.com/company/fazil",
-        "https://instagram.com/fazil.pro"
-      ]
-    }
-  </script>
-</head>
-<body>
-  <slot />
-  
-  <!-- Global styles integrados -->
-  
-</body>
+      </script>
+    )}
+  </body>
 </html>
